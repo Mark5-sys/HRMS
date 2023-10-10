@@ -21,7 +21,7 @@ const SideBar = ({}) => {
               <li class="menu-title">
                 <span>Employees</span>
               </li>
-              <li class="submenu">
+              {/* <li class="submenu">
                 <a class="noti-dot">
                   <i class="la la-user"></i> <span> Employees</span>
                   <span class="menu-arrow"></span>
@@ -37,7 +37,7 @@ const SideBar = ({}) => {
                     <Link to={"/employees"}>Pending</Link>
                   </li>
                 </ul>
-              </li>
+              </li> */}
 
               <li>
                 <Link to={"/employees"}>

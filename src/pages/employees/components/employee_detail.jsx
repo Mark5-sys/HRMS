@@ -55,20 +55,30 @@ const EmployeeDetail = ({}) => {
               marginBottom: "40px",
             }}
           >
-            <ProfileCard employee={employee} />
+            {employee && <ProfileCard employee={employee} />}
           </div>
           <div class="row">
             <div class="col-md-6 d-flex">
-              <PersonalInfomation  employeeId={employeeId} personalInfo={employee} />
+              {employee && (
+                <PersonalInfomation
+                  employeeId={employeeId}
+                  personalInfo={employee}
+                />
+              )}
             </div>
 
             <div class="col-md-6 d-flex">
-              <EmergencyContact employeeId={employeeId} employee={employee}   />
+              {employee && (
+                <EmergencyContact employeeId={employeeId} employee={employee} />
+              )}
             </div>
           </div>
 
           <div class="row">
-            <Qualifications employeeId={employeeId} employee={employee} />
+            {employee && (
+              <Qualifications employeeId={employeeId} employee={employee} />
+            )}
+
             {/* <BankInformation /> */}
           </div>
         </div>
