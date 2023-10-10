@@ -22,6 +22,26 @@ const AddThroughUpload = () => {
     reader.readAsBinaryString(file);
   };
 
+  const uploadDataToBackend = ( data ) => {
+    const transformedData = data.slice(1).map((row) => {
+      return {
+        code: row[0],
+        first_name: row[1],
+        surname: row[2],
+        department: row[3],
+        national_identification_no: row[4],
+        marital_status: row[5],
+        date_of_birth: row[6],
+        gender: row[7],
+        postal_city: row[8],
+        phone_number_1: row[9],
+        phone_number_2: row[10]
+      };
+
+      
+    });
+  }
+
   return (
     <Fragment>
       <div className="page-wrapper">

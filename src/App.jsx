@@ -23,17 +23,30 @@ import LoginPage from "./pages/auth/login";
 import JobApplicationPage from "./pages/application/job_application_page";
 import HomePage from "./Home";
 import AddThroughUpload from "./pages/employees/upload_excel";
+import { useSelector } from "react-redux";
 
 const App = () => {
+  const isAuth = useSelector((state) => state.auth.isAuthenticated);
   return (
     <BrowserRouter>
       <>
         <Routes>
-          <Route exact path="/" element={<HomePage />}>
+          <Route
+            exact
+            path="/"
+            element={
+              isAuth ? <Navigate to="/home" /> : <Navigate to="/login" />
+            }
+          >
+            <Route exact path="/home" element={<HomePage />} />
             <Route exact path="/dashboard" element={<Dashboard />} />
             <Route exact path="/employees" element={<EmployeeList />} />
             <Route exact path="/add/employee" element={<AddEmployee />} />
-            <Route exact path="/add/employee/excel" element={<AddThroughUpload />} />
+            <Route
+              exact
+              path="/add/employee/excel"
+              element={<AddThroughUpload />}
+            />
             <Route
               exact
               path="/employee/:employeeId"
