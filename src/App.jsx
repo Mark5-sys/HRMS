@@ -35,10 +35,10 @@ const App = () => {
             exact
             path="/"
             element={
-              isAuth ? <Navigate to="/home" /> : <Navigate to="/login" />
+              isAuth ? <Navigate to="/dashboard" /> : <Navigate to="/login" />
             }
-          >
-            <Route exact path="/home" element={<HomePage />} />
+          />
+          <Route exact path="/" element={<HomePage />}>
             <Route exact path="/dashboard" element={<Dashboard />} />
             <Route exact path="/employees" element={<EmployeeList />} />
             <Route exact path="/add/employee" element={<AddEmployee />} />
