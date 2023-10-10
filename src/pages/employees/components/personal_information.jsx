@@ -4,44 +4,42 @@ import PersonalInfoFormModal from "../forms/personal_info_form";
 const PersonalInfomation = ({ employeeId, personalInfo }) => {
   return (
     <Fragment>
-      <div class="card profile-box flex-fill">
-        <div class="card-body">
-          <h3 class="card-title">
+      <div className="card profile-box flex-fill">
+        <div className="card-body">
+          <h3 className="card-title">
             Personal Informations
             <a
-              href="#"
-              class="edit-icon"
+              className="edit-icon"
               data-bs-toggle="modal"
               data-bs-target="#personal_info_modal"
             >
-              <i class="fa-solid fa-pencil"></i>
+              <i className="fa-solid fa-pencil"></i>
             </a>
           </h3>
-          <ul class="personal-info">
-            {personalInfo.personal_info.passport_number && (
+          <ul className="personal-info">
+            {personalInfo && personalInfo.personal_info && personalInfo.personal_info.passport_number && (
               <li>
-                <div class="title">Passport No.</div>
-                <div class="text">
+                <div className="title">Passport No.</div>
+                <div className="text">
                   {personalInfo.personal_info.passport_number}
                 </div>
               </li>
             )}
-
             <li>
-              <div class="title">Nationality</div>
-              <div class="text">{personalInfo.personal_info.nationality}</div>
+              <div className="title">Nationality</div>
+              <div className="text">{personalInfo?.personal_info?.nationality}</div>
             </li>
             <li>
-              <div class="title">Religion</div>
-              <div class="text">{personalInfo.personal_info.religion}</div>
+              <div className="title">Religion</div>
+              <div className="text">{personalInfo?.personal_info?.religion}</div>
             </li>
             <li>
-              <div class="title">Marital status</div>
-              <div class="text">{personalInfo.marital_status}</div>
+              <div className="title">Marital status</div>
+              <div className="text">{personalInfo?.marital_status}</div>
             </li>
             <li>
-              <div class="title">Employment of spouse</div>
-              {personalInfo.personal_info.spouse_employment === 1 ? (
+              <div className="title">Employment of spouse</div>
+              {personalInfo?.personal_info?.spouse_employment === 1 ? (
                 <span
                   className="badge badge-pill badge-success"
                   style={{
@@ -49,7 +47,7 @@ const PersonalInfomation = ({ employeeId, personalInfo }) => {
                     borderRadius: "20px",
                   }}
                 >
-                  Employeed
+                  Employed
                 </span>
               ) : (
                 <span
@@ -59,27 +57,26 @@ const PersonalInfomation = ({ employeeId, personalInfo }) => {
                     borderRadius: "20px",
                   }}
                 >
-                  Unemployeed
+                  Unemployed
                 </span>
               )}
             </li>
-            {personalInfo.personal_info.no_children > 0 && (
+            {personalInfo && personalInfo.personal_info && personalInfo.personal_info.no_children > 0 && (
               <li>
-                <div class="title">No. of children</div>
-                <div class="text">{personalInfo.personal_info.no_children}</div>
+                <div className="title">No. of children</div>
+                <div className="text">{personalInfo.personal_info.no_children}</div>
               </li>
             )}
           </ul>
         </div>
       </div>
-
       <div
         id="personal_info_modal"
-        class="modal custom-modal fade"
+        className="modal custom-modal fade"
         role="dialog"
       >
         <div
-          class="modal-dialog modal-dialog-centered modal-lg"
+          className="modal-dialog modal-dialog-centered modal-lg"
           role="document"
         >
           <PersonalInfoFormModal employeeId={employeeId} />
