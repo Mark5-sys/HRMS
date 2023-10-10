@@ -9,7 +9,6 @@ const EmergencyContact = ({ employeeId, employee }) => {
           <h3 className="card-title">
             Next Of Kin
             <a
-              href="#"
               className="edit-icon"
               data-bs-toggle="modal"
               data-bs-target="#emergency_contact_modal"
@@ -18,34 +17,37 @@ const EmergencyContact = ({ employeeId, employee }) => {
             </a>
           </h3>
           <h5 className="section-title">Primary</h5>
-          {employee.emergency_contacts.map((contact) => (
-            <ul className="personal-info">
-              <li>
-                <div className="title">Name</div>
-                <div className="text">{contact.name}</div>
-              </li>
-              <li>
-                <div className="title">Relationship</div>
-                <div className="text">{contact.relationship}</div>
-              </li>
-              <li>
-                <div className="title">Phone</div>
-                <div className="text">
-                  {contact.phone1}, {contact.phone2}
-                </div>
-              </li>
-            </ul>
-          ))}
+          {employee && employee.emergency_contacts ? (
+            employee.emergency_contacts.map((contact) => (
+              <ul className="personal-info" key={contact.name}>
+                <li>
+                  <div className="title">Name</div>
+                  <div className="text">{contact.name}</div>
+                </li>
+                <li>
+                  <div className="title">Relationship</div>
+                  <div className="text">{contact.relationship}</div>
+                </li>
+                <li>
+                  <div className="title">Phone</div>
+                  <div className="text">
+                    {contact.phone1}, {contact.phone2}
+                  </div>
+                </li>
+              </ul>
+            ))
+          ) : (
+            <p>No emergency contacts found.</p>
+          )}
         </div>
       </div>
-
       <div
         id="emergency_contact_modal"
-        class="modal custom-modal fade"
+        className="modal custom-modal fade"
         role="dialog"
       >
         <div
-          class="modal-dialog modal-dialog-centered modal-lg"
+          className="modal-dialog modal-dialog-centered modal-lg"
           role="document"
         >
           <EmergencyContactFormModal employeeId={employeeId} />
