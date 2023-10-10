@@ -195,7 +195,7 @@ const AddEducationalInfo = ({ employeeId }) => {
                                     className="text-danger"
                                   />
                                 </div>
-                                <label class="focus-label">Complete Year</label>
+                                <label class="focus-label">End Year</label>
                               </div>
                             </div>
 

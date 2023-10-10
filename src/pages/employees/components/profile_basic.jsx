@@ -24,12 +24,19 @@ const ProfileCard = ({ employee }) => {
                           <h3 className="user-name m-t-0 mb-0">
                             {employee.first_name} {employee.surname}
                           </h3>
-                          <h6 className="text-muted">
-                            {employee.department.name}
-                          </h6>
-                          <small className="text-muted">
-                            {employee.position.name}
-                          </small>
+
+                          {employee.department && (
+                            <h6 className="text-muted">
+                              {employee.department.name}
+                            </h6>
+                          )}
+
+                          {employee.position && (
+                            <small className="text-muted">
+                              {employee.position.name}
+                            </small>
+                          )}
+
                           <div className="staff-id">
                             Employee ID : {employee.code}{" "}
                           </div>

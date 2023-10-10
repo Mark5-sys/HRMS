@@ -28,11 +28,11 @@ const EditEmployeeFormModal = ({}) => {
     employeeCode: employee.code,
     firstName: employee.first_name,
     surname: employee.surname,
-    department: employee.department.id,
+    department: employee.department ? employee.department.id : "",
     nationalId: employee.national_id,
     maritalStatus: employee.marital_status,
     dateOfBirth: employee.date_of_birth,
-    position: employee.position.id,
+    position: employee.position ? employee.position.id : "",
     gender: employee.gender,
     postalCity: employee.postal_city,
     phoneNumber1: employee.phone_number_1,
@@ -327,7 +327,9 @@ const EditEmployeeFormModal = ({}) => {
                         id="department"
                         name="department"
                       >
-                        <option value="">{employee.department.name}</option>
+                        {employee.department ? (
+                          <option value="">{employee.department.name}</option>
+                        ) : null}
                         {departments.map((department) => (
                           <option key={department.id} value={department.id}>
                             {department.name}
@@ -354,7 +356,8 @@ const EditEmployeeFormModal = ({}) => {
                         id="position"
                         name="position"
                       >
-                        <option value="">{employee.position.name}</option>
+                        { employee.position ? (<option value="">{employee.position.name}</option>) : null}
+                        
                         {positions.map((position) => (
                           <option key={position.id} value={position.id}>
                             {position.name}

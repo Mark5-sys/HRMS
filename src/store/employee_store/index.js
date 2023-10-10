@@ -25,7 +25,14 @@ const employeeSlice = createSlice({
 
     setSingleEmployee: (state, action) => {
       state.singleEmployee = action.payload.singleEmployee;
-    }
+    },
+
+    clearState: (state) => {
+      state.activeEmployees = [];
+      state.pendingEmployees = [];
+      state.waitingEmployees = [];
+      state.singleEmployee = {};
+    },
   },
 });
 

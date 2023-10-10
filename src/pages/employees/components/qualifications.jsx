@@ -4,34 +4,34 @@ import AddEducationalInfo from "../forms/educational_info";
 const Qualifications = ({ employeeId, employee }) => {
   return (
     <Fragment>
-      <div class="col-md-6 d-flex">
-        <div class="card profile-box flex-fill">
-          <div class="card-body">
-            <h3 class="card-title">
+      <div className="col-md-6 d-flex">
+        <div className="card profile-box flex-fill">
+          <div className="card-body">
+            <h3 className="card-title">
               Education Informations
               <a
                 href="#"
-                class="edit-icon"
+                className="edit-icon"
                 data-bs-toggle="modal"
                 data-bs-target="#education_info"
               >
-                <i class="fa-solid fa-pencil"></i>
+                <i className="fa-solid fa-pencil"></i>
               </a>
             </h3>
-            <div class="experience-box">
-              <ul class="experience-list">
-                {employee.qualifications.map((qualification) => (
+            <div className="experience-box">
+              <ul className="experience-list">
+                {employee.qualifications && employee.qualifications.map((qualification) => (
                   <li key={qualification.id}>
-                    <div class="experience-user">
-                      <div class="before-circle"></div>
+                    <div className="experience-user">
+                      <div className="before-circle"></div>
                     </div>
-                    <div class="experience-content">
-                      <div class="timeline-content">
-                        <a href="#/" class="name">
+                    <div className="experience-content">
+                      <div className="timeline-content">
+                        <a  className="name">
                           {qualification.school}
                         </a>
                         <div>{qualification.educational_level}</div>
-                        <span class="time">
+                        <span className="time">
                           {qualification.start_date} - {qualification.end_date}
                         </span>
                       </div>
@@ -43,7 +43,6 @@ const Qualifications = ({ employeeId, employee }) => {
           </div>
         </div>
       </div>
-
       <AddEducationalInfo employeeId={employeeId} />
     </Fragment>
   );

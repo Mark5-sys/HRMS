@@ -2,6 +2,7 @@ import React, { Fragment, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { authActions } from "../store/auth_store";
+import { employeesActions } from "../store/employee_store";
 
 const Header = ({}) => {
   const dispatch = useDispatch();
@@ -12,6 +13,7 @@ const Header = ({}) => {
 
   const signOut = () => {
     dispatch(authActions.setLogout());
+    dispatch(employeesActions.clearState());
 
     navigate("/login");
   };
@@ -38,7 +40,7 @@ const Header = ({}) => {
           </Link>
         </div>
 
-        <a id="toggle_btn" href="javascript:void(0);">
+        <a id="toggle_btn">
           <span className="bar-icon">
             <span></span>
             <span></span>
@@ -57,7 +59,7 @@ const Header = ({}) => {
         <ul className="nav user-menu">
           <li className="nav-item">
             <div className="top-nav-search">
-              <a href="javascript:void(0);" className="responsive-search">
+              <a className="responsive-search">
                 <i className="fa-solid fa-magnifying-glass"></i>
               </a>
               <form>
@@ -79,9 +81,12 @@ const Header = ({}) => {
               className="dropdown-toggle nav-link"
               data-bs-toggle="dropdown"
             >
-              <span className="user-img" style={{
-                marginRight: '10px',
-              }}>
+              <span
+                className="user-img"
+                style={{
+                  marginRight: "10px",
+                }}
+              >
                 <img
                   src="/assets/img/profiles/avatar-21.jpg"
                   alt="User Image"
@@ -102,7 +107,6 @@ const Header = ({}) => {
 
         <div className="dropdown mobile-user-menu">
           <a
-            href="#"
             className="nav-link dropdown-toggle"
             data-bs-toggle="dropdown"
             aria-expanded="false"
@@ -110,13 +114,9 @@ const Header = ({}) => {
             <i className="fa-solid fa-ellipsis-vertical"></i>
           </a>
           <div className="dropdown-menu dropdown-menu-right">
-            <a className="dropdown-item" href="profile.html">
-              My Profile
-            </a>
-            <a className="dropdown-item" href="settings.html">
-              Settings
-            </a>
-            <a className="dropdown-item" href="index.html">
+            <a className="dropdown-item">My Profile</a>
+            <a className="dropdown-item">Settings</a>
+            <a className="dropdown-item" onClick={signOut}>
               Logout
             </a>
           </div>
