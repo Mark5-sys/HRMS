@@ -1,8 +1,10 @@
 import React, { Fragment, useState } from "react";
 import * as XLSX from "xlsx";
+import Loading from "../../components/loader/loading";
 
 const AddThroughUpload = () => {
   const [excelData, setExcelData] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   const handleFileUpload = (event) => {
     const file = event.target.files[0];
@@ -41,23 +43,46 @@ const AddThroughUpload = () => {
             <h4>Upload Excel Sheet</h4>
             <form>
               <div className="form-floating">
-                <div className="col-xl-6 col-12">
-                  <label
-                    htmlFor="fileInput"
-                    className="form-label form-label"
-                    style={{
-                      textTransform: "uppercase",
-                    }}
-                  >
-                    Upload Excel File
-                  </label>
-                  <div className="mb-3">
-                    <input
-                      className="form-control"
-                      type="file"
-                      id="fileInput"
-                      onChange={handleFileUpload}
-                    />
+                <div className="row">
+                  <div className="col-xl-6 col-12">
+                    <label
+                      htmlFor="fileInput"
+                      className="form-label form-label"
+                      style={{
+                        textTransform: "uppercase",
+                      }}
+                    >
+                      Upload Excel File
+                    </label>
+                    <div className="mb-3">
+                      <input
+                        className="form-control"
+                        type="file"
+                        id="fileInput"
+                        onChange={handleFileUpload}
+                      />
+                    </div>
+                  </div>
+                  <div className="col-xl-6 col-12">
+                    {loading ? (
+                      <div className="btn"  style={{
+                        marginTop: "1.5rem",
+                        borderRadius: "10px",
+                        marginLeft: "17rem"
+                      }}>
+                        <Loading />
+                      </div>
+                    ) : (
+                      <button
+                        className="btn add-btn"
+                        style={{
+                          marginTop: "2rem",
+                          borderRadius: "10px",
+                        }}
+                      >
+                        UPLOAD EMPLOYEES
+                      </button>
+                    )}
                   </div>
                 </div>
               </div>
