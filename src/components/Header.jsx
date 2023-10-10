@@ -77,7 +77,6 @@ const Header = ({}) => {
 
           <li className="nav-item dropdown has-arrow main-drop">
             <a
-              href="#"
               className="dropdown-toggle nav-link"
               data-bs-toggle="dropdown"
             >
@@ -88,7 +87,7 @@ const Header = ({}) => {
                 }}
               >
                 <img
-                  src="/assets/img/profiles/avatar-21.jpg"
+                  src="/assets/img/user.jpg" 
                   alt="User Image"
                 />
                 <span className="status online"></span>

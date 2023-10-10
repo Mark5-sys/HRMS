@@ -7,6 +7,7 @@ import {
   redirect,
   useNavigate,
   useLocation,
+  HashRouter,
 } from "react-router-dom";
 import reactLogo from "./assets/react.svg";
 import viteLogo from "/vite.svg";
@@ -28,44 +29,44 @@ import { useSelector } from "react-redux";
 const App = () => {
   const isAuth = useSelector((state) => state.auth.isAuthenticated);
   return (
-    <BrowserRouter>
-      <>
-        <Routes>
+    // <BrowserRouter>
+    //   <>
+
+    //   </>
+    // </BrowserRouter>
+
+    <HashRouter>
+      <Routes>
+        <Route
+          exact
+          path="/"
+          element={
+            isAuth ? <Navigate to="/dashboard" /> : <Navigate to="/login" />
+          }
+        />
+        <Route exact path="/" element={<HomePage />}>
+          <Route exact path="/dashboard" element={<Dashboard />} />
+          <Route exact path="/employees" element={<EmployeeList />} />
+          <Route exact path="/add/employee" element={<AddEmployee />} />
           <Route
             exact
-            path="/"
-            element={
-              isAuth ? <Navigate to="/dashboard" /> : <Navigate to="/login" />
-            }
+            path="/add/employee/excel"
+            element={<AddThroughUpload />}
           />
-          <Route exact path="/" element={<HomePage />}>
-            <Route exact path="/dashboard" element={<Dashboard />} />
-            <Route exact path="/employees" element={<EmployeeList />} />
-            <Route exact path="/add/employee" element={<AddEmployee />} />
-            <Route
-              exact
-              path="/add/employee/excel"
-              element={<AddThroughUpload />}
-            />
-            <Route
-              exact
-              path="/employee/:employeeId"
-              element={<EmployeeDetail />}
-            />
-            <Route exact path="/departments" element={<DepartmentsPage />} />
-            <Route exact path="/positions" element={<PositionsPage />} />
-          </Route>
-
-          <Route exact path="/login" element={<LoginPage />} />
-
           <Route
             exact
-            path="/job/application"
-            element={<JobApplicationPage />}
+            path="/employee/:employeeId"
+            element={<EmployeeDetail />}
           />
-        </Routes>
-      </>
-    </BrowserRouter>
+          <Route exact path="/departments" element={<DepartmentsPage />} />
+          <Route exact path="/positions" element={<PositionsPage />} />
+        </Route>
+
+        <Route exact path="/login" element={<LoginPage />} />
+
+        <Route exact path="/job/application" element={<JobApplicationPage />} />
+      </Routes>
+    </HashRouter>
   );
 };
 
