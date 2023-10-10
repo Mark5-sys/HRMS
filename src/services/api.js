@@ -55,3 +55,18 @@ export const getSingleEmployee = async (employeeId) => {
 
   return response.data;
 };
+
+//Statistics
+
+export const employeesCount = async () => {
+  const response = await fetch(`${API}/employees/count`, {
+    method: "GET",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+  });
+
+  const responseData = await response.json();
+  return responseData;
+};

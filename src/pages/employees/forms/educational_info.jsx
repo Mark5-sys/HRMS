@@ -3,6 +3,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as yup from "yup";
+import Loading from "../../../components/loader/loading";
+import { API } from "../../../config";
+import { getSingleEmployee } from "../../../services/api";
+import { employeesActions } from "../../../store/employee_store";
 
 const educationLevels = [
   "Grade 7",
@@ -15,7 +19,7 @@ const educationLevels = [
   "Phd",
 ];
 
-const AddEducationalInfo = () => {
+const AddEducationalInfo = ({ employeeId }) => {
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -30,15 +34,49 @@ const AddEducationalInfo = () => {
   };
 
   const validationSchema = yup.object().shape({
-    school: yup.string().required("Enter the attended school name"),
-    start_date: yup.string().required("Enter the start date"),
-    end_date: yup.string().required("Enter the end date"),
+    school: yup.string().nullable(),
+    start_date: yup.string().nullable(),
+    end_date: yup.string().nullable(),
     educational_level: yup.string().required("Select the level of education"),
     results: yup.string().nullable(),
     grade: yup.string().nullable(),
   });
 
-  const onSubmit = async (values, {}) => {};
+  const onSubmit = async (values, { setSubmitting, resetForm }) => {
+    setLoading(true);
+    console.log("submit", values);
+
+    try {
+      
+      values.employee_id = employeeId;
+
+      const response = await fetch(`${API}/qualifications`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(values),
+      });
+
+      const responseData = await response.json();
+      console.log("responseData", responseData);
+      if (response.ok) {
+        setLoading(false);
+        resetForm();
+        const employee = await getSingleEmployee(employeeId);
+        dispatch(
+          employeesActions.setSingleEmployee({
+            singleEmployee: employee,
+          })
+        );
+      }
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoading(false);
+      setSubmitting(false);
+    }
+  };
 
   return (
     <Fragment>
@@ -91,7 +129,9 @@ const AddEducationalInfo = () => {
                                   component="div"
                                   className="text-danger"
                                 />
-                                <label class="focus-label">Institution</label>
+                                <label class="focus-label">
+                                  Institution / School
+                                </label>
                               </div>
                             </div>
 
@@ -121,11 +161,11 @@ const AddEducationalInfo = () => {
                               </div>
                             </div>
 
-                            <div class="col-md-6">
+                            <div class="col-md-6 mt-3">
                               <div class="input-block mb-3 form-focus focused">
                                 <div class="cal-icon">
                                   <Field
-                                    type="date"
+                                    type="text"
                                     name="start_date"
                                     id="start_date"
                                     class="form-control floating"
@@ -136,15 +176,15 @@ const AddEducationalInfo = () => {
                                     className="text-danger"
                                   />
                                 </div>
-                                <label class="focus-label">Starting Date</label>
+                                <label class="focus-label">Starting Year</label>
                               </div>
                             </div>
 
-                            <div class="col-md-6">
+                            <div class="col-md-6  mt-3">
                               <div class="input-block mb-3 form-focus focused">
                                 <div class="cal-icon">
                                   <Field
-                                    type="date"
+                                    type="text"
                                     class="form-control floating "
                                     id="end_date"
                                     name="end_date"
@@ -155,7 +195,7 @@ const AddEducationalInfo = () => {
                                     className="text-danger"
                                   />
                                 </div>
-                                <label class="focus-label">Complete Date</label>
+                                <label class="focus-label">Complete Year</label>
                               </div>
                             </div>
 
@@ -192,9 +232,16 @@ const AddEducationalInfo = () => {
                       </div>
                     </div>
                     <div class="submit-section">
-                      <button class="btn btn-primary submit-btn" type="submit">
-                        Submit
-                      </button>
+                      {loading ? (
+                        <Loading />
+                      ) : (
+                        <button
+                          class="btn btn-primary submit-btn"
+                          type="submit"
+                        >
+                          Submit
+                        </button>
+                      )}
                     </div>
                   </Form>
                 )}

@@ -1,15 +1,20 @@
 import React, { Fragment, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as yup from "yup";
 import { API } from "../../../config";
+import { employeesActions } from "../../../store/employee_store";
+import Loading from "../../../components/loader/loading";
+
+import { getSingleEmployee } from "../../../services/api";
 
 const maritalStatuses = ["Married", "Single", "Divorced"];
 const gender = ["Male", "Female", "Other"];
 const empStatus = ["Pending", "Orientation", "Active"];
 
 const EditEmployeeFormModal = ({}) => {
+  const { employeeId } = useParams();
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -17,46 +22,75 @@ const EditEmployeeFormModal = ({}) => {
   const positions = useSelector((state) => state.position.positions);
   const departments = useSelector((state) => state.department.departments);
 
+  const employee = useSelector((state) => state.employees.singleEmployee);
+
   const initialValues = {
-    employeeCode: "",
-    firstName: "Tea",
-    surname: "",
-    department: null,
-    nationalId: "",
-    maritalStatus: "",
-    dateOfBirth: "",
-    position: null,
-    gender: "Male",
-    postalCity: "",
-    phoneNumber1: "",
-    phoneNumber2: "",
-    address: "",
-    email: "",
+    employeeCode: employee.code,
+    firstName: employee.first_name,
+    surname: employee.surname,
+    department: employee.department.id,
+    nationalId: employee.national_id,
+    maritalStatus: employee.marital_status,
+    dateOfBirth: employee.date_of_birth,
+    position: employee.position.id,
+    gender: employee.gender,
+    postalCity: employee.postal_city,
+    phoneNumber1: employee.phone_number_1,
+    phoneNumber2: employee.phone_number_2,
+    address: employee.address,
+    email: employee.email,
   };
 
   const validationSchema = yup.object().shape({
-    email: yup.string().email().required("Please enter a valid email"),
-    address: yup.string().required("Please enter a  address"),
+    email: yup.string().nullable(),
+    address: yup.string().nullable(),
   });
 
-  const onSubmit = async (employeeValues, { setSubmitting, resetForm }) => {
+  const onSubmit = async (values, { setSubmitting, resetForm }) => {
     setLoading(true);
+
+    const apiData = {
+      code: values.employeeCode,
+      position_id: parseInt(values.position),
+      first_name: values.firstName,
+      surname: values.surname,
+      department_id: parseInt(values.department),
+      national_id: values.nationalId,
+      marital_status: values.maritalStatus,
+      date_of_birth: values.dateOfBirth,
+      gender: values.gender,
+      postal_city: values.postalCity,
+      phone_number_1: values.phoneNumber1,
+      phone_number_2: values.phoneNumber2,
+      address: values.address,
+      email: values.email,
+    };
+
+    // console.log("Vaues", apiData)
     try {
-      const response = await fetch(`${API}/employee/${1}`, {
+      const response = await fetch(`${API}/employee/${employee.id}`, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify(apiData),
       });
       const responseData = await response.json();
-      console.log(responseData.data);
+      console.log(responseData);
       if (response.ok) {
         setLoading(false);
         resetForm();
+
+        const employee = await getSingleEmployee(employeeId);
+        dispatch(
+          employeesActions.setSingleEmployee({
+            singleEmployee: employee,
+          })
+        );
       }
     } catch (error) {
       console.log(error);
+      setLoading(false);
     } finally {
       setLoading(false);
       setSubmitting(false);
@@ -65,48 +99,57 @@ const EditEmployeeFormModal = ({}) => {
 
   return (
     <Fragment>
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title">Profile Information</h5>
+      <div className="modal-content">
+        <div className="modal-header">
+          <h5 className="modal-title">Profile Information</h5>
           <button
             type="button"
-            class="btn-close"
+            className="btn-close"
             data-bs-dismiss="modal"
             aria-label="Close"
           >
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
-        <div class="modal-body">
+        <div className="modal-body">
           <Formik
+            enableReinitialize={true}
             initialValues={initialValues}
             onSubmit={onSubmit}
             validationSchema={validationSchema}
           >
-            {({ values, isSubmitting, handleSubmit, touched, errors }) => (
+            {({
+              values,
+              isSubmitting,
+              handleSubmit,
+              touched,
+              errors,
+              handleChange,
+            }) => (
               <Form>
-                <div class="row">
-                  <div class="col-md-12">
-                    <div class="profile-img-wrap edit-img">
+                <div className="row">
+                  <div className="col-md-12">
+                    <div className="profile-img-wrap edit-img">
                       <img
-                        class="inline-block"
-                        src="/assets/img/profiles/avatar-02.jpg"
+                        className="inline-block"
+                        src="/assets/img/user.jpg"
                         alt="User Image"
                       />
-                      <div class="fileupload btn">
-                        <span class="btn-text">edit</span>
-                        <input class="upload" type="file" />
+                      <div className="fileupload btn">
+                        <span className="btn-text">edit</span>
+                        <input className="upload" type="file" />
                       </div>
                     </div>
-                    <div class="row">
-                      <div class="col-md-4">
-                        <div class="input-block mb-3">
-                          <label class="col-form-label">First Name</label>
+                    <div className="row">
+                      <div className="col-md-4">
+                        <div className="input-block mb-3">
+                          <label className="col-form-label">First Name</label>
                           <Field
                             type="text"
-                            class="form-control"
+                            className="form-control"
                             id="firstName"
                             name="firstName"
+                            onChange={handleChange}
                           />
                           <ErrorMessage
                             name="firstName"
@@ -116,14 +159,15 @@ const EditEmployeeFormModal = ({}) => {
                         </div>
                       </div>
 
-                      <div class="col-md-4">
-                        <div class="input-block mb-3">
-                          <label class="col-form-label">Surname</label>
+                      <div className="col-md-4">
+                        <div className="input-block mb-3">
+                          <label className="col-form-label">Surname</label>
                           <Field
                             type="text"
-                            class="form-control"
+                            className="form-control"
                             id="surname"
                             name="surname"
+                            onChange={handleChange}
                           />
                           <ErrorMessage
                             name="surname"
@@ -132,14 +176,15 @@ const EditEmployeeFormModal = ({}) => {
                           />
                         </div>
                       </div>
-                      <div class="col-md-4">
-                        <div class="input-block mb-3">
-                          <label class="col-form-label">National Id</label>
+                      <div className="col-md-4">
+                        <div className="input-block mb-3">
+                          <label className="col-form-label">National Id</label>
                           <Field
                             type="text"
-                            class="form-control"
+                            className="form-control"
                             id="nationalId"
                             name="nationalId"
+                            onChange={handleChange}
                           />
                           <ErrorMessage
                             name="nationalId"
@@ -149,14 +194,17 @@ const EditEmployeeFormModal = ({}) => {
                         </div>
                       </div>
 
-                      <div class="col-md-4">
-                        <div class="input-block mb-3">
-                          <label class="col-form-label">Employee Code</label>
+                      <div className="col-md-4">
+                        <div className="input-block mb-3">
+                          <label className="col-form-label">
+                            Employee Code
+                          </label>
                           <Field
                             type="text"
-                            class="form-control"
+                            className="form-control"
                             id="employeeCode"
                             name="employeeCode"
+                            onChange={handleChange}
                           />
                           <ErrorMessage
                             name="employeeCode"
@@ -166,18 +214,19 @@ const EditEmployeeFormModal = ({}) => {
                         </div>
                       </div>
 
-                      <div class="col-md-4">
-                        <div class="input-block mb-3">
-                          <label class="col-form-label">Birth Date</label>
-                          <div class="cal-icon">
+                      <div className="col-md-4">
+                        <div className="input-block mb-3">
+                          <label className="col-form-label">Birth Date</label>
+                          <div className="cal-icon">
                             <Field
-                              class="form-control datetimepicker"
+                              className="form-control datetimepicker"
                               type="text"
-                              name="birthDate"
-                              id="birthDate"
+                              name="dateOfBirth"
+                              id="dateOfBirth"
+                              onChange={handleChange}
                             />
                             <ErrorMessage
-                              name="birthDate"
+                              name="dateOfBirth"
                               component="div"
                               className="text-danger"
                             />
@@ -185,11 +234,17 @@ const EditEmployeeFormModal = ({}) => {
                         </div>
                       </div>
 
-                      <div class="col-md-4">
-                        <div class="input-block mb-3">
-                          <label class="col-form-label">Gender</label>
-                          <Field as="select" className="select form-control">
-                            <option value=""></option>
+                      <div className="col-md-4">
+                        <div className="input-block mb-3">
+                          <label className="col-form-label">Gender</label>
+                          <Field
+                            as="select"
+                            className="select form-control"
+                            id="gender"
+                            name="gender"
+                            onChange={handleChange}
+                          >
+                            <option value={""}> {values.gender}</option>
                             {gender.map((gender) => (
                               <option key={gender} value={gender}>
                                 {gender}
@@ -207,15 +262,16 @@ const EditEmployeeFormModal = ({}) => {
                   </div>
                 </div>
 
-                <div class="row">
-                  <div class="col-md-12">
-                    <div class="input-block mb-3">
-                      <label class="col-form-label">Address</label>
+                <div className="row">
+                  <div className="col-md-12">
+                    <div className="input-block mb-3">
+                      <label className="col-form-label">Address</label>
                       <Field
                         type="text"
-                        class="form-control"
+                        className="form-control"
                         name="address"
                         id="address"
+                        onChange={handleChange}
                       />
                       <ErrorMessage
                         name="address"
@@ -225,14 +281,15 @@ const EditEmployeeFormModal = ({}) => {
                     </div>
                   </div>
 
-                  <div class="col-md-6">
-                    <div class="input-block mb-3">
-                      <label class="col-form-label">Email Address</label>
+                  <div className="col-md-6">
+                    <div className="input-block mb-3">
+                      <label className="col-form-label">Email Address</label>
                       <Field
                         type="email"
-                        class="form-control"
+                        className="form-control"
                         name="email"
                         id="email"
+                        onChange={handleChange}
                       />
                       <ErrorMessage
                         name="email"
@@ -242,14 +299,15 @@ const EditEmployeeFormModal = ({}) => {
                     </div>
                   </div>
 
-                  <div class="col-md-6">
-                    <div class="input-block mb-3">
-                      <label class="col-form-label">Postal City</label>
+                  <div className="col-md-6">
+                    <div className="input-block mb-3">
+                      <label className="col-form-label">Postal City</label>
                       <Field
                         type="text"
-                        class="form-control"
+                        className="form-control"
                         name="postalCity"
                         id="postalCity"
+                        onChange={handleChange}
                       />
                       <ErrorMessage
                         name="postalCity"
@@ -259,11 +317,17 @@ const EditEmployeeFormModal = ({}) => {
                     </div>
                   </div>
 
-                  <div class="col-md-4">
-                    <div class="input-block mb-3">
-                      <label class="col-form-label">Department</label>
-                      <Field as="select" className="select form-control">
-                        <option value=""></option>
+                  <div className="col-md-4">
+                    <div className="input-block mb-3">
+                      <label className="col-form-label">Department</label>
+                      <Field
+                        as="select"
+                        className="select form-control"
+                        onChange={handleChange}
+                        id="department"
+                        name="department"
+                      >
+                        <option value="">{employee.department.name}</option>
                         {departments.map((department) => (
                           <option key={department.id} value={department.id}>
                             {department.name}
@@ -278,11 +342,19 @@ const EditEmployeeFormModal = ({}) => {
                     </div>
                   </div>
 
-                  <div class="col-md-4">
-                    <div class="input-block mb-3">
-                      <label class="col-form-label">Position/Designation</label>
-                      <Field as="select" className="select form-control">
-                        <option value=""></option>
+                  <div className="col-md-4">
+                    <div className="input-block mb-3">
+                      <label className="col-form-label">
+                        Position/Designation
+                      </label>
+                      <Field
+                        as="select"
+                        className="select form-control"
+                        onChange={handleChange}
+                        id="position"
+                        name="position"
+                      >
+                        <option value="">{employee.position.name}</option>
                         {positions.map((position) => (
                           <option key={position.id} value={position.id}>
                             {position.name}
@@ -297,11 +369,17 @@ const EditEmployeeFormModal = ({}) => {
                     </div>
                   </div>
 
-                  <div class="col-md-4">
-                    <div class="input-block mb-3">
-                      <label class="col-form-label">Marital Status</label>
-                      <Field as="select" className="select form-control">
-                        <option value=""></option>
+                  <div className="col-md-4">
+                    <div className="input-block mb-3">
+                      <label className="col-form-label">Marital Status</label>
+                      <Field
+                        as="select"
+                        className="select form-control"
+                        id="maritalStatus"
+                        name="maritalStatus"
+                        onChange={handleChange}
+                      >
+                        <option value="">{values.maritalStatus}</option>
                         {maritalStatuses.map((maritalStatus) => (
                           <option key={maritalStatus} value={maritalStatus}>
                             {maritalStatus}
@@ -316,14 +394,16 @@ const EditEmployeeFormModal = ({}) => {
                     </div>
                   </div>
 
-                  <div class="col-md-6">
-                    <div class="input-block mb-3">
-                      <label class="col-form-label">Phone Number 1</label>
+                  <div className="col-md-6">
+                    <div className="input-block mb-3">
+                      <label className="col-form-label">Phone Number 1</label>
                       <Field
                         type="text"
-                        class="form-control"
+                        className="form-control"
                         name="phoneNumber1"
                         id="phoneNumber1"
+                        value={values.phoneNumber1}
+                        onChange={handleChange}
                       />{" "}
                       <ErrorMessage
                         name="phoneNumber1"
@@ -332,14 +412,16 @@ const EditEmployeeFormModal = ({}) => {
                       />
                     </div>
                   </div>
-                  <div class="col-md-6">
-                    <div class="input-block mb-3">
-                      <label class="col-form-label">Phone Number 2</label>
+                  <div className="col-md-6">
+                    <div className="input-block mb-3">
+                      <label className="col-form-label">Phone Number 2</label>
                       <Field
                         type="text"
-                        class="form-control"
+                        className="form-control"
                         name="phoneNumber2"
                         id="phoneNumber2"
+                        value={values.phoneNumber2}
+                        onChange={handleChange}
                       />{" "}
                       <ErrorMessage
                         name="phoneNumber2"
@@ -350,16 +432,21 @@ const EditEmployeeFormModal = ({}) => {
                   </div>
                 </div>
 
-                <div class="submit-section">
-                  <button
-                    class="btn btn-primary submit-btn"
-                    style={{
-                      borderRadius: "10px",
-                    }}
-                  >
-                    Submit
-                  </button>
-                </div>
+                {loading ? (
+                  <Loading />
+                ) : (
+                  <div className="submit-section">
+                    <button
+                      className="btn btn-primary submit-btn"
+                      type="submit"
+                      style={{
+                        borderRadius: "10px",
+                      }}
+                    >
+                      Submit
+                    </button>
+                  </div>
+                )}
               </Form>
             )}
           </Formik>

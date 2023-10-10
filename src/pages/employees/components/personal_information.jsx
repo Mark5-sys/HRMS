@@ -1,9 +1,7 @@
 import React, { Fragment, useEffect, useState } from "react";
 import PersonalInfoFormModal from "../forms/personal_info_form";
 
-
-const PersonalInfomation = ({}) => {
- 
+const PersonalInfomation = ({ employeeId, personalInfo }) => {
   return (
     <Fragment>
       <div class="card profile-box flex-fill">
@@ -20,40 +18,57 @@ const PersonalInfomation = ({}) => {
             </a>
           </h3>
           <ul class="personal-info">
-            <li>
-              <div class="title">Passport No.</div>
-              <div class="text">9876543210</div>
-            </li>
-            <li>
-              <div class="title">Passport Exp Date.</div>
-              <div class="text">9876543210</div>
-            </li>
-            <li>
-              <div class="title">Tel</div>
-              <div class="text">
-                <a href>9876543210</a>
-              </div>
-            </li>
+            {personalInfo.personal_info.passport_number && (
+              <li>
+                <div class="title">Passport No.</div>
+                <div class="text">
+                  {personalInfo.personal_info.passport_number}
+                </div>
+              </li>
+            )}
+
             <li>
               <div class="title">Nationality</div>
-              <div class="text">Indian</div>
+              <div class="text">{personalInfo.personal_info.nationality}</div>
             </li>
             <li>
               <div class="title">Religion</div>
-              <div class="text">Christian</div>
+              <div class="text">{personalInfo.personal_info.religion}</div>
             </li>
             <li>
               <div class="title">Marital status</div>
-              <div class="text">Married</div>
+              <div class="text">{personalInfo.marital_status}</div>
             </li>
             <li>
               <div class="title">Employment of spouse</div>
-              <div class="text">No</div>
+              {personalInfo.personal_info.spouse_employment === 1 ? (
+                <span
+                  className="badge badge-pill badge-success"
+                  style={{
+                    padding: "6px 9px",
+                    borderRadius: "20px",
+                  }}
+                >
+                  Employeed
+                </span>
+              ) : (
+                <span
+                  className="badge badge-pill badge-warning"
+                  style={{
+                    padding: "6px 9px",
+                    borderRadius: "20px",
+                  }}
+                >
+                  Unemployeed
+                </span>
+              )}
             </li>
-            <li>
-              <div class="title">No. of children</div>
-              <div class="text">2</div>
-            </li>
+            {personalInfo.personal_info.no_children > 0 && (
+              <li>
+                <div class="title">No. of children</div>
+                <div class="text">{personalInfo.personal_info.no_children}</div>
+              </li>
+            )}
           </ul>
         </div>
       </div>
@@ -67,7 +82,7 @@ const PersonalInfomation = ({}) => {
           class="modal-dialog modal-dialog-centered modal-lg"
           role="document"
         >
-          <PersonalInfoFormModal />
+          <PersonalInfoFormModal employeeId={employeeId} />
         </div>
       </div>
     </Fragment>

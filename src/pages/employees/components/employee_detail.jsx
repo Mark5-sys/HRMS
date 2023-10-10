@@ -57,20 +57,19 @@ const EmployeeDetail = ({}) => {
           >
             <ProfileCard employee={employee} />
           </div>
-          {/* {JSON.stringify(employee)} */}
           <div class="row">
             <div class="col-md-6 d-flex">
-              <PersonalInfomation />
+              <PersonalInfomation  employeeId={employeeId} personalInfo={employee} />
             </div>
 
             <div class="col-md-6 d-flex">
-              <EmergencyContact />
+              <EmergencyContact employeeId={employeeId} employee={employee}   />
             </div>
           </div>
 
           <div class="row">
-            <Qualifications />
-            <BankInformation />
+            <Qualifications employeeId={employeeId} employee={employee} />
+            {/* <BankInformation /> */}
           </div>
         </div>
       </div>

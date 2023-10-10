@@ -4,7 +4,6 @@ import { useSelector } from "react-redux";
 
 const DepartmentTable = ({}) => {
   const departments = useSelector((state) => state.department.departments);
-
   return (
     <Fragment>
       <div>
@@ -23,7 +22,6 @@ const DepartmentTable = ({}) => {
           </tbody>
         </table>
       </div>
-    
     </Fragment>
   );
 };

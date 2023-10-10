@@ -15,6 +15,7 @@ import employeeSlice from "./employee_store";
 import departmentSlice from "./department_store";
 import positionSlice from "./position_store";
 import authSlice from "./auth_store";
+import statisticsSlice from "./statistics_store";
 
 const persistConfig = {
   key: "root",
@@ -27,6 +28,7 @@ const rootReducer = combineReducers({
   department: departmentSlice.reducer,
   position: positionSlice.reducer,
   auth: authSlice.reducer,
+  statistics: statisticsSlice.reducer
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

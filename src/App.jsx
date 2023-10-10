@@ -22,6 +22,7 @@ import PositionsPage from "./pages/positions/positions_page";
 import LoginPage from "./pages/auth/login";
 import JobApplicationPage from "./pages/application/job_application_page";
 import HomePage from "./Home";
+import AddThroughUpload from "./pages/employees/upload_excel";
 
 const App = () => {
   return (
@@ -32,6 +33,7 @@ const App = () => {
             <Route exact path="/dashboard" element={<Dashboard />} />
             <Route exact path="/employees" element={<EmployeeList />} />
             <Route exact path="/add/employee" element={<AddEmployee />} />
+            <Route exact path="/add/employee/excel" element={<AddThroughUpload />} />
             <Route
               exact
               path="/employee/:employeeId"

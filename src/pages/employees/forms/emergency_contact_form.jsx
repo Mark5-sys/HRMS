@@ -4,8 +4,11 @@ import { useNavigate } from "react-router-dom";
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as yup from "yup";
 import Loading from "../../../components/loader/loading";
+import { getSingleEmployee } from "../../../services/api";
+import { employeesActions } from "../../../store/employee_store";
+import { API } from "../../../config";
 
-const EmergencyContactFormModal = ({}) => {
+const EmergencyContactFormModal = ({ employeeId }) => {
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -24,7 +27,39 @@ const EmergencyContactFormModal = ({}) => {
     phone2: yup.string().nullable(),
   });
 
-  const onSubmit = async (values, {}) => {};
+  const onSubmit = async (values, { setSubmitting, resetForm }) => {
+    setLoading(true);
+
+    values.employee_id = employeeId;
+
+    try {
+      const response = await fetch(`${API}/emergency/contact`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(values),
+      });
+      const responseData = await response.json();
+      console.log("JSON response", responseData);
+      if (response.ok) {
+        setLoading(false);
+        resetForm();
+        const employee = await getSingleEmployee(employeeId);
+        dispatch(
+          employeesActions.setSingleEmployee({
+            singleEmployee: employee,
+          })
+        );
+      }
+    } catch (error) {
+      console.log(error);
+      setLoading(false);
+    } finally {
+      setSubmitting(false);
+      setLoading(false);
+    }
+  };
 
   return (
     <Fragment>
@@ -134,8 +169,6 @@ const EmergencyContactFormModal = ({}) => {
                     </button>
                   </div>
                 )}
-
-                
               </Form>
             )}
           </Formik>

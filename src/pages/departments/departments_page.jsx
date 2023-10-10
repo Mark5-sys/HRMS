@@ -3,8 +3,13 @@ import PageHeader from "../../components/page_header";
 import AddDepartmentForm from "./forms/add_department_form";
 import DepartmentTable from "./components/department_table";
 import EditDepartmentForm from "./forms/edit_department_form";
+import { useSelector } from "react-redux";
 
 const DepartmentsPage = ({}) => {
+  const departmentEdit = useSelector(
+    (state) => state.department.departmentEdit
+  );
+
   return (
     <Fragment>
       <div class="page-wrapper">
@@ -21,6 +26,7 @@ const DepartmentsPage = ({}) => {
           </div>
 
           <AddDepartmentForm />
+          {departmentEdit && <EditDepartmentForm />}
           <EditDepartmentForm />
         </div>
       </div>

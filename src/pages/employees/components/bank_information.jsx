@@ -16,14 +16,6 @@ const BankInformation = ({}) => {
                 <div class="title">Bank account No.</div>
                 <div class="text">159843014641</div>
               </li>
-              <li>
-                <div class="title">IFSC Code</div>
-                <div class="text">ICI24504</div>
-              </li>
-              <li>
-                <div class="title">PAN No</div>
-                <div class="text">TC000Y56</div>
-              </li>
             </ul>
           </div>
         </div>

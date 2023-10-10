@@ -9,6 +9,10 @@ import { departmentsActions } from "../store/department_store";
 import { positionsActions } from "../store/position_store";
 import { employeesActions } from "../store/employee_store";
 import StatsCard from "../components/stats_card";
+import AgeStats from "./dashboard/components/age_overview_stat";
+import GenderStat from "./dashboard/components/gender_overview_stat";
+import MaritalStatus from "./dashboard/components/marital_status_stat";
+import DepartmentStatistics from "./dashboard/components/departments_stats";
 
 const Dashboard = ({}) => {
   const dispatch = useDispatch();
@@ -63,6 +67,40 @@ const Dashboard = ({}) => {
 
     fetchData();
   }, []);
+
+  const data = [
+    { age: 25, count: 7 },
+    { age: 30, count: 5 },
+    { age: 35, count: 10 },
+    { age: 40, count: 4 },
+    // Add more age/count data objects as needed
+  ];
+
+  const genderData = [
+    { gender: "Male", count: 10 },
+    { gender: "Female", count: 8 },
+    { gender: "Other", count: 2 },
+    // Add more gender/count data objects as needed
+  ];
+
+  const maritalStatus = [
+    { maritalStatus: "Single", count: 44 },
+    { maritalStatus: "Married", count: 28 },
+    { maritalStatus: "Divorced", count: 7 },
+  ];
+
+  const departmentStats = [
+    { department: "I.T & MAINTENANCE", count: 10 },
+    { department: "HEALTH & WELLNESS", count: 8 },
+    { department: "PAYROLL", count: 5 },
+    { department: "HEAD OFFICE", count: 12 },
+    { department: "LOGISTICS", count: 6 },
+    { department: "STAFFING SOLUTIONS", count: 7 },
+    { department: "WELLNESS & SUSTAINABILITY", count: 3 },
+    { department: "LEARNING & DEVELOPMENT", count: 9 },
+    // Add more department/count data objects as needed
+  ];
+
   return (
     <Fragment>
       <div className="page-wrapper">
@@ -87,22 +125,13 @@ const Dashboard = ({}) => {
           <div class="row">
             <div class="col-md-12">
               <div class="row">
-                <div class="col-md-6 text-center">
-                  <div class="card">
-                    <div class="card-body">
-                      <h3 class="card-title">Total Revenue</h3>
-                      <div id="bar-charts"></div>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-md-6 text-center">
-                  <div class="card">
-                    <div class="card-body">
-                      <h3 class="card-title">Sales Overview</h3>
-                      <div id="line-charts"></div>
-                    </div>
-                  </div>
-                </div>
+                <GenderStat data={genderData} />
+                <AgeStats data={data} />
+                <MaritalStatus data={maritalStatus} />
+              </div>
+
+              <div class="row">
+                <DepartmentStatistics data={departmentStats} />
               </div>
             </div>
           </div>

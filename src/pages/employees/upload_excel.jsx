@@ -1,8 +1,6 @@
 import React, { Fragment, useEffect, useState } from "react";
-import AddEmployeeForm from "./forms/add_employee_form";
-import { Link } from "react-router-dom";
 
-const AddEmployee = ({}) => {
+const AddThroughUpload = () => {
   return (
     <Fragment>
       <div className="page-wrapper">
@@ -15,23 +13,15 @@ const AddEmployee = ({}) => {
                   <li class="breadcrumb-item">
                     <a href="admin-dashboard.html">Dashboard</a>
                   </li>
-                  <li class="breadcrumb-item active">Add New Employee</li>
+                  <li class="breadcrumb-item active">Excel Upload</li>
                 </ul>
-              </div>
-              <div className="col-auto float-end ms-auto">
-                <Link to={"/add/employee/excel"}  className="btn add-btn">
-                <i class="fas fa-file-excel"></i> Upload Excel
-                </Link>
-                <div className="view-icons"></div>
               </div>
             </div>
           </div>
-
-          <AddEmployeeForm />
         </div>
       </div>
     </Fragment>
   );
 };
 
-export default AddEmployee;
+export default AddThroughUpload;

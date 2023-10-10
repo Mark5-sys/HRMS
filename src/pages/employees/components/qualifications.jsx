@@ -1,7 +1,7 @@
 import React, { Fragment, useEffect, useState } from "react";
 import AddEducationalInfo from "../forms/educational_info";
 
-const Qualifications = ({}) => {
+const Qualifications = ({ employeeId, employee }) => {
   return (
     <Fragment>
       <div class="col-md-6 d-flex">
@@ -20,41 +20,31 @@ const Qualifications = ({}) => {
             </h3>
             <div class="experience-box">
               <ul class="experience-list">
-                <li>
-                  <div class="experience-user">
-                    <div class="before-circle"></div>
-                  </div>
-                  <div class="experience-content">
-                    <div class="timeline-content">
-                      <a href="#/" class="name">
-                        International College of Arts and Science (UG)
-                      </a>
-                      <div>Bsc Computer Science</div>
-                      <span class="time">2000 - 2003</span>
+                {employee.qualifications.map((qualification) => (
+                  <li key={qualification.id}>
+                    <div class="experience-user">
+                      <div class="before-circle"></div>
                     </div>
-                  </div>
-                </li>
-                <li>
-                  <div class="experience-user">
-                    <div class="before-circle"></div>
-                  </div>
-                  <div class="experience-content">
-                    <div class="timeline-content">
-                      <a href="#/" class="name">
-                        International College of Arts and Science (PG)
-                      </a>
-                      <div>Msc Computer Science</div>
-                      <span class="time">2000 - 2003</span>
+                    <div class="experience-content">
+                      <div class="timeline-content">
+                        <a href="#/" class="name">
+                          {qualification.school}
+                        </a>
+                        <div>{qualification.educational_level}</div>
+                        <span class="time">
+                          {qualification.start_date} - {qualification.end_date}
+                        </span>
+                      </div>
                     </div>
-                  </div>
-                </li>
+                  </li>
+                ))}
               </ul>
             </div>
           </div>
         </div>
       </div>
 
-      <AddEducationalInfo />
+      <AddEducationalInfo employeeId={employeeId} />
     </Fragment>
   );
 };

@@ -1,0 +1,36 @@
+import React, { Fragment, useEffect, useState } from "react";
+import ApexCharts from "react-apexcharts";
+
+const MaritalStatus = ({ data }) => {
+  const options = {
+    chart: {
+      id: "basic-pie",
+    },
+    labels: data.map((item) => item.maritalStatus),
+    legend: {
+      position: "bottom",
+    },
+  };
+
+  const series = data.map((item) => item.count);
+
+  return (
+    <Fragment>
+      <div className="col-md-4 text-start">
+        <div className="card">
+          <div className="card-body">
+            <h3 className="card-title">Marriage Status Analysis</h3>
+            <ApexCharts
+              options={options}
+              series={series}
+              type="pie"
+              height={350}
+            />
+          </div>
+        </div>
+      </div>
+    </Fragment>
+  );
+};
+
+export default MaritalStatus;

@@ -64,7 +64,7 @@ const ProfileCard = ({ employee }) => {
                           <div className="text">
                             <a href>
                               <span className="__cf_email__">
-                                mafaro@providence.com
+                               { employee.email }
                               </span>
                             </a>
                           </div>
@@ -76,7 +76,7 @@ const ProfileCard = ({ employee }) => {
                         <li>
                           <div className="title">Address:</div>
                           <div className="text">
-                            1861 Bayonne Ave, Manchester Township, NJ, 08759
+                            { employee.address }
                           </div>
                         </li>
                         <li>
