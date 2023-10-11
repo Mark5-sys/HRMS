@@ -22,6 +22,9 @@ const AddDepartmentForm = ({}) => {
   });
 
   const onSubmit = async (formData, { setSubmitting, resetForm }) => {
+    const apiData = {
+      name: formData.name.toUpperCase(),
+    }
     setLoading(true);
     try {
       const response = await fetch(`${API}/department`, {
@@ -29,7 +32,7 @@ const AddDepartmentForm = ({}) => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify(apiData),
       });
       const responseData = await response.json();
       console.log(responseData.data);

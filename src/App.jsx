@@ -29,12 +29,6 @@ import { useSelector } from "react-redux";
 const App = () => {
   const isAuth = useSelector((state) => state.auth.isAuthenticated);
   return (
-    // <BrowserRouter>
-    //   <>
-
-    //   </>
-    // </BrowserRouter>
-
     <HashRouter>
       <Routes>
         <Route

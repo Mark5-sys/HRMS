@@ -55,13 +55,13 @@ const ProfileCard = ({ employee }) => {
                           <li>
                             <div className="title">Phone:</div>
                             <div className="text">
-                              <a href>{employee.phone_number_1}</a>
+                              <a >+{employee.phone_number_1}</a>
                             </div>
                           </li>
                           <li>
                             <div className="title">Phone 2:</div>
                             <div className="text">
-                              <a href>{employee.phone_number_2}</a>
+                              <a >{employee.phone_number_2}</a>
                             </div>
                           </li>
                           <li>
@@ -94,9 +94,9 @@ const ProfileCard = ({ employee }) => {
 
                 <div className="pro-edit">
                   <a
+                    className="edit-icon"
                     data-bs-target="#profile_info"
                     data-bs-toggle="modal"
-                    className="edit-icon"
                   >
                     <i className="fa-solid fa-pencil"></i>
                   </a>

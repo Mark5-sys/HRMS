@@ -21,15 +21,32 @@ const AddPositionForm = ({}) => {
     name: yup.string().required("Please Enter Position Name"),
   });
 
+  const pascalCase = (str) => {
+    return str
+      .split(" ")
+      .map((word) => {
+        if (word.length > 0) {
+          return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+        }
+        return word;
+      })
+      .join(" ");
+  };
+
   const onSubmit = async (formData, { setSubmitting, resetForm }) => {
     setLoading(true);
+
+    const apiData = {
+      name:  pascalCase(formData.name),
+    }
+
     try {
       const response = await fetch(`${API}/position`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify(apiData),
       });
 
       const responseData = await response.json();
@@ -55,21 +72,21 @@ const AddPositionForm = ({}) => {
 
   return (
     <Fragment>
-      <div id="add_position" class="modal custom-modal fade" role="dialog">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title">Add New Position</h5>
+      <div id="add_position" className="modal custom-modal fade" role="dialog">
+        <div className="modal-dialog modal-dialog-centered" role="document">
+          <div className="modal-content">
+            <div className="modal-header">
+              <h5 className="modal-title">Add New Position</h5>
               <button
                 type="button"
-                class="btn-close"
+                className="btn-close"
                 data-bs-dismiss="modal"
                 aria-label="Close"
               >
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
-            <div class="modal-body">
+            <div className="modal-body">
               <Formik
                 initialValues={initialValues}
                 onSubmit={onSubmit}
@@ -77,12 +94,12 @@ const AddPositionForm = ({}) => {
               >
                 {({ values, isSubmitting, handleSubmit, touched, errors }) => (
                   <Form>
-                    <div class="input-block mb-3">
-                      <label class="col-form-label">
-                        Position Name <span class="text-danger">*</span>
+                    <div className="input-block mb-3">
+                      <label className="col-form-label">
+                        Position Name <span className="text-danger">*</span>
                       </label>
                       <Field
-                        class="form-control"
+                        className="form-control"
                         type="text"
                         name="name"
                         id="name"
@@ -93,12 +110,12 @@ const AddPositionForm = ({}) => {
                         className="text-danger"
                       />
                     </div>
-                    <div class="submit-section">
+                    <div className="submit-section">
                       {loading ? (
                         <Loading />
                       ) : (
                         <button
-                          class="btn btn-primary submit-btn"
+                          className="btn btn-primary submit-btn"
                           disabled={isSubmitting}
                           onClick={handleSubmit}
                           style={{

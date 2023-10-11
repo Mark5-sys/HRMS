@@ -1,0 +1,181 @@
+.patient-skeleton {
+    display: flex;
+    flex-direction: column;
+    background-color: #f5f5f5;
+    border-radius: 8px;
+    padding: 16px;
+    margin-bottom: 16px;
+    height: 100vh;
+    animation: skeleton-fade 1s ease-in-out infinite;
+  }
+   @keyframes skeleton-fade {
+    0% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.5;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+   .patient-skeleton-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 16px;
+  }
+   .patient-skeleton-avatar {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    background-color: #ddd;
+    margin-right: 16px;
+    animation: skeleton-pulse 1s ease-in-out infinite;
+  }
+   @keyframes skeleton-pulse {
+    0% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.05);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+   .patient-skeleton-name {
+    width: 400px;
+    height: 40px;
+    background-color: #ddd;
+    animation: skeleton-fade 1s ease-in-out infinite;
+    border-radius: 10px;
+  }
+   .patient-skeleton-details {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    border-radius: 10px;
+  }
+   .patient-skeleton-detail {
+    width: calc(50% - 8px);
+    height: 32px;
+    margin-bottom: 8px;
+    background-color: #ddd;
+    border-radius: 10px;
+    animation: skeleton-fade 1s ease-in-out infinite;
+  }
+   .patient-skeleton-detail:last-child {
+    width: 100%;
+  }
+   .patient-skeleton-detail-full {
+    width: 100%;
+    height: 32px;
+    margin-bottom: 8px;
+    background-color: #ddd;
+    animation: skeleton-fade 1s ease-in-out infinite;
+  }
+   .patient-skeleton-column {
+    display: flex;
+    flex-direction: column;
+    width: calc(25% - 8px);
+    border-radius: 10px;
+  }
+   .patient-skeleton-detail {
+    height: 32px;
+    margin-bottom: 8px;
+    border-radius: 10px;
+    background-color: #ddd;
+    animation: skeleton-fade 1s ease-in-out infinite;
+  }
+   .patient-skeleton-detail:last-child {
+    margin-bottom: 0;
+  }
+  
+  
+  
+  .table-skeleton {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 3rem;
+  }
+  
+  .table-skeleton td {
+    padding: 8px;
+    text-align: center;
+  }
+  
+  .cell-skeleton {
+    width: 100%;
+    border-radius: 10px;
+    height: 30px;
+    background-color: #e0e0e0;
+    animation: pulse 1.5s infinite;
+  }
+  
+  @keyframes pulse {
+    0% { background-color: #e0e0e0; }
+    50% { background-color: #f5f5f5; }
+    100% { background-color: #e0e0e0; }
+  }
+  
+  
+  .user-card-skeleton {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    /* border: 1px solid #ccc; */
+    border-radius: 5px;
+    background-color: #f5f5f5;
+    animation: fadeIn 1s ease-in-out infinite alternate;
+    margin: 10px;
+  }
+   @keyframes fadeIn {
+    0% {
+      opacity: 0.5;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+   .avatar-skeleton {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: #ddd;
+    animation: pulse 1.5s ease-in-out infinite alternate;
+  }
+   @keyframes pulse {
+    0% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.1);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+   .info-skeleton {
+    margin-left: 10px;
+  }
+   .name-skeleton {
+    width: 120px;
+    height: 12px;
+    background-color: #ddd;
+    margin-bottom: 5px;
+    animation: shimmer 1s infinite linear;
+  }
+   @keyframes shimmer {
+    0% {
+      background-position: -200px 0;
+    }
+    100% {
+      background-position: 200px 0;
+    }
+  }
+   .email-skeleton {
+    width: 80px;
+    height: 10px;
+    background-color: #ddd;
+    animation: shimmer 1s infinite linear;
+  }
