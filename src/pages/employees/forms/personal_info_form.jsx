@@ -72,19 +72,19 @@ const PersonalInfoFormModal = ({ employeeId }) => {
 
   return (
     <Fragment>
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title">Personal Information</h5>
+      <div className="modal-content">
+        <div className="modal-header">
+          <h5 className="modal-title">Personal Information</h5>
           <button
             type="button"
-            class="btn-close"
+            className="btn-close"
             data-bs-dismiss="modal"
             aria-label="Close"
           >
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
-        <div class="modal-body">
+        <div className="modal-body">
           <Formik
             initialValues={initialValues}
             onSubmit={onSubmit}
@@ -100,14 +100,14 @@ const PersonalInfoFormModal = ({ employeeId }) => {
             }) => (
               <Form>
                 <div className="row">
-                  <div class="col-md-6">
-                    <div class="input-block mb-3">
-                      <label class="col-form-label">
+                  <div className="col-md-6">
+                    <div className="input-block mb-3">
+                      <label className="col-form-label">
                         Passport No (Optional)
                       </label>
                       <Field
                         type="text"
-                        class="form-control"
+                        className="form-control"
                         name="passport_number"
                         id="passport_number"
                         onChange={handleChange}
@@ -115,36 +115,36 @@ const PersonalInfoFormModal = ({ employeeId }) => {
                     </div>
                   </div>
 
-                  <div class="col-md-6">
-                    <div class="input-block mb-3">
-                      <label class="col-form-label">Nationality</label>
+                  <div className="col-md-6">
+                    <div className="input-block mb-3">
+                      <label className="col-form-label">Nationality</label>
                       <Field
                         type="text"
-                        class="form-control"
+                        className="form-control"
                         name="nationality"
                         id="nationality"
                         onChange={handleChange}
                       />
                     </div>
                   </div>
-                  <div class="col-md-6">
-                    <div class="input-block mb-3">
-                      <label class="col-form-label">Religion</label>
+                  <div className="col-md-6">
+                    <div className="input-block mb-3">
+                      <label className="col-form-label">Religion</label>
                       <Field
                         type="text"
-                        class="form-control"
+                        className="form-control"
                         name="religion"
                         id="religion"
                         onChange={handleChange}
                       />
                     </div>
                   </div>
-                  <div class="col-md-3">
-                    <div class="input-block mb-3">
-                      <label class="col-form-label">Number of Children</label>
+                  <div className="col-md-3">
+                    <div className="input-block mb-3">
+                      <label className="col-form-label">Number of Children</label>
                       <Field
                         type="number"
-                        class="form-control"
+                        className="form-control"
                         name="no_children"
                         id="no_children"
                         onChange={handleChange}
@@ -176,11 +176,11 @@ const PersonalInfoFormModal = ({ employeeId }) => {
                     </div>
                   </div>
                 </div>
-                <div class="submit-section">
+                <div className="submit-section">
                   {loading ? (
                     <Loading />
                   ) : (
-                    <button class="btn btn-primary submit-btn" type="submit">
+                    <button className="btn btn-primary submit-btn" type="submit">
                       Submit
                     </button>
                   )}

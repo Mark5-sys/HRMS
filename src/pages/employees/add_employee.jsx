@@ -7,20 +7,20 @@ const AddEmployee = ({}) => {
     <Fragment>
       <div className="page-wrapper">
         <div className="content container-fluid">
-          <div class="page-header">
-            <div class="row">
-              <div class="col-sm-12">
-                <h3 class="page-title">Profile</h3>
-                <ul class="breadcrumb">
-                  <li class="breadcrumb-item">
+          <div className="page-header">
+            <div className="row">
+              <div className="col-sm-12">
+                <h3 className="page-title">Profile</h3>
+                <ul className="breadcrumb">
+                  <li className="breadcrumb-item">
                     <a href="admin-dashboard.html">Dashboard</a>
                   </li>
-                  <li class="breadcrumb-item active">Add New Employee</li>
+                  <li className="breadcrumb-item active">Add New Employee</li>
                 </ul>
               </div>
               <div className="col-auto float-end ms-auto">
                 <Link to={"/add/employee/excel"}  className="btn add-btn">
-                <i class="fas fa-file-excel"></i> Upload Excel
+                <i className="fas fa-file-excel"></i> Upload Excel
                 </Link>
                 <div className="view-icons"></div>
               </div>

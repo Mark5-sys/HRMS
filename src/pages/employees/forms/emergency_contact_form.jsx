@@ -63,19 +63,19 @@ const EmergencyContactFormModal = ({ employeeId }) => {
 
   return (
     <Fragment>
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title">Emergency Contact</h5>
+      <div className="modal-content">
+        <div className="modal-header">
+          <h5 className="modal-title">Emergency Contact</h5>
           <button
             type="button"
-            class="btn-close"
+            className="btn-close"
             data-bs-dismiss="modal"
             aria-label="Close"
           >
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
-        <div class="modal-body">
+        <div className="modal-body">
           <Formik
             initialValues={initialValues}
             onSubmit={onSubmit}
@@ -83,18 +83,18 @@ const EmergencyContactFormModal = ({ employeeId }) => {
           >
             {({ values, isSubmitting, handleSubmit, touched, errors }) => (
               <Form>
-                <div class="card">
-                  <div class="card-body">
-                    <h3 class="card-title">Emergency Contact</h3>
-                    <div class="row">
-                      <div class="col-md-6">
-                        <div class="input-block mb-3">
-                          <label class="col-form-label">
-                            Name <span class="text-danger">*</span>
+                <div className="card">
+                  <div className="card-body">
+                    <h3 className="card-title">Emergency Contact</h3>
+                    <div className="row">
+                      <div className="col-md-6">
+                        <div className="input-block mb-3">
+                          <label className="col-form-label">
+                            Name <span className="text-danger">*</span>
                           </label>
                           <Field
                             type="text"
-                            class="form-control"
+                            className="form-control"
                             id="name"
                             name="name"
                           />
@@ -106,14 +106,14 @@ const EmergencyContactFormModal = ({ employeeId }) => {
                         </div>
                       </div>
 
-                      <div class="col-md-6">
-                        <div class="input-block mb-3">
-                          <label class="col-form-label">
+                      <div className="col-md-6">
+                        <div className="input-block mb-3">
+                          <label className="col-form-label">
                             Relationship
-                            <span class="text-danger">*</span>
+                            <span className="text-danger">*</span>
                           </label>
                           <Field
-                            class="form-control"
+                            className="form-control"
                             type="text"
                             name="relationship"
                             id="relationship"
@@ -126,13 +126,13 @@ const EmergencyContactFormModal = ({ employeeId }) => {
                         </div>
                       </div>
 
-                      <div class="col-md-6">
-                        <div class="input-block mb-3">
-                          <label class="col-form-label">
-                            Phone <span class="text-danger">*</span>
+                      <div className="col-md-6">
+                        <div className="input-block mb-3">
+                          <label className="col-form-label">
+                            Phone <span className="text-danger">*</span>
                           </label>
                           <Field
-                            class="form-control"
+                            className="form-control"
                             type="text"
                             name="phone1"
                             id="phone1"
@@ -145,11 +145,11 @@ const EmergencyContactFormModal = ({ employeeId }) => {
                         </div>
                       </div>
 
-                      <div class="col-md-6">
-                        <div class="input-block mb-3">
-                          <label class="col-form-label">Phone 2</label>
+                      <div className="col-md-6">
+                        <div className="input-block mb-3">
+                          <label className="col-form-label">Phone 2</label>
                           <Field
-                            class="form-control"
+                            className="form-control"
                             type="text"
                             name="phone2"
                             id="phone2"
@@ -163,8 +163,8 @@ const EmergencyContactFormModal = ({ employeeId }) => {
                 {loading ? (
                   <Loading />
                 ) : (
-                  <div class="submit-section">
-                    <button class="btn btn-primary submit-btn" type="submit">
+                  <div className="submit-section">
+                    <button className="btn btn-primary submit-btn" type="submit">
                       Submit
                     </button>
                   </div>

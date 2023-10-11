@@ -105,32 +105,32 @@ const Dashboard = ({}) => {
     <Fragment>
       <div className="page-wrapper">
         <div className="content container-fluid">
-          <div class="page-header">
-            <div class="row">
-              <div class="col-sm-12">
-                <h3 class="page-title">
+          <div className="page-header">
+            <div className="row">
+              <div className="col-sm-12">
+                <h3 className="page-title">
                   {greeting} {user.username}!
                 </h3>
-                <ul class="breadcrumb">
-                  <li class="breadcrumb-item active">Dashboard</li>
+                <ul className="breadcrumb">
+                  <li className="breadcrumb-item active">Dashboard</li>
                 </ul>
               </div>
             </div>
           </div>
 
-          <div class="row">
+          <div className="row">
             <StatsCard />
           </div>
 
-          <div class="row">
-            <div class="col-md-12">
-              <div class="row">
+          <div className="row">
+            <div className="col-md-12">
+              <div className="row">
                 <GenderStat data={genderData} />
                 <AgeStats data={data} />
                 <MaritalStatus data={maritalStatus} />
               </div>
 
-              <div class="row">
+              <div className="row">
                 <DepartmentStatistics data={departmentStats} />
               </div>
             </div>

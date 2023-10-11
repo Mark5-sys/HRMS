@@ -6,8 +6,8 @@ const EmployeeItem = ({ employee }) => {
     <Fragment>
       <tr>
         <td>
-          <h2 class="table-avatar">
-            <a class="avatar">
+          <h2 className="table-avatar">
+            <a className="avatar">
               <img src="assets/img/user.jpg" alt="User Image" />
             </a>
             <Link to={`/employee/${employee.id}`}>
@@ -31,32 +31,32 @@ const EmployeeItem = ({ employee }) => {
             {employee.status}
           </span>
         </td>
-        <td class="text-end">
-          <div class="dropdown dropdown-action">
+        <td className="text-end">
+          <div className="dropdown dropdown-action">
             <a
               href="#"
-              class="action-icon dropdown-toggle"
+              className="action-icon dropdown-toggle"
               data-bs-toggle="dropdown"
               aria-expanded="false"
             >
-              <i class="material-icons">more_vert</i>
+              <i className="material-icons">more_vert</i>
             </a>
-            <div class="dropdown-menu dropdown-menu-right">
+            <div className="dropdown-menu dropdown-menu-right">
               <a
-                class="dropdown-item"
+                className="dropdown-item"
                 href="#"
                 data-bs-toggle="modal"
                 data-bs-target="#edit_employee"
               >
-                <i class="fa-solid fa-pencil m-r-5"></i> Edit
+                <i className="fa-solid fa-pencil m-r-5"></i> Edit
               </a>
               <a
-                class="dropdown-item"
+                className="dropdown-item"
                 href="#"
                 data-bs-toggle="modal"
                 data-bs-target="#delete_employee"
               >
-                <i class="fa-regular fa-trash-can m-r-5"></i>
+                <i className="fa-regular fa-trash-can m-r-5"></i>
                 Delete
               </a>
             </div>

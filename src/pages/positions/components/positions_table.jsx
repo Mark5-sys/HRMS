@@ -7,12 +7,12 @@ const PositionsTable = ({}) => {
   return (
     <Fragment>
       <div>
-        <table class="table table-striped custom-table mb-0 datatable">
+        <table className="table table-striped custom-table mb-0 datatable">
           <thead>
             <tr>
-              <th class="width-thirty">#</th>
+              <th className="width-thirty">#</th>
               <th>Position Name</th>
-              <th class="text-end">Action</th>
+              <th className="text-end">Action</th>
             </tr>
           </thead>
           <tbody>

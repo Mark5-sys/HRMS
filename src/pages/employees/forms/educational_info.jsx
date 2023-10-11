@@ -80,24 +80,24 @@ const AddEducationalInfo = ({ employeeId }) => {
 
   return (
     <Fragment>
-      <div id="education_info" class="modal custom-modal fade" role="dialog">
+      <div id="education_info" className="modal custom-modal fade" role="dialog">
         <div
-          class="modal-dialog modal-dialog-centered modal-lg"
+          className="modal-dialog modal-dialog-centered modal-lg"
           role="document"
         >
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title">Education Informations</h5>
+          <div className="modal-content">
+            <div className="modal-header">
+              <h5 className="modal-title">Education Informations</h5>
               <button
                 type="button"
-                class="btn-close"
+                className="btn-close"
                 data-bs-dismiss="modal"
                 aria-label="Close"
               >
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
-            <div class="modal-body">
+            <div className="modal-body">
               <Formik
                 initialValues={initialValues}
                 onSubmit={onSubmit}
@@ -105,22 +105,22 @@ const AddEducationalInfo = ({ employeeId }) => {
               >
                 {({ values, isSubmitting, handleSubmit, touched, errors }) => (
                   <Form>
-                    <div class="form-scroll">
-                      <div class="card">
-                        <div class="card-body">
-                          <h3 class="card-title">
+                    <div className="form-scroll">
+                      <div className="card">
+                        <div className="card-body">
+                          <h3 className="card-title">
                             Education Informations
-                            <a class="delete-icon">
-                              <i class="fa-regular fa-trash-can"></i>
+                            <a className="delete-icon">
+                              <i className="fa-regular fa-trash-can"></i>
                             </a>
                           </h3>
 
-                          <div class="row">
-                            <div class="col-md-6">
-                              <div class="input-block mb-3 form-focus focused">
+                          <div className="row">
+                            <div className="col-md-6">
+                              <div className="input-block mb-3 form-focus focused">
                                 <Field
                                   type="text"
-                                  class="form-control floating"
+                                  className="form-control floating"
                                   name="school"
                                   id="school"
                                 />
@@ -129,17 +129,17 @@ const AddEducationalInfo = ({ employeeId }) => {
                                   component="div"
                                   className="text-danger"
                                 />
-                                <label class="focus-label">
+                                <label className="focus-label">
                                   Institution / School
                                 </label>
                               </div>
                             </div>
 
-                            <div class="col-md-6">
-                              <div class="input-block mb-3 form-focus focused">
+                            <div className="col-md-6">
+                              <div className="input-block mb-3 form-focus focused">
                                 <Field
                                   as="select"
-                                  class="form-control floating"
+                                  className="form-control floating"
                                   name="educational_level"
                                   id="educational_level"
                                 >
@@ -155,20 +155,20 @@ const AddEducationalInfo = ({ employeeId }) => {
                                   component="div"
                                   className="text-danger"
                                 />
-                                <label class="focus-label">
+                                <label className="focus-label">
                                   Education Level (Grade 7, Form 4 ...)
                                 </label>
                               </div>
                             </div>
 
-                            <div class="col-md-6 mt-3">
-                              <div class="input-block mb-3 form-focus focused">
-                                <div class="cal-icon">
+                            <div className="col-md-6 mt-3">
+                              <div className="input-block mb-3 form-focus focused">
+                                <div className="cal-icon">
                                   <Field
                                     type="text"
                                     name="start_date"
                                     id="start_date"
-                                    class="form-control floating"
+                                    className="form-control floating"
                                   />
                                   <ErrorMessage
                                     name="start_date"
@@ -176,16 +176,16 @@ const AddEducationalInfo = ({ employeeId }) => {
                                     className="text-danger"
                                   />
                                 </div>
-                                <label class="focus-label">Starting Year</label>
+                                <label className="focus-label">Starting Year</label>
                               </div>
                             </div>
 
-                            <div class="col-md-6  mt-3">
-                              <div class="input-block mb-3 form-focus focused">
-                                <div class="cal-icon">
+                            <div className="col-md-6  mt-3">
+                              <div className="input-block mb-3 form-focus focused">
+                                <div className="cal-icon">
                                   <Field
                                     type="text"
-                                    class="form-control floating "
+                                    className="form-control floating "
                                     id="end_date"
                                     name="end_date"
                                   />
@@ -195,19 +195,19 @@ const AddEducationalInfo = ({ employeeId }) => {
                                     className="text-danger"
                                   />
                                 </div>
-                                <label class="focus-label">End Year</label>
+                                <label className="focus-label">End Year</label>
                               </div>
                             </div>
 
-                            <div class="col-md-12 mt-3">
-                              <div class="input-block mb-3 form-focus focused">
+                            <div className="col-md-12 mt-3">
+                              <div className="input-block mb-3 form-focus focused">
                                 <Field
                                   type="text"
                                   name="results"
                                   id="results"
-                                  class="form-control floating"
+                                  className="form-control floating"
                                 />
-                                <label class="focus-label">Results</label>
+                                <label className="focus-label">Results</label>
                                 <ErrorMessage
                                   name="results"
                                   component="div"
@@ -216,27 +216,27 @@ const AddEducationalInfo = ({ employeeId }) => {
                               </div>
                             </div>
 
-                            <div class="col-md-6">
-                              <div class="input-block mb-3 form-focus focused">
+                            <div className="col-md-6">
+                              <div className="input-block mb-3 form-focus focused">
                                 <Field
                                   type="text"
                                   name="grade"
                                   id="grade"
-                                  class="form-control floating"
+                                  className="form-control floating"
                                 />
-                                <label class="focus-label">Grade</label>
+                                <label className="focus-label">Grade</label>
                               </div>
                             </div>
                           </div>
                         </div>
                       </div>
                     </div>
-                    <div class="submit-section">
+                    <div className="submit-section">
                       {loading ? (
                         <Loading />
                       ) : (
                         <button
-                          class="btn btn-primary submit-btn"
+                          className="btn btn-primary submit-btn"
                           type="submit"
                         >
                           Submit

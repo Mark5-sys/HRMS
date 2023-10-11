@@ -4,27 +4,27 @@ import { Link } from "react-router-dom";
 const SideBar = ({}) => {
   return (
     <Fragment>
-      <div class="sidebar" id="sidebar">
-        <div class="sidebar-inner slimscroll">
-          <div id="sidebar-menu" class="sidebar-menu">
-            <ul class="sidebar-vertical">
-              <li class="menu-title">
+      <div className="sidebar" id="sidebar">
+        <div className="sidebar-inner slimscroll">
+          <div id="sidebar-menu" className="sidebar-menu">
+            <ul className="sidebar-vertical">
+              <li className="menu-title">
                 <span>Main</span>
               </li>
 
               <li>
                 <Link to={"/dashboard"}>
-                  <i class="la la-dashboard"></i> <span>Dashboard</span>
+                  <i className="la la-dashboard"></i> <span>Dashboard</span>
                 </Link>
               </li>
 
-              <li class="menu-title">
+              <li className="menu-title">
                 <span>Employees</span>
               </li>
-              {/* <li class="submenu">
-                <a class="noti-dot">
-                  <i class="la la-user"></i> <span> Employees</span>
-                  <span class="menu-arrow"></span>
+              {/* <li className="submenu">
+                <a className="noti-dot">
+                  <i className="la la-user"></i> <span> Employees</span>
+                  <span className="menu-arrow"></span>
                 </a>
                 <ul>
                   <li>
@@ -41,19 +41,19 @@ const SideBar = ({}) => {
 
               <li>
                 <Link to={"/employees"}>
-                  <i class="la la-user"></i> <span>Employees</span>
+                  <i className="la la-user"></i> <span>Employees</span>
                 </Link>
               </li>
 
               <li>
                 <Link to={"/departments"}>
-                  <i class="la la-files-o"></i> <span>Departments</span>
+                  <i className="la la-files-o"></i> <span>Departments</span>
                 </Link>
               </li>
 
               <li>
                 <Link to={"/positions"}>
-                  <i class="la la-briefcase"></i> <span>Positions</span>
+                  <i className="la la-briefcase"></i> <span>Positions</span>
                 </Link>
               </li>
             </ul>

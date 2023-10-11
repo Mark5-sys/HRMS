@@ -45,29 +45,29 @@ const EmployeeDetail = ({}) => {
             <PatientSkeleton />
           ) : (
             <Fragment>
-              <div class="page-header">
-                <div class="row">
-                  <div class="col-sm-12">
-                    <h3 class="page-title">Profile</h3>
-                    <ul class="breadcrumb">
-                      <li class="breadcrumb-item">
+              <div className="page-header">
+                <div className="row">
+                  <div className="col-sm-12">
+                    <h3 className="page-title">Profile</h3>
+                    <ul className="breadcrumb">
+                      <li className="breadcrumb-item">
                         <a href="admin-dashboard.html">Dashboard</a>
                       </li>
-                      <li class="breadcrumb-item active">Profile</li>
+                      <li className="breadcrumb-item active">Profile</li>
                     </ul>
                   </div>
                 </div>
               </div>
               <div
-                class="row"
+                className="row"
                 style={{
                   marginBottom: "40px",
                 }}
               >
                 {employee && <ProfileCard employee={employee} />}
               </div>
-              <div class="row">
-                <div class="col-md-6 d-flex">
+              <div className="row">
+                <div className="col-md-6 d-flex">
                   {employee && (
                     <PersonalInfomation
                       employeeId={employeeId}
@@ -75,7 +75,7 @@ const EmployeeDetail = ({}) => {
                     />
                   )}
                 </div>
-                <div class="col-md-6 d-flex">
+                <div className="col-md-6 d-flex">
                   {employee && (
                     <EmergencyContact
                       employeeId={employeeId}
@@ -84,7 +84,7 @@ const EmployeeDetail = ({}) => {
                   )}
                 </div>
               </div>
-              <div class="row">
+              <div className="row">
                 {employee && (
                   <Qualifications employeeId={employeeId} employee={employee} />
                 )}
