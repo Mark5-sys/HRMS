@@ -110,7 +110,14 @@ export const employeeByDepartment = async () => {
   return responseData;
 };
 
-
-export const maritalStatus = async () => { 
-  const response = await fetch(`${API}/age/statistics`)
-}
+export const ageStatistics = async () => {
+  const response = await fetch(`${API}/age/statistics`, {
+    method: "GET",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+  });
+  const responseData = await response.json();
+  return responseData;
+};

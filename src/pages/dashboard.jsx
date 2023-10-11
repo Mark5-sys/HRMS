@@ -1,5 +1,6 @@
 import React, { Fragment, useEffect, useState } from "react";
 import {
+  genderStatistics,
   getAllDepartments,
   getAllEmployees,
   getAllPositions,
@@ -13,6 +14,7 @@ import AgeStats from "./dashboard/components/age_overview_stat";
 import GenderStat from "./dashboard/components/gender_overview_stat";
 import MaritalStatus from "./dashboard/components/marital_status_stat";
 import DepartmentStatistics from "./dashboard/components/departments_stats";
+import { statisticsActions } from "../store/statistics_store";
 
 const Dashboard = ({}) => {
   const dispatch = useDispatch();
@@ -57,6 +59,13 @@ const Dashboard = ({}) => {
           })
         );
 
+        const genderStats = await genderStatistics();
+        dispatch(
+          statisticsActions.setGenderStatistics({
+            genderStatistics: genderStats,
+          })
+        );
+
         console.log("Departments", departments);
         console.log("Positions", positions);
         console.log("Employees", employees);
@@ -68,6 +77,9 @@ const Dashboard = ({}) => {
     fetchData();
   }, []);
 
+
+  const genderData = useSelector((state) => state.statistics.genderStatistics)
+
   const data = [
     { age: 25, count: 7 },
     { age: 30, count: 5 },
@@ -76,11 +88,11 @@ const Dashboard = ({}) => {
     // Add more age/count data objects as needed
   ];
 
-  const genderData = [
-    { gender: "Male", count: 10 },
-    { gender: "Female", count: 8 },
-    // Add more gender/count data objects as needed
-  ];
+  // const genderData = [
+  //   { gender: "Male", count: 10 },
+  //   { gender: "Female", count: 8 },
+  //   // Add more gender/count data objects as needed
+  // ];
 
   const maritalStatus = [
     { maritalStatus: "Single", count: 44 },
