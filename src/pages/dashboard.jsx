@@ -1,5 +1,7 @@
 import React, { Fragment, useEffect, useState } from "react";
 import {
+  ageStatistics,
+  employeeByDepartment,
   genderStatistics,
   getAllDepartments,
   getAllEmployees,
@@ -74,6 +76,21 @@ const Dashboard = ({}) => {
           })
         );
 
+        const ageStats = await ageStatistics();
+        dispatch(
+          statisticsActions.setAgeStatistics({
+            ageStatistics: ageStats,
+          })
+        );
+
+        const dptStats = await employeeByDepartment();
+
+        dispatch(
+          statisticsActions.setEmployeeDepartmentStatistics({
+            employeeByDepartmentStatistics: dptStats,
+          })
+        );
+
         console.log("Departments", departments);
         console.log("Positions", positions);
         console.log("Employees", employees);
@@ -85,20 +102,23 @@ const Dashboard = ({}) => {
     fetchData();
   }, []);
 
-  const genderData = useSelector((state) => state.statistics.genderStatistics) || [];
-  const maritalStatus = useSelector((state) => state.statistics.maritalStatusStatistics) || []
+  const genderData =
+    useSelector((state) => state.statistics.genderStatistics) || [];
+  const maritalStatus =
+    useSelector((state) => state.statistics.maritalStatusStatistics) || [];
+  const data = useSelector((state) => state.statistics.ageStatistics) || [];
+  const bydpt =
+    useSelector((state) => state.statistics.employeeByDepartmentStatistics) ||
+    [];
 
+  // const data = [
+  //   { age: 25, count: 7 },
+  //   { age: 30, count: 5 },
+  //   { age: 35, count: 10 },
+  //   { age: 40, count: 4 },
+  //   // Add more age/count data objects as needed
+  // ];
 
-
-  const data = [
-    { age: 25, count: 7 },
-    { age: 30, count: 5 },
-    { age: 35, count: 10 },
-    { age: 40, count: 4 },
-    // Add more age/count data objects as needed
-  ];
-
-  
   // const maritalStatus = [
   //   { maritalStatus: "Single", count: 44 },
   //   { maritalStatus: "Married", count: 28 },
@@ -142,11 +162,11 @@ const Dashboard = ({}) => {
               <div className="row">
                 <GenderStat data={genderData} />
                 <AgeStats data={data} />
-                <MaritalStatus data={maritalStatus} />
               </div>
 
               <div className="row">
-                <DepartmentStatistics data={departmentStats} />
+                <MaritalStatus data={maritalStatus} />
+                <DepartmentStatistics data={bydpt} />
               </div>
             </div>
           </div>

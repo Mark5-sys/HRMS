@@ -4,7 +4,8 @@ import ApexCharts from "react-apexcharts";
 const DepartmentStatistics = ({ data }) => {
   const options = {
     chart: {
-      id: "basic-bar",
+      id: "basic-line",
+      type: "line",
     },
     xaxis: {
       categories: data.map((item) => item.department),
@@ -18,7 +19,6 @@ const DepartmentStatistics = ({ data }) => {
       },
     },
     yaxis: {
-      
       title: {
         text: "Number of People",
       },
@@ -29,18 +29,19 @@ const DepartmentStatistics = ({ data }) => {
     {
       name: "Number of People",
       data: data.map((item) => item.count),
+      curve: "smooth",
     },
   ];
   return (
     <Fragment>
-      <div className="col-md-6 text-start" >
+      <div className="col-md-8 text-start">
         <div className="card">
           <div className="card-body">
             <h3 className="card-title">Departments Analysis</h3>
             <ApexCharts
               options={options}
               series={series}
-              type="bar"
+              type="line"
               height={350}
             />
           </div>

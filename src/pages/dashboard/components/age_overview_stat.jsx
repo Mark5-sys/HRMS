@@ -9,25 +9,28 @@ const AgeStats = ({ data }) => {
     xaxis: {
       categories: data.map((item) => item.age),
       title: {
-        text: "Age",
+        text: "Employees Age",
       },
     },
     yaxis: {
       title: {
-        text: "Number of People",
+        text: "Number of People per Age",
       },
     },
+    colors: Array.from({ length: data.length }, () =>
+      `#${Math.floor(Math.random() * 16777215).toString(16)}`
+    ),
   };
 
   const series = [
     {
-      name: "Number of People",
+      name: "Employee(s)",
       data: data.map((item) => item.count),
     },
   ];
   return (
     <Fragment>
-      <div className="col-md-4 text-start">
+      <div className="col-md-8 text-start">
         <div className="card">
           <div className="card-body">
             <h3 className="card-title">Age Overview</h3>
