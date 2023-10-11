@@ -7,7 +7,7 @@ const PersonalInfomation = ({ employeeId, personalInfo }) => {
       <div className="card profile-box flex-fill">
         <div className="card-body">
           <h3 className="card-title">
-            Personal Informations
+            Personal Information
             <a
               className="edit-icon"
               data-bs-toggle="modal"

@@ -8,7 +8,7 @@ const Qualifications = ({ employeeId, employee }) => {
         <div className="card profile-box flex-fill">
           <div className="card-body">
             <h3 className="card-title">
-              Education Informations
+              Education
               <a
                 href="#"
                 className="edit-icon"

@@ -70,3 +70,47 @@ export const employeesCount = async () => {
   const responseData = await response.json();
   return responseData;
 };
+
+export const genderStatistics = async () => {
+  const response = await fetch(`${API}/employees/gender/count`, {
+    method: "GET",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+  });
+
+  const responseData = await response.json();
+  return responseData;
+};
+
+export const maritalStatistics = async () => {
+  const response = await fetch(`${API}/employees/marital/count`, {
+    method: "GET",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+  });
+
+  const responseData = await response.json();
+  return responseData;
+};
+
+export const employeeByDepartment = async () => {
+  const response = await fetch(`${API}/departments/employees/count`, {
+    method: "GET",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+  });
+
+  const responseData = await response.json();
+  return responseData;
+};
+
+
+export const maritalStatus = async () => { 
+  const response = await fetch(`${API}/age/statistics`)
+}

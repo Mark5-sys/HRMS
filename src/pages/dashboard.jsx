@@ -79,14 +79,12 @@ const Dashboard = ({}) => {
   const genderData = [
     { gender: "Male", count: 10 },
     { gender: "Female", count: 8 },
-    { gender: "Other", count: 2 },
     // Add more gender/count data objects as needed
   ];
 
   const maritalStatus = [
     { maritalStatus: "Single", count: 44 },
     { maritalStatus: "Married", count: 28 },
-    { maritalStatus: "Divorced", count: 7 },
   ];
 
   const departmentStats = [
