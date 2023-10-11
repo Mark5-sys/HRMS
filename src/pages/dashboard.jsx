@@ -4,6 +4,7 @@ import {
   getAllDepartments,
   getAllEmployees,
   getAllPositions,
+  maritalStatistics,
 } from "../services/api";
 import { useDispatch, useSelector } from "react-redux";
 import { departmentsActions } from "../store/department_store";
@@ -66,6 +67,13 @@ const Dashboard = ({}) => {
           })
         );
 
+        const maritalStats = await maritalStatistics();
+        dispatch(
+          statisticsActions.setMaritalStatusStatistics({
+            maritalStatusStatistics: maritalStats,
+          })
+        );
+
         console.log("Departments", departments);
         console.log("Positions", positions);
         console.log("Employees", employees);
@@ -77,8 +85,10 @@ const Dashboard = ({}) => {
     fetchData();
   }, []);
 
+  const genderData = useSelector((state) => state.statistics.genderStatistics) || [];
+  const maritalStatus = useSelector((state) => state.statistics.maritalStatusStatistics) || []
 
-  const genderData = useSelector((state) => state.statistics.genderStatistics)
+
 
   const data = [
     { age: 25, count: 7 },
@@ -88,16 +98,11 @@ const Dashboard = ({}) => {
     // Add more age/count data objects as needed
   ];
 
-  // const genderData = [
-  //   { gender: "Male", count: 10 },
-  //   { gender: "Female", count: 8 },
-  //   // Add more gender/count data objects as needed
+  
+  // const maritalStatus = [
+  //   { maritalStatus: "Single", count: 44 },
+  //   { maritalStatus: "Married", count: 28 },
   // ];
-
-  const maritalStatus = [
-    { maritalStatus: "Single", count: 44 },
-    { maritalStatus: "Married", count: 28 },
-  ];
 
   const departmentStats = [
     { department: "I.T & MAINTENANCE", count: 10 },
