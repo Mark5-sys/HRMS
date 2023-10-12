@@ -64,26 +64,26 @@ const AddEmployeeForm = ({}) => {
       };
       console.log(postData);
 
-      // try {
-      //   setIsLoading(true);
-      //   const response = await fetch(`${API}/employee`, {
-      //     method: "POST",
-      //     headers: {
-      //       "Content-Type": "application/json",
-      //     },
-      //     body: JSON.stringify(postData),
-      //   });
-      //   const data = await response.json();
-      //   if (response.ok) {
-      //     setIsLoading(false);
-      //     navigate("/employees");
-      //   }
-      //   console.log("data", data);
-      // } catch (error) {
-      //   console.error("Error Messsage", error);
-      // } finally {
-      //   setIsLoading(false);
-      // }
+      try {
+        setIsLoading(true);
+        const response = await fetch(`${API}/employee`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(postData),
+        });
+        const data = await response.json();
+        if (response.ok) {
+          setIsLoading(false);
+          navigate("/employees");
+        }
+        console.log("data", data);
+      } catch (error) {
+        console.error("Error Messsage", error);
+      } finally {
+        setIsLoading(false);
+      }
     },
   });
 
