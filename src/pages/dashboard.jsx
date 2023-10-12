@@ -18,6 +18,7 @@ import GenderStat from "./dashboard/components/gender_overview_stat";
 import MaritalStatus from "./dashboard/components/marital_status_stat";
 import DepartmentStatistics from "./dashboard/components/departments_stats";
 import { statisticsActions } from "../store/statistics_store";
+import AgeDistributionChart from "./dashboard/components/age_distribution_chart";
 
 const Dashboard = ({}) => {
   const dispatch = useDispatch();
@@ -136,6 +137,13 @@ const Dashboard = ({}) => {
     // Add more department/count data objects as needed
   ];
 
+  const ageData = [
+    { age: 18, count: 5 },
+    { age: 25, count: 10 },
+    { age: 30, count: 8 },
+    // Add more age data as needed
+  ];
+
   return (
     <Fragment>
       <div className="page-wrapper">
@@ -161,12 +169,14 @@ const Dashboard = ({}) => {
             <div className="col-md-12">
               <div className="row">
                 <GenderStat data={genderData} />
-                <AgeStats data={data} />
+                <DepartmentStatistics data={bydpt} />
               </div>
 
               <div className="row">
+                <AgeStats data={data} />
+              </div>
+              <div className="row">
                 <MaritalStatus data={maritalStatus} />
-                <DepartmentStatistics data={bydpt} />
               </div>
             </div>
           </div>

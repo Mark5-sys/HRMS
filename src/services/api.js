@@ -121,3 +121,17 @@ export const ageStatistics = async () => {
   const responseData = await response.json();
   return responseData;
 };
+
+//Orients routes
+
+const getAllOrients = async () => {
+  const response = await fetch(`${API}/orientation`, {
+    method: "GET",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+  });
+  const responseData = await response.json();
+  return responseData;
+};

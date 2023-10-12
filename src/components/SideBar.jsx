@@ -21,28 +21,21 @@ const SideBar = ({}) => {
               <li className="menu-title">
                 <span>Employees</span>
               </li>
-              {/* <li className="submenu">
-                <a className="noti-dot">
-                  <i className="la la-user"></i> <span> Employees</span>
-                  <span className="menu-arrow"></span>
-                </a>
-                <ul>
-                  <li>
-                    <Link to={"/employees"}>Active Employees</Link>
-                  </li>
-                  <li>
-                    <Link to={"/employees"}>Orientation</Link>
-                  </li>
-                  <li>
-                    <Link to={"/employees"}>Pending</Link>
-                  </li>
-                </ul>
-              </li> */}
 
               <li>
                 <Link to={"/employees"}>
                   <i className="la la-user"></i> <span>Employees</span>
                 </Link>
+              </li>
+
+              <li>
+                <Link to={"/orients"}>
+                  <i className="la la-users"></i> <span>Orients (SS)</span>
+                </Link>
+              </li>
+
+              <li className="menu-title">
+                <span>HR</span>
               </li>
 
               <li>

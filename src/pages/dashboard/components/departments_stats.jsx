@@ -37,7 +37,7 @@ const DepartmentStatistics = ({ data }) => {
       <div className="col-md-8 text-start">
         <div className="card">
           <div className="card-body">
-            <h3 className="card-title">Departments Analysis</h3>
+            <h3 className="card-title">Department Analysis</h3>
             <ApexCharts
               options={options}
               series={series}

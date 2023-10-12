@@ -133,10 +133,10 @@ const LoginPage = ({}) => {
                               component="div"
                               className="text-danger"
                             />
-                            <span
+                            {/* <span
                               className="fa-solid fa-eye-slash"
                               id="toggle-password"
-                            ></span>
+                            ></span> */}
                           </div>
                         </div>
 
@@ -153,12 +153,12 @@ const LoginPage = ({}) => {
                             </button>
                           )}
                         </div>
-                        <div className="account-footer">
+                        {/* <div className="account-footer">
                           <p>
                             Don't have an account yet?
                             <a href="register.html">Register</a>
                           </p>
-                        </div>
+                        </div> */}
                       </Form>
                     )}
                   </Formik>

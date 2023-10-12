@@ -33,7 +33,7 @@ const AddEmployeeForm = ({}) => {
       phoneNumber2: "",
       employeeStatus: "",
     },
-    
+
     validationSchema: Yup.object({
       employeeCode: Yup.string().nullable(),
       firstName: Yup.string().nullable(),
@@ -48,10 +48,10 @@ const AddEmployeeForm = ({}) => {
     }),
     onSubmit: async (values) => {
       const postData = {
-        code: values.employeeCode,
+        code: values.employeeCode.toUpperCase(),
         position_id: parseInt(values.position),
-        first_name: values.firstName,
-        surname: values.surname,
+        first_name: values.firstName.toUpperCase(),
+        surname: values.surname.toUpperCase(),
         department_id: parseInt(values.department),
         national_id: values.nationalId,
         marital_status: values.maritalStatus,
@@ -64,26 +64,26 @@ const AddEmployeeForm = ({}) => {
       };
       console.log(postData);
 
-      try {
-        setIsLoading(true);
-        const response = await fetch(`${API}/employee`, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(postData),
-        });
-        const data = await response.json();
-        if (response.ok) {
-          setIsLoading(false);
-          navigate("/employees");
-        }
-        console.log("data", data);
-      } catch (error) {
-        console.error("Error Messsage", error);
-      } finally {
-        setIsLoading(false);
-      }
+      // try {
+      //   setIsLoading(true);
+      //   const response = await fetch(`${API}/employee`, {
+      //     method: "POST",
+      //     headers: {
+      //       "Content-Type": "application/json",
+      //     },
+      //     body: JSON.stringify(postData),
+      //   });
+      //   const data = await response.json();
+      //   if (response.ok) {
+      //     setIsLoading(false);
+      //     navigate("/employees");
+      //   }
+      //   console.log("data", data);
+      // } catch (error) {
+      //   console.error("Error Messsage", error);
+      // } finally {
+      //   setIsLoading(false);
+      // }
     },
   });
 
@@ -157,7 +157,7 @@ const AddEmployeeForm = ({}) => {
                   value={formik.values.department}
                   onChange={formik.handleChange}
                   style={{
-                    height: "45px"
+                    height: "45px",
                   }}
                 >
                   <option value="">Select Department</option>
@@ -202,7 +202,7 @@ const AddEmployeeForm = ({}) => {
                   value={formik.values.maritalStatus}
                   onChange={formik.handleChange}
                   style={{
-                    height: "45px"
+                    height: "45px",
                   }}
                 >
                   <option value=""></option>
@@ -247,7 +247,7 @@ const AddEmployeeForm = ({}) => {
                   value={formik.values.position}
                   onChange={formik.handleChange}
                   style={{
-                    height: "45px"
+                    height: "45px",
                   }}
                 >
                   <option value=""></option>
@@ -271,7 +271,7 @@ const AddEmployeeForm = ({}) => {
                   value={formik.values.gender}
                   onChange={formik.handleChange}
                   style={{
-                    height: "45px"
+                    height: "45px",
                   }}
                 >
                   <option value=""></option>
@@ -355,7 +355,7 @@ const AddEmployeeForm = ({}) => {
                 value={formik.values.employeeStatus}
                 onChange={formik.handleChange}
                 style={{
-                  height: "45px"
+                  height: "45px",
                 }}
               >
                 <option value=""></option>
@@ -371,11 +371,15 @@ const AddEmployeeForm = ({}) => {
           {isLoading ? (
             <Loading />
           ) : (
-            <div className="submit-section">
-              <button className="btn btn-primary submit-btn" type="submit">
-                Save Employee
-              </button>
-            </div>
+            <button
+              className="btn btn-primary submit-btn"
+              type="submit"
+              style={{
+                borderRadius: "10px",
+              }}
+            >
+              Save Employee
+            </button>
           )}
         </form>
       </div>

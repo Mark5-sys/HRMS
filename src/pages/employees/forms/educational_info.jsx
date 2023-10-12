@@ -11,9 +11,10 @@ import { employeesActions } from "../../../store/employee_store";
 const educationLevels = [
   "Grade 7",
   "ZJC",
-  "Form 4",
-  "Form 6",
-  "Polytechnic",
+  "Ordinary Level",
+  "Advanced Level",
+  "National Certificate",
+  "Diploma",
   "Bachelors Degree",
   "Masters Degree",
   "Phd",
@@ -87,7 +88,7 @@ const AddEducationalInfo = ({ employeeId }) => {
         >
           <div className="modal-content">
             <div className="modal-header">
-              <h5 className="modal-title">Education Informations</h5>
+              <h5 className="modal-title">Education </h5>
               <button
                 type="button"
                 className="btn-close"
@@ -109,7 +110,7 @@ const AddEducationalInfo = ({ employeeId }) => {
                       <div className="card">
                         <div className="card-body">
                           <h3 className="card-title">
-                            Education Informations
+                          
                             <a className="delete-icon">
                               <i className="fa-regular fa-trash-can"></i>
                             </a>
@@ -207,7 +208,7 @@ const AddEducationalInfo = ({ employeeId }) => {
                                   id="results"
                                   className="form-control floating"
                                 />
-                                <label className="focus-label">Results</label>
+                                <label className="focus-label">Qualification</label>
                                 <ErrorMessage
                                   name="results"
                                   component="div"
@@ -216,7 +217,7 @@ const AddEducationalInfo = ({ employeeId }) => {
                               </div>
                             </div>
 
-                            <div className="col-md-6">
+                            {/* <div className="col-md-6">
                               <div className="input-block mb-3 form-focus focused">
                                 <Field
                                   type="text"
@@ -226,7 +227,7 @@ const AddEducationalInfo = ({ employeeId }) => {
                                 />
                                 <label className="focus-label">Grade</label>
                               </div>
-                            </div>
+                            </div> */}
                           </div>
                         </div>
                       </div>

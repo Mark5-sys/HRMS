@@ -16,6 +16,7 @@ import departmentSlice from "./department_store";
 import positionSlice from "./position_store";
 import authSlice from "./auth_store";
 import statisticsSlice from "./statistics_store";
+import orientSlice from "./orients_store";
 
 const persistConfig = {
   key: "root",
@@ -28,7 +29,8 @@ const rootReducer = combineReducers({
   department: departmentSlice.reducer,
   position: positionSlice.reducer,
   auth: authSlice.reducer,
-  statistics: statisticsSlice.reducer
+  statistics: statisticsSlice.reducer,
+  orientation: orientSlice.reducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

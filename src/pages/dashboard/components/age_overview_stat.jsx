@@ -30,7 +30,7 @@ const AgeStats = ({ data }) => {
   ];
   return (
     <Fragment>
-      <div className="col-md-8 text-start">
+      <div className="col-md-12 text-start">
         <div className="card">
           <div className="card-body">
             <h3 className="card-title">Age Overview</h3>
