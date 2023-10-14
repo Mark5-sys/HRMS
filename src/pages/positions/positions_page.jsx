@@ -2,8 +2,11 @@ import React, { Fragment, useEffect, useState } from "react";
 import PageHeader from "../../components/page_header";
 import PositionsTable from "./components/positions_table";
 import AddPositionForm from "./forms/add_position_form";
+import EditPositionForm from "./forms/edit_position_form";
+import { useSelector } from "react-redux";
 
 const PositionsPage = ({}) => {
+  const positionEdit = useSelector((state) => state.position.positionEdit);
   return (
     <Fragment>
       <div className="page-wrapper">
@@ -20,6 +23,7 @@ const PositionsPage = ({}) => {
           </div>
 
           <AddPositionForm />
+          {positionEdit && <EditPositionForm />}
         </div>
       </div>
     </Fragment>

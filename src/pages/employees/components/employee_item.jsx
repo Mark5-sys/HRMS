@@ -34,7 +34,6 @@ const EmployeeItem = ({ employee }) => {
         <td className="text-end">
           <div className="dropdown dropdown-action">
             <a
-              href="#"
               className="action-icon dropdown-toggle"
               data-bs-toggle="dropdown"
               aria-expanded="false"
@@ -42,14 +41,9 @@ const EmployeeItem = ({ employee }) => {
               <i className="material-icons">more_vert</i>
             </a>
             <div className="dropdown-menu dropdown-menu-right">
-              <a
-                className="dropdown-item"
-                href="#"
-                data-bs-toggle="modal"
-                data-bs-target="#edit_employee"
-              >
-                <i className="fa-solid fa-pencil m-r-5"></i> Edit
-              </a>
+              <Link  to={`/employee/${employee.id}`}  className="dropdown-item" >
+                <i className="fa-solid fa-pencil m-r-5"></i> View
+              </Link>
               <a
                 className="dropdown-item"
                 href="#"

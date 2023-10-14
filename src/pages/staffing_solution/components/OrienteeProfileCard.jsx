@@ -1,7 +1,7 @@
 import React, { Fragment, useEffect, useState } from "react";
-import EditEmployeeFormModal from "../forms/edit_employee_modal";
+import { convertToDateWord } from "../../../helpers/helpers";
 
-const ProfileCard = ({ employee }) => {
+const OrienteeProfileCard = ({ orientee }) => {
   return (
     <Fragment>
       <div className="card mb-0">
@@ -16,35 +16,34 @@ const ProfileCard = ({ employee }) => {
                     </a>
                   </div>
                 </div>
-                {employee && (
+                {orientee && (
                   <div className="profile-basic">
                     <div className="row">
                       <div className="col-md-5">
                         <div className="profile-info-left">
                           <h3 className="user-name m-t-0 mb-0">
-                            {employee.first_name} {employee.surname}
+                            {orientee.first_name} {orientee.last_name}
                           </h3>
 
-                          {employee.department && (
-                            <h6 className="text-muted">
-                              {employee.department.name}
-                            </h6>
+                          {orientee.company && (
+                            <h6 className="text-muted">{orientee.company}</h6>
                           )}
 
-                          {employee.position && (
-                            <small className="text-muted">
-                              {employee.position.name}
-                            </small>
-                          )}
-
-                          <div className="staff-id">
-                            Employee ID : {employee.code}{" "}
-                          </div>
+                          <div className="staff-id">Employee ID : </div>
                           <div className="small doj text-muted">
-                            Date of Join : 1st Jan 2013
+                            Date of Orientation :{" "}
+                            {convertToDateWord(orientee.created_at)}
                           </div>
                           <div className="staff-msg">
-                            <a className="btn btn-custom">Send Message</a>
+                            {" "}
+                            Deployment Status {"  "}
+                            <span
+                              className="badge badge-pill badge-info"
+                              style={{
+                                padding: "8px 11px",
+                                borderRadius: "20px",
+                              }}
+                            > { orientee.deployement_status }</span>
                           </div>
                         </div>
                       </div>
@@ -53,13 +52,13 @@ const ProfileCard = ({ employee }) => {
                           <li>
                             <div className="title">Phone:</div>
                             <div className="text">
-                              <a>+{employee.phone_number_1}</a>
+                              <a>{orientee.phone_1}</a>
                             </div>
                           </li>
                           <li>
                             <div className="title">Phone 2:</div>
                             <div className="text">
-                              <a>{employee.phone_number_2}</a>
+                              <a>{orientee.phone_2}</a>
                             </div>
                           </li>
                           <li>
@@ -67,22 +66,22 @@ const ProfileCard = ({ employee }) => {
                             <div className="text">
                               <a href>
                                 <span className="__cf_email__">
-                                  {employee.email}
+                                  {/* {orientee.email} */}
                                 </span>
                               </a>
                             </div>
                           </li>
                           <li>
                             <div className="title">Birthday:</div>
-                            <div className="text">{employee.date_of_birth}</div>
+                            <div className="text">{orientee.date_of_birth}</div>
                           </li>
                           <li>
                             <div className="title">Address:</div>
-                            <div className="text">{employee.address}</div>
+                            <div className="text">{orientee.address}</div>
                           </li>
                           <li>
                             <div className="title">Gender:</div>
-                            <div className="text">{employee.gender}</div>
+                            <div className="text">{orientee.gender}</div>
                           </li>
                         </ul>
                       </div>
@@ -104,17 +103,8 @@ const ProfileCard = ({ employee }) => {
           </div>
         </div>
       </div>
-
-      <div id="profile_info" class="modal custom-modal fade" role="dialog">
-        <div
-          class="modal-dialog modal-dialog-centered modal-lg"
-          role="document"
-        >
-          <EditEmployeeFormModal />
-        </div>
-      </div>
     </Fragment>
   );
 };
 
-export default ProfileCard;
+export default OrienteeProfileCard;

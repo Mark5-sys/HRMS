@@ -124,7 +124,7 @@ export const ageStatistics = async () => {
 
 //Orients routes
 
-const getAllOrients = async () => {
+export const getAllOrients = async () => {
   const response = await fetch(`${API}/orientation`, {
     method: "GET",
     headers: {
@@ -133,5 +133,17 @@ const getAllOrients = async () => {
     },
   });
   const responseData = await response.json();
-  return responseData;
+  return responseData.data;
+};
+
+export const getAllCompanies = async () => {
+  const response = await fetch(`${API}/company`, {
+    method: "GET",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+  });
+  const responseData = await response.json();
+  return responseData.data;
 };

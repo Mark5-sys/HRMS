@@ -49,6 +49,16 @@ const SideBar = ({}) => {
                   <i className="la la-briefcase"></i> <span>Positions</span>
                 </Link>
               </li>
+
+              <li className="menu-title">
+                <span>STAFFING SOLUTIONS</span>
+              </li>
+
+              <li>
+                <Link to={"/companies"}>
+                  <i className="la la-briefcase"></i> <span>Companies</span>
+                </Link>
+              </li>
             </ul>
           </div>
         </div>

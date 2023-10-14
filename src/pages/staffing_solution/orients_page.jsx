@@ -1,7 +1,27 @@
 import React, { Fragment, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import OrinetsTable from "./components/orients_table";
+import { useDispatch } from "react-redux";
+import { getAllOrients } from "../../services/api";
+import { orientActions } from "../../store/orients_store";
 
 const OrientsPage = () => {
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const fetchOrients = async () => {
+      const orientsAll = await getAllOrients();
+      dispatch(
+        orientActions.setOrients({
+          orients: orientsAll,
+        })
+      );
+    };
+    fetchOrients();
+  }, []);
+
+
   return (
     <Fragment>
       <div className="page-wrapper">
@@ -25,6 +45,8 @@ const OrientsPage = () => {
               </div>
             </div>
           </div>
+
+          <OrinetsTable />
         </div>
       </div>
     </Fragment>

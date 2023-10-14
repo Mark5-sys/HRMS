@@ -17,56 +17,69 @@ const PersonalInfomation = ({ employeeId, personalInfo }) => {
             </a>
           </h3>
           <ul className="personal-info">
-            {personalInfo && personalInfo.personal_info && personalInfo.personal_info.passport_number && (
-              <li>
-                <div className="title">Passport No.</div>
-                <div className="text">
-                  {personalInfo.personal_info.passport_number}
-                </div>
-              </li>
-            )}
+            {personalInfo &&
+              personalInfo.personal_info &&
+              personalInfo.personal_info.passport_number && (
+                <li>
+                  <div className="title">Passport No.</div>
+                  <div className="text">
+                    {personalInfo.personal_info.passport_number}
+                  </div>
+                </li>
+              )}
             <li>
               <div className="title">Nationality</div>
-              <div className="text">{personalInfo?.personal_info?.nationality}</div>
+              <div className="text">
+                {personalInfo?.personal_info?.nationality}
+              </div>
             </li>
             <li>
               <div className="title">Religion</div>
-              <div className="text">{personalInfo?.personal_info?.religion}</div>
+              <div className="text">
+                {personalInfo?.personal_info?.religion}
+              </div>
             </li>
             <li>
               <div className="title">Marital status</div>
               <div className="text">{personalInfo?.marital_status}</div>
             </li>
-            <li>
-              <div className="title">Employment of spouse</div>
-              {personalInfo?.personal_info?.spouse_employment === 1 ? (
-                <span
-                  className="badge badge-pill badge-success"
-                  style={{
-                    padding: "6px 9px",
-                    borderRadius: "20px",
-                  }}
-                >
-                  Employed
-                </span>
-              ) : (
-                <span
-                  className="badge badge-pill badge-warning"
-                  style={{
-                    padding: "6px 9px",
-                    borderRadius: "20px",
-                  }}
-                >
-                  Unemployed
-                </span>
-              )}
-            </li>
-            {personalInfo && personalInfo.personal_info && personalInfo.personal_info.no_children > 0 && (
+            {personalInfo?.marital_status === "Married" && (
               <li>
-                <div className="title">No. of children</div>
-                <div className="text">{personalInfo.personal_info.no_children}</div>
+                <div className="title">Employment of spouse</div>
+                {personalInfo?.personal_info?.spouse_employment === 1 ? (
+                  <span
+                    className="badge badge-pill badge-success"
+                    style={{
+                      padding: "6px 9px",
+                      borderRadius: "20px",
+                    }}
+                  >
+                    Employed
+                  </span>
+                ) : (
+                  <span
+                    className="badge badge-pill badge-warning"
+                    style={{
+                      padding: "6px 9px",
+                      borderRadius: "20px",
+                    }}
+                  >
+                    Unemployed
+                  </span>
+                )}
               </li>
             )}
+
+            {personalInfo &&
+              personalInfo.personal_info &&
+              personalInfo.personal_info.no_children > 0 && (
+                <li>
+                  <div className="title">No. of children</div>
+                  <div className="text">
+                    {personalInfo.personal_info.no_children}
+                  </div>
+                </li>
+              )}
           </ul>
         </div>
       </div>

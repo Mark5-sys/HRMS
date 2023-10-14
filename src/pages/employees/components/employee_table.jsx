@@ -33,9 +33,10 @@ const EmployeeTable = () => {
       const codeMatch =
         employeeCode !== "" &&
         employee.code.toLowerCase().includes(employeeCode.toLowerCase());
-      const nameMatch =
+        const nameMatch =
         employeeName !== "" &&
-        employee.first_name.toLowerCase().includes(employeeName.toLowerCase());
+        (employee.first_name.toLowerCase().includes(employeeName.toLowerCase()) ||
+          employee.surname.toLowerCase().includes(employeeName.toLowerCase()));
       return codeMatch || nameMatch;
     });
     setFilteredEmployees(filteredEmployees);
@@ -62,7 +63,7 @@ const EmployeeTable = () => {
     <Fragment>
       <div className="row filter-row">
         <div className="col-sm-6 col-md-4">
-          <div className="input-block mb-3 form-focus">
+          <div className="form-floating mb-3">
             <input
               type="text"
               className="form-control floating"
@@ -74,10 +75,10 @@ const EmployeeTable = () => {
           </div>
         </div>
         <div className="col-sm-6 col-md-4">
-          <div className="input-block mb-3 form-focus">
+          <div className="form-floating mb-3">
             <input
               type="text"
-              className="form-control floating"
+              className="form-control"
               name="employeeName"
               value={employeeName}
               onChange={handleInputChange}

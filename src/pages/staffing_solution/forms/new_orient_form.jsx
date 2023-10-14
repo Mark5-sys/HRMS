@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { orientActions } from "../../../store/orients_store";
 import Loading from "../../../components/loader/loading";
+import { getAllOrients } from "../../../services/api";
 
 const gender = ["Male", "Female"];
 
@@ -33,7 +34,7 @@ const NewOrientForm = () => {
     qualifications: yup.string().nullable(),
     gender: yup.string().required("Please Select Gender"),
     company: yup.string().nullable(),
-    date_of_birth: yup.date().required("Please Select Date Of Birth"),
+    date_of_birth: yup.date().nullable(),
     address: yup.string().nullable(),
     phone_1: yup.string().nullable(),
     phone_2: yup.string().nullable(),
@@ -62,30 +63,32 @@ const NewOrientForm = () => {
       address: pascalCase(values.address),
       phone_1: values.phone_1,
       phone_2: values.phone_2,
+      deployement_status: values.deployement_status
     };
 
     console.log(postData)
+    setLoading(true);
     try {
-    //   const response = await fetch(`${API}/orientation`, {
-    //     method: "POST",
-    //     headers: {
-    //       "Content-Type": "application/json",
-    //     },
-    //     body: JSON.stringify(postData),
-    //   });
+      const response = await fetch(`${API}/orientation`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(postData),
+      });
 
-    //   const responseData = await response.json();
-    //   console.log(responseData.data);
-    //   if (response.ok) {
-    //     //dispatch actions here
+      const responseData = await response.json();
+      console.log(responseData.data);
+      if (response.ok) {
+        //dispatch actions here
 
-    //     const orientsAll = getAllOrients();
-    //     dispatch(
-    //       orientActions.setOrients({
-    //         orients: orientsAll,
-    //       })
-    //     );
-    //   }
+        const orientsAll = await getAllOrients();
+        dispatch(
+          orientActions.setOrients({
+            orients: orientsAll,
+          })
+        );
+      }
 
       setLoading(false);
       resetForm();

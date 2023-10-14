@@ -1,41 +1,49 @@
 import React, { Fragment, useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as yup from "yup";
-import { API } from "../../../config";
+import { getAllPositions } from "../../../services/api";
+import { positionsActions } from "../../../store/position_store";
 import Loading from "../../../components/loader/loading";
-import { useDispatch, useSelector } from "react-redux";
-import { getAllDepartments } from "../../../services/api";
-import { departmentsActions } from "../../../store/department_store";
+import { API } from "../../../config";
 
-const EditDepartmentForm = () => {
+const EditPositionForm = () => {
   const [loading, setLoading] = useState(false);
-  const departmentEdit = useSelector(
-    (state) => state.department.departmentEdit
-  );
-  const [department, setDepartment] = useState({});
-
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    setDepartment(departmentEdit);
-  }, [departmentEdit]);
+  const positionEdit = useSelector((state) => state.position.positionEdit);
 
   const initialValues = {
-    name: department.name || "",
+    name: positionEdit.name || "",
   };
 
   const validationSchema = yup.object().shape({
-    name: yup.string().required("Please Enter Department Name"),
+    name: yup.string().required("Please Enter Position Name"),
   });
+
+  const pascalCase = (str) => {
+    return str
+      .split(" ")
+      .map((word) => {
+        if (word.length > 0) {
+          return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+        }
+        return word;
+      })
+      .join(" ");
+  };
 
   const onSubmitPatch = async (values, { setSubmitting, resetForm }) => {
     setLoading(true);
-    console.log("onSubmitPatch", values);
+
     const apiValues = {
-      name: values.name.toUpperCase(),
+      name: pascalCase(values.name),
     };
+
+    console.log("onSubmitPatch", apiValues);
+
     try {
-      const response = await fetch(`${API}/department/${department.id}`, {
+      const response = await fetch(`${API}/position/${positionEdit.id}`, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",
@@ -45,13 +53,12 @@ const EditDepartmentForm = () => {
       const responseData = await response.json();
       console.log(responseData.data);
       if (response.ok) {
-        const departments = await getAllDepartments();
+        const positions = await getAllPositions();
         dispatch(
-          departmentsActions.setDepartments({
-            departments: departments,
+          positionsActions.setPositions({
+            positions: positions,
           })
         );
-        // navigate("/departments");
         setLoading(false);
         resetForm();
       }
@@ -65,17 +72,16 @@ const EditDepartmentForm = () => {
 
   return (
     <Fragment>
-      {department && (
+      {positionEdit && (
         <div
-          id="edit_department"
+          id="edit_position"
           className="modal custom-modal fade"
           role="dialog"
-          style={{}}
         >
           <div className="modal-dialog modal-dialog-centered" role="document">
             <div className="modal-content">
               <div className="modal-header">
-                <h5 className="modal-title">Edit Department </h5>
+                <h5 className="modal-title">Edit Position </h5>
                 <button
                   type="button"
                   className="btn-close"
@@ -85,26 +91,30 @@ const EditDepartmentForm = () => {
                   <span aria-hidden="true">&times;</span>
                 </button>
               </div>
+
               <div className="modal-body">
                 <Formik
-                  enableReinitialize={true}
                   initialValues={initialValues}
                   onSubmit={onSubmitPatch}
                   validationSchema={validationSchema}
                 >
-                  {({ values, isSubmitting, handleSubmit, handleChange }) => (
+                  {({
+                    values,
+                    isSubmitting,
+                    handleSubmit,
+                    touched,
+                    errors,
+                  }) => (
                     <Form>
                       <div className="input-block mb-3">
                         <label className="col-form-label">
-                          Department Name <span className="text-danger">*</span>
+                          Position Name <span className="text-danger">*</span>
                         </label>
                         <Field
-                          type="text"
                           className="form-control"
+                          type="text"
                           name="name"
                           id="name"
-                          value={values.name}
-                          onChange={handleChange}
                         />
                         <ErrorMessage
                           name="name"
@@ -118,11 +128,13 @@ const EditDepartmentForm = () => {
                         ) : (
                           <button
                             className="btn btn-primary submit-btn"
-                            type="submit"
                             disabled={isSubmitting}
                             onClick={handleSubmit}
+                            style={{
+                              borderRadius: "10px",
+                            }}
                           >
-                            Submit
+                            Save Position
                           </button>
                         )}
                       </div>
@@ -138,4 +150,4 @@ const EditDepartmentForm = () => {
   );
 };
 
-export default EditDepartmentForm;
+export default EditPositionForm;

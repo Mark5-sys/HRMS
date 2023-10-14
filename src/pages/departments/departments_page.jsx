@@ -12,22 +12,21 @@ const DepartmentsPage = ({}) => {
 
   return (
     <Fragment>
-      <div class="page-wrapper">
-        <div class="content container-fluid">
+      <div className="page-wrapper">
+        <div className="content container-fluid">
           <PageHeader
             activePage={"Department"}
             modalName={"Add Department"}
             toggleModal={"#add_department"}
           />
-          <div class="row">
-            <div class="col-md-12">
+          <div className="row">
+            <div className="col-md-12">
               <DepartmentTable />
             </div>
           </div>
 
           <AddDepartmentForm />
           {departmentEdit && <EditDepartmentForm />}
-          <EditDepartmentForm />
         </div>
       </div>
     </Fragment>

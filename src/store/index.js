@@ -17,6 +17,7 @@ import positionSlice from "./position_store";
 import authSlice from "./auth_store";
 import statisticsSlice from "./statistics_store";
 import orientSlice from "./orients_store";
+import companySlice from "./companies_store";
 
 const persistConfig = {
   key: "root",
@@ -31,6 +32,7 @@ const rootReducer = combineReducers({
   auth: authSlice.reducer,
   statistics: statisticsSlice.reducer,
   orientation: orientSlice.reducer,
+  company: companySlice.reducer
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

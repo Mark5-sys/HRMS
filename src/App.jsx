@@ -27,6 +27,8 @@ import AddThroughUpload from "./pages/employees/upload_excel";
 import { useSelector } from "react-redux";
 import OrientsPage from "./pages/staffing_solution/orients_page";
 import AddOrientPage from "./pages/staffing_solution/add_orient_page";
+import OrienteeDetail from "./pages/staffing_solution/orientee_detail_page";
+import CompaniesPage from "./pages/companies/companies_page";
 
 const App = () => {
   const isAuth = useSelector((state) => state.auth.isAuthenticated);
@@ -44,7 +46,7 @@ const App = () => {
           <Route exact path="/dashboard" element={<Dashboard />} />
           <Route exact path="/employees" element={<EmployeeList />} />
           <Route exact path="/add/employee" element={<AddEmployee />} />
-          
+
           <Route
             exact
             path="/add/employee/excel"
@@ -58,6 +60,14 @@ const App = () => {
 
           <Route exact path="/orients" element={<OrientsPage />} />
           <Route exact path="/add/orient" element={<AddOrientPage />} />
+          <Route
+            exact
+            path="/orientee/:orienteeId"
+            element={<OrienteeDetail />}
+          />
+
+          <Route exact path="/companies" element={<CompaniesPage />} />
+
           <Route exact path="/departments" element={<DepartmentsPage />} />
           <Route exact path="/positions" element={<PositionsPage />} />
         </Route>

@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   positions: [],
+  positionEdit: {},
 };
 
 const positionSlice = createSlice({
@@ -10,6 +11,10 @@ const positionSlice = createSlice({
   reducers: {
     setPositions: (state, action) => {
       state.positions = action.payload.positions;
+    },
+
+    setPositionEdit: (state, action) => {
+      state.positionEdit = action.payload.positionEdit;
     },
   },
 });

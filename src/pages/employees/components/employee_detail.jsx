@@ -2,7 +2,7 @@ import React, { Fragment, useEffect, useState } from "react";
 import ProfileCard from "./profile_basic";
 import PersonalInfomation from "./personal_information";
 import EmergencyContact from "./emergency_contact";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { getSingleEmployee } from "../../../services/api";
 import { useDispatch, useSelector } from "react-redux";
 import { employeesActions } from "../../../store/employee_store";
@@ -51,7 +51,7 @@ const EmployeeDetail = ({}) => {
                     <h3 className="page-title">Profile</h3>
                     <ul className="breadcrumb">
                       <li className="breadcrumb-item">
-                        <a href="admin-dashboard.html">Dashboard</a>
+                        <Link to={'/'} >Dashboard</Link>
                       </li>
                       <li className="breadcrumb-item active">Profile</li>
                     </ul>

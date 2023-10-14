@@ -1,41 +1,37 @@
 import React, { Fragment, useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { API } from "../../../config";
+import { getAllCompanies } from "../../../services/api";
+import { companyActions } from "../../../store/companies_store";
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as yup from "yup";
-import { API } from "../../../config";
 import Loading from "../../../components/loader/loading";
-import { useDispatch, useSelector } from "react-redux";
-import { getAllDepartments } from "../../../services/api";
-import { departmentsActions } from "../../../store/department_store";
 
-const EditDepartmentForm = () => {
+const EditCompanyForm = ({}) => {
   const [loading, setLoading] = useState(false);
-  const departmentEdit = useSelector(
-    (state) => state.department.departmentEdit
-  );
-  const [department, setDepartment] = useState({});
-
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    setDepartment(departmentEdit);
-  }, [departmentEdit]);
+  const companyEdit = useSelector((state) => state.company.companyEdit);
 
   const initialValues = {
-    name: department.name || "",
+    name: companyEdit.name || "",
   };
 
   const validationSchema = yup.object().shape({
-    name: yup.string().required("Please Enter Department Name"),
+    name: yup.string().required("Please Enter Company Name"),
   });
 
   const onSubmitPatch = async (values, { setSubmitting, resetForm }) => {
     setLoading(true);
-    console.log("onSubmitPatch", values);
+
     const apiValues = {
-      name: values.name.toUpperCase(),
+      name: values.name.toUpperCase()
     };
+
+    console.log("onSubmitPatch", apiValues);
+
     try {
-      const response = await fetch(`${API}/department/${department.id}`, {
+      const response = await fetch(`${API}/company/${companyEdit.id}`, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",
@@ -45,13 +41,13 @@ const EditDepartmentForm = () => {
       const responseData = await response.json();
       console.log(responseData.data);
       if (response.ok) {
-        const departments = await getAllDepartments();
+        const companies = await getAllCompanies();
         dispatch(
-          departmentsActions.setDepartments({
-            departments: departments,
+          companyActions.setCompanies({
+            companies: companies,
           })
         );
-        // navigate("/departments");
+
         setLoading(false);
         resetForm();
       }
@@ -65,7 +61,7 @@ const EditDepartmentForm = () => {
 
   return (
     <Fragment>
-      {department && (
+      {companyEdit && (
         <div
           id="edit_department"
           className="modal custom-modal fade"
@@ -75,7 +71,7 @@ const EditDepartmentForm = () => {
           <div className="modal-dialog modal-dialog-centered" role="document">
             <div className="modal-content">
               <div className="modal-header">
-                <h5 className="modal-title">Edit Department </h5>
+                <h5 className="modal-title">Edit Company </h5>
                 <button
                   type="button"
                   className="btn-close"
@@ -85,6 +81,7 @@ const EditDepartmentForm = () => {
                   <span aria-hidden="true">&times;</span>
                 </button>
               </div>
+
               <div className="modal-body">
                 <Formik
                   enableReinitialize={true}
@@ -96,7 +93,7 @@ const EditDepartmentForm = () => {
                     <Form>
                       <div className="input-block mb-3">
                         <label className="col-form-label">
-                          Department Name <span className="text-danger">*</span>
+                          Company Name <span className="text-danger">*</span>
                         </label>
                         <Field
                           type="text"
@@ -138,4 +135,4 @@ const EditDepartmentForm = () => {
   );
 };
 
-export default EditDepartmentForm;
+export default EditCompanyForm;

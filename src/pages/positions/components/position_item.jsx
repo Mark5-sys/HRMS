@@ -1,6 +1,17 @@
 import React, { Fragment, useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { positionsActions } from "../../../store/position_store";
 
 const PositionsItem = ({ position }) => {
+  const dispatch = useDispatch();
+
+  const selectEditPosition = (position) => {
+    dispatch(
+      positionsActions.setPositionEdit({
+        positionEdit: position,
+      })
+    );
+  };
   return (
     <Fragment>
       <tr>
@@ -9,7 +20,6 @@ const PositionsItem = ({ position }) => {
         <td className="text-end">
           <div className="dropdown dropdown-action">
             <a
-              href="#"
               className="action-icon dropdown-toggle"
               data-bs-toggle="dropdown"
               aria-expanded="false"
@@ -19,15 +29,14 @@ const PositionsItem = ({ position }) => {
             <div className="dropdown-menu dropdown-menu-right">
               <a
                 className="dropdown-item"
-                href="#"
+                onClick={() => selectEditPosition(position)}
                 data-bs-toggle="modal"
-                data-bs-target="#edit_department"
+                data-bs-target="#edit_position"
               >
                 <i className="fa-solid fa-pencil m-r-5"></i> Edit
               </a>
               <a
                 className="dropdown-item"
-                href="#"
                 data-bs-toggle="modal"
                 data-bs-target="#delete_department"
               >
