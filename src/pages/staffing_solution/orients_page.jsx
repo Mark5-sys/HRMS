@@ -17,8 +17,12 @@ const OrientsPage = () => {
           orients: orientsAll,
         })
       );
+      console.log(orientsAll)
     };
+    
     fetchOrients();
+
+   
   }, []);
 
 

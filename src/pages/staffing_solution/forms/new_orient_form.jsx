@@ -63,10 +63,10 @@ const NewOrientForm = () => {
       address: pascalCase(values.address),
       phone_1: values.phone_1,
       phone_2: values.phone_2,
-      deployement_status: values.deployement_status
+      deployement_status: values.deployement_status,
     };
 
-    console.log(postData)
+    console.log(postData);
     setLoading(true);
     try {
       const response = await fetch(`${API}/orientation`, {
@@ -88,6 +88,8 @@ const NewOrientForm = () => {
             orients: orientsAll,
           })
         );
+
+        navigate("/orients");
       }
 
       setLoading(false);

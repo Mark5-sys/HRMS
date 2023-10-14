@@ -4,8 +4,8 @@ import ApexCharts from "react-apexcharts";
 const DepartmentStatistics = ({ data }) => {
   const options = {
     chart: {
-      id: "basic-line",
-      type: "line",
+      id: "basic-bar",
+      type: "bar",
     },
     xaxis: {
       categories: data.map((item) => item.department),
@@ -41,7 +41,7 @@ const DepartmentStatistics = ({ data }) => {
             <ApexCharts
               options={options}
               series={series}
-              type="line"
+              type="bar"
               height={350}
             />
           </div>

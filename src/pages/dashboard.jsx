@@ -2,6 +2,7 @@ import React, { Fragment, useEffect, useState } from "react";
 import {
   ageStatistics,
   employeeByDepartment,
+  employeesCount,
   genderStatistics,
   getAllDepartments,
   getAllEmployees,
@@ -92,9 +93,14 @@ const Dashboard = ({}) => {
           })
         );
 
-        console.log("Departments", departments);
-        console.log("Positions", positions);
-        console.log("Employees", employees);
+        const databaseStats = await employeesCount();
+
+        dispatch(
+          statisticsActions.setEmployeesCount({
+            employeesCount: databaseStats,
+          })
+        );
+        console.log(databaseStats);
       } catch (error) {
         console.log("There was an error while fetching stats ", error);
       }
@@ -112,37 +118,7 @@ const Dashboard = ({}) => {
     useSelector((state) => state.statistics.employeeByDepartmentStatistics) ||
     [];
 
-  // const data = [
-  //   { age: 25, count: 7 },
-  //   { age: 30, count: 5 },
-  //   { age: 35, count: 10 },
-  //   { age: 40, count: 4 },
-  //   // Add more age/count data objects as needed
-  // ];
-
-  // const maritalStatus = [
-  //   { maritalStatus: "Single", count: 44 },
-  //   { maritalStatus: "Married", count: 28 },
-  // ];
-
-  const departmentStats = [
-    { department: "I.T & MAINTENANCE", count: 10 },
-    { department: "HEALTH & WELLNESS", count: 8 },
-    { department: "PAYROLL", count: 5 },
-    { department: "HEAD OFFICE", count: 12 },
-    { department: "LOGISTICS", count: 6 },
-    { department: "STAFFING SOLUTIONS", count: 7 },
-    { department: "WELLNESS & SUSTAINABILITY", count: 3 },
-    { department: "LEARNING & DEVELOPMENT", count: 9 },
-    // Add more department/count data objects as needed
-  ];
-
-  const ageData = [
-    { age: 18, count: 5 },
-    { age: 25, count: 10 },
-    { age: 30, count: 8 },
-    // Add more age data as needed
-  ];
+  const dbstats = useSelector((state) => state.statistics.employeesCount) || [];
 
   return (
     <Fragment>
@@ -162,7 +138,9 @@ const Dashboard = ({}) => {
           </div>
 
           <div className="row">
-            <StatsCard />
+            {dbstats.map((stat, index) => (
+              <StatsCard key={index} stat={stat} />
+            ))}
           </div>
 
           <div className="row">

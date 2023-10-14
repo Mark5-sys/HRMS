@@ -23,7 +23,7 @@ const GenderStat = ({ data }) => {
               options={options}
               series={series}
               type="pie"
-              height={350}
+              height={400}
             />
           </div>
         </div>
