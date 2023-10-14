@@ -137,11 +137,13 @@ const Dashboard = ({}) => {
             </div>
           </div>
 
-          <div className="row">
-            {dbstats.map((stat, index) => (
-              <StatsCard key={index} stat={stat} />
-            ))}
-          </div>
+          {dbstats.length > 0 && (
+            <div className="row">
+              {dbstats.map((stat, index) => (
+                <StatsCard key={index} stat={stat} />
+              ))}
+            </div>
+          )}
 
           <div className="row">
             <div className="col-md-12">
