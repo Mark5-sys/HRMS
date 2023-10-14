@@ -1,5 +1,5 @@
 import React, { Fragment, useEffect, useState } from "react";
-import ApexCharts from "react-apexcharts";
+import Chart from "react-apexcharts";
 
 const DepartmentStatistics = ({ data }) => {
   const options = {
@@ -8,13 +8,19 @@ const DepartmentStatistics = ({ data }) => {
       type: "bar",
     },
     xaxis: {
-      categories: data.map((item) => item.department),
+      categories: data.map((item) => ({
+        value: item.department,
+        tooltip: item.department,
+      })),
       labels: {
-        rotate: -45,
+        rotate: -0,
         style: {
-          fontSize: "12px",
+          fontSize: "10px",
           fontWeight: 400,
           cssClass: "apexcharts-xaxis-label",
+        },
+        formatter: function (value) {
+          return value.value; // Extract the value property
         },
       },
     },
@@ -23,8 +29,12 @@ const DepartmentStatistics = ({ data }) => {
         text: "Number of People",
       },
     },
+    tooltip: {
+      x: {
+        show: true,
+      },
+    },
   };
-
   const series = [
     {
       name: "Number of People",
@@ -38,12 +48,7 @@ const DepartmentStatistics = ({ data }) => {
         <div className="card">
           <div className="card-body">
             <h3 className="card-title">Department Analysis</h3>
-            <ApexCharts
-              options={options}
-              series={series}
-              type="bar"
-              height={350}
-            />
+            <Chart options={options} series={series} type="bar" height={400} />
           </div>
         </div>
       </div>

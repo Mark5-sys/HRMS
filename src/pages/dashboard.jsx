@@ -20,6 +20,7 @@ import MaritalStatus from "./dashboard/components/marital_status_stat";
 import DepartmentStatistics from "./dashboard/components/departments_stats";
 import { statisticsActions } from "../store/statistics_store";
 import AgeDistributionChart from "./dashboard/components/age_distribution_chart";
+import MonthlyOrientationStats from "./dashboard/orientation/monthly_orientation_stats";
 
 const Dashboard = ({}) => {
   const dispatch = useDispatch();
@@ -157,6 +158,7 @@ const Dashboard = ({}) => {
               </div>
               <div className="row">
                 <MaritalStatus data={maritalStatus} />
+                <MonthlyOrientationStats />
               </div>
             </div>
           </div>

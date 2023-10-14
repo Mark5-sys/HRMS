@@ -24,7 +24,7 @@ const MaritalStatus = ({ data }) => {
               options={options}
               series={series}
               type="pie"
-              height={350}
+              height={450}
             />
           </div>
         </div>

@@ -7,9 +7,11 @@ const OrientItem = ({ orientee }) => {
     <Fragment>
       <tr>
         <td>{convertToDateWord(orientee.created_at)}</td>
-        <td style={{
-          cursor: 'pointer'
-        }}>
+        <td
+          style={{
+            cursor: "pointer",
+          }}
+        >
           <Link to={`/orientee/${orientee.id}`}>
             {orientee.first_name} {orientee.last_name}
           </Link>
@@ -18,15 +20,27 @@ const OrientItem = ({ orientee }) => {
         <td>{orientee.qualifications}</td>
         <td>{orientee.phone_1}</td>
         <td>
-          <span
-            className="badge badge-pill badge-info"
-            style={{
-              padding: "6px 9px",
-              borderRadius: "20px",
-            }}
-          >
-            {orientee.deployement_status}
-          </span>
+          {orientee.deployement_status === "Pending" ? (
+            <span
+              className="badge badge-pill badge-danger"
+              style={{
+                padding: "6px 9px",
+                borderRadius: "20px",
+              }}
+            >
+              {orientee.deployement_status}
+            </span>
+          ) : (
+            <span
+              className="badge badge-pill badge-success"
+              style={{
+                padding: "6px 9px",
+                borderRadius: "20px",
+              }}
+            >
+              {orientee.deployement_status}
+            </span>
+          )}
         </td>
         <td className="text-end">
           <div className="dropdown dropdown-action">

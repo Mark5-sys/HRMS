@@ -6,6 +6,7 @@ const initialState = {
   maritalStatusStatistics: [],
   employeeByDepartmentStatistics: [],
   ageStatistics: [],
+  orientationMonthlyStatistics: {},
 };
 
 const statisticsSlice = createSlice({
@@ -31,6 +32,10 @@ const statisticsSlice = createSlice({
 
     setAgeStatistics: (state, action) => {
       state.ageStatistics = action.payload.ageStatistics;
+    },
+
+    setOrientationMonthlyStatistics: (state, action) => {
+      state.orientationMonthlyStatistics = action.payload.orientationMonth;
     },
   },
 });
