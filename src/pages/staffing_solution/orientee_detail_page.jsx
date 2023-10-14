@@ -29,7 +29,6 @@ const OrienteeDetail = () => {
     <Fragment>
       <div className="page-wrapper">
         <div className="content container-fluid">
-            
           <div className="page-header">
             <div className="row">
               <div className="col-sm-12">
@@ -50,7 +49,7 @@ const OrienteeDetail = () => {
               marginBottom: "40px",
             }}
           >
-            <OrienteeProfileCard orientee={orientee} />
+            {orientee && <OrienteeProfileCard orientee={orientee} />}
           </div>
         </div>
       </div>
