@@ -32,7 +32,7 @@ const OrienteeProfileCard = ({ orientee }) => {
                           <div className="staff-id">Employee ID : </div>
                           <div className="small doj text-muted">
                             Date of Orientation :{" "}
-                            {convertToDateWord(orientee.created_at)}
+                            {/* {convertToDateWord(orientee.created_at)} */}
                           </div>
                           <div className="staff-msg">
                             {" "}
