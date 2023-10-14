@@ -6,7 +6,7 @@ import { getAllEmployees } from "../../../services/api";
 
 const EmployeeTable = () => {
   const dispatch = useDispatch();
-  const employees = useSelector((state) => state.employees.activeEmployees);
+  const employees = useSelector((state) => state.employees.activeEmployees) || [];
   const positions = useSelector((state) => state.position.positions);
   const [employeeName, setEmployeeName] = useState("");
   const [employeeCode, setEmployeeCode] = useState("");
