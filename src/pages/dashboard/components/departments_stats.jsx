@@ -26,7 +26,7 @@ const DepartmentStatistics = ({ data }) => {
     },
     yaxis: {
       title: {
-        text: "Number of People",
+        text: "Employee(s)",
       },
     },
     tooltip: {
@@ -37,7 +37,7 @@ const DepartmentStatistics = ({ data }) => {
   };
   const series = [
     {
-      name: "Number of People",
+      name: "Employee(s)",
       data: data.map((item) => item.count),
       curve: "smooth",
     },

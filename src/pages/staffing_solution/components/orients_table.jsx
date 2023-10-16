@@ -1,6 +1,7 @@
 import React, { Fragment, useEffect, useState } from "react";
 import OrientItem from "./orient_item";
 import { useSelector } from "react-redux";
+import DeployOrienteeModal from "./deploy_orientee_modal";
 
 const OrinetsTable = () => {
   const allOrients = useSelector((state) => state.orientation.orients);
@@ -86,6 +87,8 @@ const OrinetsTable = () => {
             </div>
           </div>
         </div>
+
+        <DeployOrienteeModal />
       </div>
     </Fragment>
   );

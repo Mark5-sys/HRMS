@@ -3,6 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   orients: [],
   singleOrient: {},
+  toBeDeployedOrientee: {},
 };
 
 const orientSlice = createSlice({
@@ -15,6 +16,10 @@ const orientSlice = createSlice({
 
     setSingleSingleOrient: (state, action) => {
       state.singleOrient = action.payload.singleOrient;
+    },
+
+    setOrienteeToBeDeployed: (state, action) => {
+      state.toBeDeployedOrientee = action.payload.toBeDeployedOrientee;
     },
 
     clearOrientState: (state) => {

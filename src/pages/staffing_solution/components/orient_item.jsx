@@ -1,8 +1,20 @@
 import React, { Fragment, useEffect, useState } from "react";
 import { convertToDateWord } from "../../../helpers/helpers";
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import orientSlice, { orientActions } from "../../../store/orients_store";
 
 const OrientItem = ({ orientee }) => {
+  const dispatch = useDispatch();
+
+  const setOrienteeForDeployemnet = (orientee) => {
+    dispatch(
+      orientActions.setOrienteeToBeDeployed({
+        toBeDeployedOrientee: orientee,
+      })
+    );
+  };
+
   return (
     <Fragment>
       <tr>
@@ -20,27 +32,33 @@ const OrientItem = ({ orientee }) => {
         <td>{orientee.qualifications}</td>
         <td>{orientee.phone_1}</td>
         <td>
-          {orientee.deployement_status === "Pending" ? (
-            <span
-              className="badge badge-pill badge-danger"
-              style={{
-                padding: "6px 9px",
-                borderRadius: "20px",
-              }}
-            >
-              {orientee.deployement_status}
-            </span>
-          ) : (
-            <span
-              className="badge badge-pill badge-success"
-              style={{
-                padding: "6px 9px",
-                borderRadius: "20px",
-              }}
-            >
-              {orientee.deployement_status}
-            </span>
-          )}
+          <a
+            data-bs-target="#deploy_orientee"
+            data-bs-toggle="modal"
+            onClick={() => setOrienteeForDeployemnet(orientee)}
+          >
+            {orientee.deployement_status === "Pending" ? (
+              <span
+                className="badge bg-inverse-danger"
+                style={{
+                  padding: "6px 9px",
+                  borderRadius: "20px",
+                }}
+              >
+                {orientee.deployement_status}
+              </span>
+            ) : (
+              <span
+                className="badge bg-inverse-success"
+                style={{
+                  padding: "6px 9px",
+                  borderRadius: "20px",
+                }}
+              >
+                {orientee.deployement_status}
+              </span>
+            )}
+          </a>
         </td>
         <td className="text-end">
           <div className="dropdown dropdown-action">
@@ -49,7 +67,7 @@ const OrientItem = ({ orientee }) => {
               data-bs-toggle="dropdown"
               aria-expanded="false"
             >
-              <i className="material-icons">more_vert</i>
+              <i className="material-icons">:</i>
             </a>
             <div className="dropdown-menu dropdown-menu-right">
               <a

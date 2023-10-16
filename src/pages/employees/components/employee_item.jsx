@@ -22,7 +22,7 @@ const EmployeeItem = ({ employee }) => {
         <td>{employee.phone_number_1}</td>
         <td>
           <span
-            className="badge badge-pill badge-success"
+            className="badge bg-inverse-success"
             style={{
               padding: "6px 9px",
               borderRadius: "20px",
@@ -38,15 +38,14 @@ const EmployeeItem = ({ employee }) => {
               data-bs-toggle="dropdown"
               aria-expanded="false"
             >
-              <i className="material-icons">more_vert</i>
+              <i className="material-icons">:</i>
             </a>
             <div className="dropdown-menu dropdown-menu-right">
-              <Link  to={`/employee/${employee.id}`}  className="dropdown-item" >
+              <Link to={`/employee/${employee.id}`} className="dropdown-item">
                 <i className="fa-solid fa-pencil m-r-5"></i> View
               </Link>
               <a
                 className="dropdown-item"
-                href="#"
                 data-bs-toggle="modal"
                 data-bs-target="#delete_employee"
               >

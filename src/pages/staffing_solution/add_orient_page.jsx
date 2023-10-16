@@ -6,7 +6,6 @@ const AddOrientPage = () => {
     <Fragment>
       <div className="page-wrapper">
         <div className="content container-fluid">
-
           <div className="page-header">
             <div className="row">
               <div className="col-sm-12">
@@ -20,10 +19,7 @@ const AddOrientPage = () => {
               </div>
             </div>
           </div>
-
           <NewOrientForm />
-
-
         </div>
       </div>
     </Fragment>
