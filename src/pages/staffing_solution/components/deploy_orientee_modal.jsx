@@ -133,6 +133,12 @@ const DeployOrienteeModal = () => {
                           }`}
                           id="company"
                           name="company"
+                          style={{
+                            display:
+                              values.deployement_status === "Deployed"
+                                ? "block"
+                                : "none",
+                          }}
                         >
                           <option value=""></option>
                           {companies.map((company) => (
@@ -141,7 +147,17 @@ const DeployOrienteeModal = () => {
                             </option>
                           ))}
                         </Field>
-                        <label htmlFor="company_id">COMPANY NAME</label>
+                        <label
+                          htmlFor="company_id"
+                          style={{
+                            display:
+                              values.deployement_status === "Deployed"
+                                ? "block"
+                                : "none",
+                          }}
+                        >
+                          COMPANY NAME
+                        </label>
                         <ErrorMessage
                           name="company_id"
                           component="div"
@@ -159,6 +175,7 @@ const DeployOrienteeModal = () => {
                         type="submit"
                         style={{
                           borderRadius: "10px",
+                          zIndex: "1000",
                         }}
                       >
                         Submit
