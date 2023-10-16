@@ -192,7 +192,7 @@ const Dashboard = ({}) => {
                     <div className="row">
                       <div className="col-md-12">
                         <div className="row">
-                          <MonthlyOrientationStats />
+                          {/* <MonthlyOrientationStats /> */}
                         </div>
                       </div>
                     </div>

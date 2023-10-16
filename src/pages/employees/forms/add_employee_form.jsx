@@ -31,7 +31,7 @@ const AddEmployeeForm = ({}) => {
       postalCity: "",
       phoneNumber1: "",
       phoneNumber2: "",
-      employeeStatus: "",
+      employeeStatus: "Active",
     },
 
     validationSchema: Yup.object({
@@ -44,7 +44,7 @@ const AddEmployeeForm = ({}) => {
       position: Yup.number().nullable(),
       gender: Yup.string().required("Select Gender"),
       postalCity: Yup.string().nullable(),
-      employeeStatus: Yup.string().nullable(),
+      employeeStatus: Yup.string().required("Please Select Employee Status, either Active/Orientation"),
     }),
     onSubmit: async (values) => {
       const postData = {
@@ -95,7 +95,7 @@ const AddEmployeeForm = ({}) => {
             <div className="col-sm-3">
               <div className="input-block mb-3">
                 <label className="col-form-label">
-                  Employee Code <span className="text-danger">*</span>
+                  Employee Code <span className="text-danger"></span>
                 </label>
                 <input
                   className="form-control"
@@ -132,7 +132,7 @@ const AddEmployeeForm = ({}) => {
 
             <div className="col-sm-3">
               <div className="input-block mb-3">
-                <label className="col-form-label">Surname</label>
+                <label className="col-form-label">Surname<span className="text-danger">*</span></label>
                 <input
                   className="form-control"
                   type="text"
