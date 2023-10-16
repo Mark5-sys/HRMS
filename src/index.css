@@ -53,7 +53,7 @@
 
 .apply-btn {
   background: #00c5fb;
-  background: linear-gradient(to right,  #007a41 0%, #124538  100%);
+  background: linear-gradient(to right, #007a41 0%, #124538 100%);
   border-color: transparent;
   box-shadow: 0 6px 15px rgba(36, 37, 38, 0.08);
   color: #fff;
@@ -61,7 +61,6 @@
   right: 20px;
   top: 20px;
 }
-
 
 .dash-widget .card-body .dash-widget-icon {
   background-color: rgba(68, 255, 174, 0.2);
@@ -75,12 +74,16 @@
   border-radius: 100%;
 }
 
-
-.submit-btn{
+.submit-btn {
   border-radius: "10px" !important;
 }
 
 .table-container {
   width: 100%;
   overflow-x: auto;
+}
+
+.nav-tabs.nav-tabs-top li a.active {
+  border-top-color: #007a41 !important;
+  border-radius: 0;
 }

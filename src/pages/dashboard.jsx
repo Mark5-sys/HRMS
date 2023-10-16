@@ -146,19 +146,58 @@ const Dashboard = ({}) => {
             </div>
           )}
 
-          <div className="row">
-            <div className="col-md-12">
-              <div className="row">
-                <GenderStat data={genderData} />
-                <DepartmentStatistics data={bydpt} />
-              </div>
+          <div class="col-md-12">
+            <div class="card">
+              <div class="card-body">
+                {/* <h4 class="card-title">Top line justified</h4> */}
+                <ul class="nav nav-tabs nav-tabs-top nav-justified">
+                  <li class="nav-item">
+                    <a
+                      class="nav-link active"
+                      href="#top-justified-tab1"
+                      data-bs-toggle="tab"
+                    >
+                      Providence Human Capital Statistical Analysis
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a
+                      class="nav-link"
+                      href="#top-justified-tab2"
+                      data-bs-toggle="tab"
+                    >
+                      Staffing Solutions Statistical Analysis
+                    </a>
+                  </li>
+                </ul>
+                <div class="tab-content">
+                  <div class="tab-pane show active" id="top-justified-tab1">
+                    <div className="row">
+                      <div className="col-md-12">
+                        <div className="row">
+                          <GenderStat data={genderData} />
+                          <DepartmentStatistics data={bydpt} />
+                        </div>
 
-              <div className="row">
-                <AgeStats data={data} />
-              </div>
-              <div className="row">
-                <MaritalStatus data={maritalStatus} />
-                <MonthlyOrientationStats />
+                        <div className="row">
+                          <AgeStats data={data} />
+                        </div>
+                        <div className="row">
+                          <MaritalStatus data={maritalStatus} />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="tab-pane" id="top-justified-tab2">
+                    <div className="row">
+                      <div className="col-md-12">
+                        <div className="row">
+                          <MonthlyOrientationStats />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
