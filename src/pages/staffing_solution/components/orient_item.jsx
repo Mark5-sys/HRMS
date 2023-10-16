@@ -18,6 +18,7 @@ const OrientItem = ({ orientee }) => {
   return (
     <Fragment>
       <tr>
+        <td>{orientee.id}</td>
         <td>{convertToDateWord(orientee.created_at)}</td>
         <td
           style={{

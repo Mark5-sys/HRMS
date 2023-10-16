@@ -6,7 +6,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { orientActions } from "../../../store/orients_store";
 import Loading from "../../../components/loader/loading";
-import { getAllOrients } from "../../../services/api";
+import { employeesCount, getAllOrients } from "../../../services/api";
+import { statisticsActions } from "../../../store/statistics_store";
 
 const gender = ["Male", "Female"];
 
@@ -86,6 +87,13 @@ const NewOrientForm = () => {
         dispatch(
           orientActions.setOrients({
             orients: orientsAll,
+          })
+        );
+
+        const databaseStats = await employeesCount();
+        dispatch(
+          statisticsActions.setEmployeesCount({
+            employeesCount: databaseStats,
           })
         );
 

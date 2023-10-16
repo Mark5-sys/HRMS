@@ -65,6 +65,7 @@ const OrinetsTable = () => {
               <table className="table table-striped custom-table datatable">
                 <thead>
                   <tr>
+                    <th>#</th>
                     <th>Date of Orientation</th>
                     <th>Name</th>
                     <th>Gender</th>

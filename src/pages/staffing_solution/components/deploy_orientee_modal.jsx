@@ -27,7 +27,11 @@ const DeployOrienteeModal = () => {
 
   const onSubmitPatch = async (values, { setSubmitting, resetForm }) => {
     setLoading(true);
-    console.log(values);
+    const apiValues = {
+      company_id: parseInt(values.company),
+      deployement_status: values.deployement_status,
+    };
+    console.log(apiValues);
     try {
       const response = await fetch(
         `${API}/orientee/deploy/${readyOrientee.id}`,
@@ -36,7 +40,7 @@ const DeployOrienteeModal = () => {
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify(values),
+          body: JSON.stringify(apiValues),
         }
       );
       const responseData = await response.json();

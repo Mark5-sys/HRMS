@@ -5,6 +5,8 @@ import { API } from "../../../config";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import Loading from "../../../components/loader/loading";
+import { employeesCount } from "../../../services/api";
+import { statisticsActions } from "../../../store/statistics_store";
 
 const maritalStatuses = ["Married", "Single", "Divorced"];
 const gender = ["Male", "Female", "Other"];
@@ -44,7 +46,9 @@ const AddEmployeeForm = ({}) => {
       position: Yup.number().nullable(),
       gender: Yup.string().required("Select Gender"),
       postalCity: Yup.string().nullable(),
-      employeeStatus: Yup.string().required("Please Select Employee Status, either Active/Orientation"),
+      employeeStatus: Yup.string().required(
+        "Please Select Employee Status, either Active/Orientation"
+      ),
     }),
     onSubmit: async (values) => {
       const postData = {
@@ -76,6 +80,12 @@ const AddEmployeeForm = ({}) => {
         const data = await response.json();
         if (response.ok) {
           setIsLoading(false);
+          const databaseStats = await employeesCount();
+          dispatch(
+            statisticsActions.setEmployeesCount({
+              employeesCount: databaseStats,
+            })
+          );
           navigate("/employees");
         }
         console.log("data", data);
@@ -132,7 +142,9 @@ const AddEmployeeForm = ({}) => {
 
             <div className="col-sm-3">
               <div className="input-block mb-3">
-                <label className="col-form-label">Surname<span className="text-danger">*</span></label>
+                <label className="col-form-label">
+                  Surname<span className="text-danger">*</span>
+                </label>
                 <input
                   className="form-control"
                   type="text"
