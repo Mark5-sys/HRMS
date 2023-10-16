@@ -2,29 +2,32 @@ import React, { Fragment, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import OrinetsTable from "./components/orients_table";
 import { useDispatch } from "react-redux";
-import { getAllOrients } from "../../services/api";
+import { getAllCompanies, getAllOrients } from "../../services/api";
 import { orientActions } from "../../store/orients_store";
+import { companyActions } from "../../store/companies_store";
 
 const OrientsPage = () => {
-
   const dispatch = useDispatch();
 
   useEffect(() => {
-    const fetchOrients = async () => {
+    const fetchData = async () => {
       const orientsAll = await getAllOrients();
+      const companies = await getAllCompanies();
       dispatch(
         orientActions.setOrients({
           orients: orientsAll,
         })
       );
-      console.log(orientsAll)
+
+      dispatch(
+        companyActions.setCompanies({
+          companies: companies,
+        })
+      );
     };
-    
-    fetchOrients();
 
-   
+    fetchData();
   }, []);
-
 
   return (
     <Fragment>
