@@ -59,6 +59,10 @@ const SideBar = ({}) => {
                   <i className="la la-briefcase"></i> <span>Companies</span>
                 </Link>
               </li>
+
+              <li className="menu-title">
+                <span>IT ASSET MANAGEMENT</span>
+              </li>
             </ul>
           </div>
         </div>
