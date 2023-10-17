@@ -24,11 +24,13 @@ const MonthlyOrientationStats = () => {
     (state) => state.statistics.orientationMonthlyStatistics
   );
 
-  const categories = Object.keys(data);
-  const totalAttendanceData = Object.values(data).map(
-    (item) => item.total_attendance
+  const categories = Object.keys(data) || [];
+  const totalAttendanceData = (Object.values(data) || []).map(
+    (item) => item.total_attendance || 0
   );
-  const deployedData = Object.values(data).map((item) => item.deployed);
+  const deployedData = (Object.values(data) || []).map(
+    (item) => item.deployed || 0
+  );
 
   const chartOptions = {
     xaxis: {
