@@ -229,10 +229,7 @@ const AddEmployeeForm = ({}) => {
 
             <div className="col-sm-4">
               <div className="input-block mb-3">
-                <label className="col-form-label">
-                  Date of Birth
-                  <span className="text-danger">*</span>
-                </label>
+                <label className="col-form-label">Date of Birth</label>
                 <div className="">
                   <input
                     className="form-control"
