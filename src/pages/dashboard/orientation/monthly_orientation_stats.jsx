@@ -28,10 +28,10 @@ const MonthlyOrientationStats = () => {
 
   const categories = Object.keys(data) || [];
   const totalAttendanceData = (Object.values(data) || []).map(
-    (item) => item.total_attendance || 0
+    (item) => item?.total_attendance || 0
   );
   const deployedData = (Object.values(data) || []).map(
-    (item) => item.deployed || 0
+    (item) => item?.deployed || 0
   );
 
   const chartOptions = {
