@@ -29,11 +29,13 @@ import OrientsPage from "./pages/staffing_solution/orients_page";
 import AddOrientPage from "./pages/staffing_solution/add_orient_page";
 import OrienteeDetail from "./pages/staffing_solution/orientee_detail_page";
 import CompaniesPage from "./pages/companies/companies_page";
+import { ToastContainer, toast } from "react-toastify";
 
 const App = () => {
   const isAuth = useSelector((state) => state.auth.isAuthenticated);
   return (
     <HashRouter>
+      <ToastContainer />
       <Routes>
         <Route
           exact

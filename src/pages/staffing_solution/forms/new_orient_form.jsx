@@ -8,6 +8,10 @@ import { orientActions } from "../../../store/orients_store";
 import Loading from "../../../components/loader/loading";
 import { employeesCount, getAllOrients } from "../../../services/api";
 import { statisticsActions } from "../../../store/statistics_store";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import Swal from "sweetalert2";
+import "sweetalert2/dist/sweetalert2.min.css";
 
 const gender = ["Male", "Female"];
 
@@ -82,6 +86,13 @@ const NewOrientForm = () => {
       console.log(responseData.data);
       if (response.ok) {
         //dispatch actions here
+        Swal.fire({
+          icon: "success",
+          title: "Success",
+          text: "Orientee has been successfully added",
+          timer: 2000,
+          confirmButtonColor: "#007a41",
+        });
 
         const orientsAll = await getAllOrients();
         dispatch(
@@ -111,196 +122,213 @@ const NewOrientForm = () => {
   };
   return (
     <Fragment>
-      <div className="container_">
-        <Formik
-          initialValues={initialValues}
-          onSubmit={onSubmit}
-          validationSchema={validationSchema}
-        >
-          {({
-            values,
-            isSubmitting,
-            handleSubmit,
-            touched,
-            errors,
-            handleChange,
-          }) => (
-            <Form>
-              <div className="row">
-                <div className="col-md-8">
-                  <div className="row">
-                    <div className="col-md-4">
-                      <div className="input-block mb-3">
-                        <label className="col-form-label">First Name</label>
-                        <Field
-                          type="text"
-                          className="form-control"
-                          id="first_name"
-                          name="first_name"
-                        />
-                        <ErrorMessage
-                          name="first_name"
-                          component="div"
-                          className="text-danger"
-                        />
-                      </div>
-                    </div>
-                    <div className="col-md-4">
-                      <div className="input-block mb-3">
-                        <label className="col-form-label">Last Name</label>
-                        <Field
-                          type="text"
-                          className="form-control"
-                          id="last_name"
-                          name="last_name"
-                        />
-                        <ErrorMessage
-                          name="last_name"
-                          component="div"
-                          className="text-danger"
-                        />
-                      </div>
-                    </div>
+      <div
+        className="card card-color"
+        style={{
+          padding: "3rem",
+        }}
+      >
+        <div className="box-body">
+          <div className="container_">
+            <h3>NEW ORIENTEE</h3>
 
-                    <div className="col-md-4">
-                      <div className="input-block mb-3">
-                        <label className="col-form-label">Gender</label>
-                        <Field
-                          as="select"
-                          className="select form-control"
-                          id="gender"
-                          name="gender"
-                          onChange={handleChange}
-                        >
-                          <option value={""}> {values.gender}</option>
-                          {gender.map((gender) => (
-                            <option key={gender} value={gender}>
-                              {gender}
-                            </option>
-                          ))}
-                        </Field>
-                        <ErrorMessage
-                          name="gender"
-                          component="div"
-                          className="text-danger"
-                        />
-                      </div>
-                    </div>
-                  </div>
+            <Formik
+              initialValues={initialValues}
+              onSubmit={onSubmit}
+              validationSchema={validationSchema}
+            >
+              {({
+                values,
+                isSubmitting,
+                handleSubmit,
+                touched,
+                errors,
+                handleChange,
+              }) => (
+                <Form>
+                  <div className="row">
+                    <div className="col-md-8">
+                      <div className="row">
+                        <div className="col-md-4">
+                          <div className="input-block mb-3">
+                            <label className="col-form-label">First Name</label>
+                            <Field
+                              type="text"
+                              className="form-control"
+                              id="first_name"
+                              name="first_name"
+                            />
+                            <ErrorMessage
+                              name="first_name"
+                              component="div"
+                              className="text-danger"
+                            />
+                          </div>
+                        </div>
+                        <div className="col-md-4">
+                          <div className="input-block mb-3">
+                            <label className="col-form-label">Last Name</label>
+                            <Field
+                              type="text"
+                              className="form-control"
+                              id="last_name"
+                              name="last_name"
+                            />
+                            <ErrorMessage
+                              name="last_name"
+                              component="div"
+                              className="text-danger"
+                            />
+                          </div>
+                        </div>
 
-                  <div className="row">
-                    <div className="col-md-12">
-                      <div className="input-block mb-3">
-                        <label className="col-form-label">Address</label>
-                        <Field
-                          type="text"
-                          className="form-control"
-                          id="address"
-                          name="address"
-                          onChange={handleChange}
-                        />
-                        <ErrorMessage
-                          name="address"
-                          component="div"
-                          className="text-danger"
-                        />
-                      </div>
-                    </div>
-                  </div>
-                  <div className="row">
-                    <div className="col-md-4">
-                      <div className="input-block mb-3">
-                        <label className="col-form-label">Date of Birth</label>
-                        <div className="">
-                          <Field
-                            className="form-control datetimepicker"
-                            type="date"
-                            name="date_of_birth"
-                            id="date_of_birth"
-                            onChange={handleChange}
-                          />
-                          <ErrorMessage
-                            name="date_of_birth"
-                            component="div"
-                            className="text-danger"
-                          />
+                        <div className="col-md-4">
+                          <div className="input-block mb-3">
+                            <label className="col-form-label">Gender</label>
+                            <Field
+                              as="select"
+                              className="select form-control"
+                              id="gender"
+                              name="gender"
+                              onChange={handleChange}
+                            >
+                              <option value={""}> {values.gender}</option>
+                              {gender.map((gender) => (
+                                <option key={gender} value={gender}>
+                                  {gender}
+                                </option>
+                              ))}
+                            </Field>
+                            <ErrorMessage
+                              name="gender"
+                              component="div"
+                              className="text-danger"
+                            />
+                          </div>
                         </div>
                       </div>
-                    </div>
 
-                    <div className="col-md-8">
-                      <div className="input-block mb-3">
-                        <label className="col-form-label">Qualifications</label>
-                        <Field
-                          type="text"
-                          className="form-control"
-                          id="qualifications"
-                          name="qualifications"
-                          onChange={handleChange}
-                        />
-                        <ErrorMessage
-                          name="qualifications"
-                          component="div"
-                          className="text-danger"
-                        />
+                      <div className="row">
+                        <div className="col-md-12">
+                          <div className="input-block mb-3">
+                            <label className="col-form-label">Address</label>
+                            <Field
+                              type="text"
+                              className="form-control"
+                              id="address"
+                              name="address"
+                              onChange={handleChange}
+                            />
+                            <ErrorMessage
+                              name="address"
+                              component="div"
+                              className="text-danger"
+                            />
+                          </div>
+                        </div>
                       </div>
+                      <div className="row">
+                        <div className="col-md-4">
+                          <div className="input-block mb-3">
+                            <label className="col-form-label">
+                              Date of Birth
+                            </label>
+                            <div className="">
+                              <Field
+                                className="form-control datetimepicker"
+                                type="date"
+                                name="date_of_birth"
+                                id="date_of_birth"
+                                onChange={handleChange}
+                              />
+                              <ErrorMessage
+                                name="date_of_birth"
+                                component="div"
+                                className="text-danger"
+                              />
+                            </div>
+                          </div>
+                        </div>
+
+                        <div className="col-md-8">
+                          <div className="input-block mb-3">
+                            <label className="col-form-label">
+                              Qualifications
+                            </label>
+                            <Field
+                              type="text"
+                              className="form-control"
+                              id="qualifications"
+                              name="qualifications"
+                              onChange={handleChange}
+                            />
+                            <ErrorMessage
+                              name="qualifications"
+                              component="div"
+                              className="text-danger"
+                            />
+                          </div>
+                        </div>
+                      </div>
+                      <div className="row">
+                        <div className="col-md-4">
+                          <div className="input-block mb-3">
+                            <label className="col-form-label">
+                              Phone Number 1
+                            </label>
+                            <Field
+                              type="text"
+                              className="form-control"
+                              name="phone_1"
+                              id="phone_1"
+                            />{" "}
+                            <ErrorMessage
+                              name="phone_1"
+                              component="div"
+                              className="text-danger"
+                            />
+                          </div>
+                        </div>
+                        <div className="col-md-4">
+                          <div className="input-block mb-3">
+                            <label className="col-form-label">
+                              Phone Number 2 (Optional)
+                            </label>
+                            <Field
+                              type="text"
+                              className="form-control"
+                              name="phone_2"
+                              id="phone_2"
+                            />{" "}
+                            <ErrorMessage
+                              name="phone_2"
+                              component="div"
+                              className="text-danger"
+                            />
+                          </div>
+                        </div>
+                      </div>
+
+                      {loading ? (
+                        <Loading />
+                      ) : (
+                        <button
+                          className="btn btn-primary submit-btn"
+                          type="submit"
+                          style={{
+                            borderRadius: "10px",
+                          }}
+                        >
+                          Submit
+                        </button>
+                      )}
                     </div>
                   </div>
-                  <div className="row">
-                    <div className="col-md-4">
-                      <div className="input-block mb-3">
-                        <label className="col-form-label">Phone Number 1</label>
-                        <Field
-                          type="text"
-                          className="form-control"
-                          name="phone_1"
-                          id="phone_1"
-                        />{" "}
-                        <ErrorMessage
-                          name="phone_1"
-                          component="div"
-                          className="text-danger"
-                        />
-                      </div>
-                    </div>
-                    <div className="col-md-4">
-                      <div className="input-block mb-3">
-                        <label className="col-form-label">
-                          Phone Number 2 (Optional)
-                        </label>
-                        <Field
-                          type="text"
-                          className="form-control"
-                          name="phone_2"
-                          id="phone_2"
-                        />{" "}
-                        <ErrorMessage
-                          name="phone_2"
-                          component="div"
-                          className="text-danger"
-                        />
-                      </div>
-                    </div>
-                  </div>
-
-                  {loading ? (
-                    <Loading />
-                  ) : (
-                    <button
-                      className="btn btn-primary submit-btn"
-                      type="submit"
-                      style={{
-                        borderRadius: "10px",
-                      }}
-                    >
-                      Submit
-                    </button>
-                  )}
-                </div>
-              </div>
-            </Form>
-          )}
-        </Formik>
+                </Form>
+              )}
+            </Formik>
+          </div>
+        </div>
       </div>
     </Fragment>
   );
