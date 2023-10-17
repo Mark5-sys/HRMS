@@ -7,6 +7,7 @@ import {
   getAllDepartments,
   getAllEmployees,
   getAllPositions,
+  getOrientationMonthlyStats,
   maritalStatistics,
 } from "../services/api";
 import { useDispatch, useSelector } from "react-redux";
@@ -101,6 +102,13 @@ const Dashboard = ({}) => {
             employeesCount: databaseStats,
           })
         );
+
+        const resp = await getOrientationMonthlyStats();
+        dispatch(
+          statisticsActions.setOrientationMonthlyStatistics({
+            orientationMonth: resp,
+          })
+        );
         console.log(databaseStats);
       } catch (error) {
         console.log("There was an error while fetching stats ", error);
@@ -120,6 +128,9 @@ const Dashboard = ({}) => {
     [];
 
   const dbstats = useSelector((state) => state.statistics.employeesCount) || [];
+
+  const monthlyOrientsData =
+    useSelector((state) => state.statistics.orientationMonthlyStatistics) || {};
 
   return (
     <Fragment>
@@ -192,7 +203,11 @@ const Dashboard = ({}) => {
                     <div className="row">
                       <div className="col-md-12">
                         <div className="row">
-                          {/* <MonthlyOrientationStats /> */}
+                          {monthlyOrientsData && (
+                            <MonthlyOrientationStats
+                              data={monthlyOrientsData}
+                            />
+                          )}
                         </div>
                       </div>
                     </div>

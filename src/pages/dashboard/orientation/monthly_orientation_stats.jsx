@@ -4,28 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getOrientationMonthlyStats } from "../../../services/api";
 import { statisticsActions } from "../../../store/statistics_store";
 
-const MonthlyOrientationStats = () => {
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const resp = await getOrientationMonthlyStats();
-      dispatch(
-        statisticsActions.setOrientationMonthlyStatistics({
-          orientationMonth: resp,
-        })
-      );
-
-      console.log("Orintation Data", resp);
-    };
-
-    fetchData();
-  }, []);
-
-  const data = useSelector(
-    (state) => state.statistics.orientationMonthlyStatistics
-  );
-
+const MonthlyOrientationStats = ({ data }) => {
   const categories = Object.keys(data) || [];
   const totalAttendanceData = (Object.values(data) || []).map(
     (item) => item?.total_attendance || 0
