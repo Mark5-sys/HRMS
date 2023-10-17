@@ -15,6 +15,8 @@ const MonthlyOrientationStats = () => {
           orientationMonth: resp,
         })
       );
+
+      console.log("Orintation Data", resp);
     };
 
     fetchData();
