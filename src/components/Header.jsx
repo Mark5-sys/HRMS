@@ -11,6 +11,8 @@ const Header = ({}) => {
   const user = useSelector((state) => state.auth.user);
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
 
+  
+
   const signOut = () => {
     dispatch(authActions.setLogout());
     dispatch(employeesActions.clearState());

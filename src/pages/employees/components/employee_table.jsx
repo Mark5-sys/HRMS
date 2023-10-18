@@ -6,7 +6,8 @@ import { getAllEmployees } from "../../../services/api";
 
 const EmployeeTable = () => {
   const dispatch = useDispatch();
-  const employees = useSelector((state) => state.employees.activeEmployees) || [];
+  const employees =
+    useSelector((state) => state.employees.activeEmployees) || [];
   const positions = useSelector((state) => state.position.positions);
   const [employeeName, setEmployeeName] = useState("");
   const [employeeCode, setEmployeeCode] = useState("");
@@ -31,11 +32,15 @@ const EmployeeTable = () => {
   const handleSearch = () => {
     const filteredEmployees = employees.filter((employee) => {
       const codeMatch =
-        employeeCode !== "" &&
-        employee.code.toLowerCase().includes(employeeCode.toLowerCase());
-        const nameMatch =
+        employeeCode !== "" && employee.code
+          ? employee.code.toLowerCase().includes(employeeCode.toLowerCase())
+          : false;
+
+      const nameMatch =
         employeeName !== "" &&
-        (employee.first_name.toLowerCase().includes(employeeName.toLowerCase()) ||
+        (employee.first_name
+          .toLowerCase()
+          .includes(employeeName.toLowerCase()) ||
           employee.surname.toLowerCase().includes(employeeName.toLowerCase()));
       return codeMatch || nameMatch;
     });
