@@ -33,6 +33,7 @@ import { ToastContainer, toast } from "react-toastify";
 import SchedulerPage from "./pages/rumuko_management/schedule_page";
 import LeaveType from "./pages/leave-management/leave_type_page";
 import AppliedLeaves from "./pages/leave-management/applied_leaves_page";
+import EmployeeRoles from "./pages/employee_roles/employee_roles_page";
 
 const App = () => {
   const isAuth = useSelector((state) => state.auth.isAuthenticated);
@@ -50,6 +51,7 @@ const App = () => {
         <Route exact path="/" element={<HomePage />}>
           <Route exact path="/dashboard" element={<Dashboard />} />
           <Route exact path="/employees" element={<EmployeeList />} />
+          <Route exact path="/roles" element={<EmployeeRoles />} />
           <Route exact path="/add/employee" element={<AddEmployee />} />
 
           <Route

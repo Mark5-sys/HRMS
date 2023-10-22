@@ -5,8 +5,8 @@ const initialState = {
   pendingEmployees: [],
   waitingEmployees: [],
   singleEmployee: {},
-  isToggled: false
-  
+  isToggled: false,
+  employeRoles: [],
 };
 
 const employeeSlice = createSlice({
@@ -31,6 +31,10 @@ const employeeSlice = createSlice({
 
     toggleBoolean: (state) => {
       state.isToggled = !state.isToggled; // Toggle the boolean field
+    },
+
+    setEmployeeRoles: (state, action) => {
+      state.employeRoles = action.payload.employeRoles;
     },
 
     clearState: (state) => {

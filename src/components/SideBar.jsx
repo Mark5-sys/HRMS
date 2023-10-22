@@ -29,6 +29,13 @@ const SideBar = ({}) => {
                   <i className="la la-users"></i> <span>Orients (SS)</span>
                 </Link>
               </li>
+
+              <li>
+                <Link to={"/roles"}>
+                  <i className="la la-info"></i> <span>Employee Roles</span>
+                </Link>
+              </li>
+
               <li className="menu-title">
                 <span>HR</span>
               </li>

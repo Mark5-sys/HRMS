@@ -173,3 +173,16 @@ export const getRumukoSchedule = async () => {
   return responseData.data;
 };
 
+
+
+export const getAllEmployeRoles = async() => {
+  const response = await fetch(`${API}/role`, {
+    method: "GET",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+  });
+  const responseData = await response.json();
+  return responseData.data;
+}
