@@ -30,6 +30,9 @@ import AddOrientPage from "./pages/staffing_solution/add_orient_page";
 import OrienteeDetail from "./pages/staffing_solution/orientee_detail_page";
 import CompaniesPage from "./pages/companies/companies_page";
 import { ToastContainer, toast } from "react-toastify";
+import SchedulerPage from "./pages/rumuko_management/schedule_page";
+import LeaveType from "./pages/leave-management/leave_type_page";
+import AppliedLeaves from "./pages/leave-management/applied_leaves_page";
 
 const App = () => {
   const isAuth = useSelector((state) => state.auth.isAuthenticated);
@@ -72,6 +75,10 @@ const App = () => {
 
           <Route exact path="/departments" element={<DepartmentsPage />} />
           <Route exact path="/positions" element={<PositionsPage />} />
+          <Route exact path="/schedule" element={<SchedulerPage />} />
+
+          <Route exact path="/leave/settings" element={<LeaveType />} />
+          <Route exact path="/leaves" element={<AppliedLeaves />} />
         </Route>
 
         <Route exact path="/login" element={<LoginPage />} />

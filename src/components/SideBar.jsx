@@ -11,57 +11,82 @@ const SideBar = ({}) => {
               <li className="menu-title">
                 <span>Main</span>
               </li>
-
               <li>
                 <Link to={"/dashboard"}>
                   <i className="la la-dashboard"></i> <span>Dashboard</span>
                 </Link>
               </li>
-
               <li className="menu-title">
                 <span>Employees</span>
               </li>
-
               <li>
                 <Link to={"/employees"}>
                   <i className="la la-user"></i> <span>Employees</span>
                 </Link>
               </li>
-
               <li>
                 <Link to={"/orients"}>
                   <i className="la la-users"></i> <span>Orients (SS)</span>
                 </Link>
               </li>
-
               <li className="menu-title">
                 <span>HR</span>
               </li>
-
               <li>
                 <Link to={"/departments"}>
                   <i className="la la-files-o"></i> <span>Departments</span>
                 </Link>
               </li>
-
               <li>
                 <Link to={"/positions"}>
                   <i className="la la-briefcase"></i> <span>Positions</span>
                 </Link>
               </li>
-
               <li className="menu-title">
                 <span>STAFFING SOLUTIONS</span>
               </li>
-
               <li>
                 <Link to={"/companies"}>
                   <i className="la la-briefcase"></i> <span>Companies</span>
                 </Link>
               </li>
-
               <li className="menu-title">
                 <span>IT ASSET MANAGEMENT</span>
+              </li>
+
+              <li>
+                <Link to={"/schedule"}>
+                  <i className="la la-server"></i> <span>Asset Register</span>
+                </Link>
+              </li>
+
+              <li className="menu-title">
+                <span>MEETINGS & EVENTS</span>
+              </li>
+              <li>
+                <Link to={"/schedule"}>
+                  <i className="la la-edit"></i> <span>Rumuko Scheduler</span>
+                </Link>
+              </li>
+              <li>
+                <Link to={"/schedule"}>
+                  <i className="la la-ticket"></i> <span>Rumuko Posts</span>
+                </Link>
+              </li>
+              <li className="menu-title">
+                <span>LEAVE MANAGEMENT</span>
+              </li>
+              <li>
+                <Link to={"/leave/settings"}>
+                  <i className="la la-calendar-check"></i>{" "}
+                  <span>Leave Settings</span>
+                </Link>
+              </li>
+
+              <li>
+                <Link to={"/leaves"}>
+                  <i className="la la-calendar-minus"></i> <span>Leaves</span>
+                </Link>
               </li>
             </ul>
           </div>

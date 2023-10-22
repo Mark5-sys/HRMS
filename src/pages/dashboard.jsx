@@ -42,6 +42,19 @@ const Dashboard = ({}) => {
   };
 
   useEffect(() => {
+    const reloadEmployees = async () => {
+      const employees = await getAllEmployees();
+      dispatch(
+        employeesActions.setActiveEmployees({
+          activeEmployees: employees,
+        })
+      );
+    };
+    console.log('Running....')
+    reloadEmployees();
+  }, []);
+
+  useEffect(() => {
     getGreeting();
     const fetchData = async () => {
       try {
@@ -56,13 +69,6 @@ const Dashboard = ({}) => {
         dispatch(
           positionsActions.setPositions({
             positions: positions,
-          })
-        );
-
-        const employees = await getAllEmployees();
-        dispatch(
-          employeesActions.setActiveEmployees({
-            activeEmployees: employees,
           })
         );
 
@@ -114,6 +120,8 @@ const Dashboard = ({}) => {
         console.log("There was an error while fetching stats ", error);
       }
     };
+
+    console.log("Running 2............")
 
     fetchData();
   }, []);

@@ -6,6 +6,8 @@ import * as yup from "yup";
 import { API } from "../../config";
 import Loading from "../../components/loader/loading";
 import { authActions } from "../../store/auth_store";
+import Swal from "sweetalert2";
+import "sweetalert2/dist/sweetalert2.min.css";
 
 const LoginPage = ({}) => {
   const [loading, setLoading] = useState(false);
@@ -47,7 +49,14 @@ const LoginPage = ({}) => {
 
         resetForm();
         navigate("/dashboard");
-        setLoading(false)
+        Swal.fire({
+          icon: "success",
+          title: "Success",
+          text: "User Login Was successful",
+          timer: 4000,
+          confirmButtonColor: "#007a41",
+        });
+        setLoading(false);
       }
     } catch (error) {
       console.log(error);

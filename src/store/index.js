@@ -10,10 +10,7 @@ import {
   REGISTER,
 } from "redux-persist";
 
-
 import storage from "redux-persist/lib/storage";
-
-
 
 import { PersistGate } from "redux-persist/integration/react";
 import employeeSlice from "./employee_store";
@@ -23,6 +20,7 @@ import authSlice from "./auth_store";
 import statisticsSlice from "./statistics_store";
 import orientSlice from "./orients_store";
 import companySlice from "./companies_store";
+import rumukoScheduleSlice from "./rumuko_store";
 
 const persistConfig = {
   key: "root",
@@ -37,7 +35,8 @@ const rootReducer = combineReducers({
   auth: authSlice.reducer,
   statistics: statisticsSlice.reducer,
   orientation: orientSlice.reducer,
-  company: companySlice.reducer
+  company: companySlice.reducer,
+  rumuko: rumukoScheduleSlice.reducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

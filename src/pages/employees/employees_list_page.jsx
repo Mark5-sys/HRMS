@@ -2,14 +2,16 @@ import React, { Fragment, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import EmployeeTable from "./components/employee_table";
 import { employeesActions } from "../../store/employee_store";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 const EmployeeList = ({}) => {
+  const dispatch = useDispatch();
+
+  
   return (
     <Fragment>
       <div className="page-wrapper">
         <div className="content container-fluid">
-
           
           <div className="page-header">
             <div className="row align-items-center">
@@ -23,7 +25,11 @@ const EmployeeList = ({}) => {
                 </ul>
               </div>
               <div className="col-auto float-end ms-auto">
-                <Link to={"/add/employee"} href="#" className="btn add-btn">
+                <Link
+                  to={"/add/employee"}
+                  onClick={() => triggerEmployeeUpdate()}
+                  className="btn add-btn"
+                >
                   <i className="fa-solid fa-plus"></i> Add Employee
                 </Link>
                 <div className="view-icons"></div>
