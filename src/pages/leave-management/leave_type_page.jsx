@@ -21,7 +21,7 @@ const LeaveType = () => {
     fetchLeaveTypes();
   }, []);
 
-  const leaveTypes = useSelector((state) => state.leave.leaveTypes);
+  const leaveTypes = useSelector((state) => state.leave.leaveTypes) || [];
 
   return (
     <Fragment>
