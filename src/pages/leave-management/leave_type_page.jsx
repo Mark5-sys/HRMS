@@ -1,7 +1,28 @@
 import React, { Fragment, useEffect, useState } from "react";
 import NewLeaveTypeForm from "./forms/new_leave_type";
+import LeaveTypeCard from "./components/leave_type_card";
+import { useDispatch, useSelector } from "react-redux";
+import { getAllLeaveTypes } from "../../services/api";
+import { leavesActions } from "../../store/leave_store";
 
 const LeaveType = () => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const fetchLeaveTypes = async () => {
+      const leaveTypes = await getAllLeaveTypes();
+      dispatch(
+        leavesActions.setLeaveTypes({
+          leaveTypes: leaveTypes,
+        })
+      );
+    };
+
+    fetchLeaveTypes();
+  }, []);
+
+  const leaveTypes = useSelector((state) => state.leave.leaveTypes);
+
   return (
     <Fragment>
       <div className="page-wrapper">
@@ -31,137 +52,9 @@ const LeaveType = () => {
 
           <div className="row">
             <div className="col-md-12">
-              <div class="card leave-box" id="leave_annual">
-                <div class="card-body">
-                  <div class="h3 card-title with-switch">
-                    Annual
-                    <div class="onoffswitch">
-                      <input
-                        type="checkbox"
-                        name="onoffswitch"
-                        class="onoffswitch-checkbox"
-                        id="switch_annual"
-                        checked=""
-                      />
-                      <label class="onoffswitch-label" for="switch_annual">
-                        <span class="onoffswitch-inner"></span>
-                        <span class="onoffswitch-switch"></span>
-                      </label>
-                    </div>
-                  </div>
-                  <div class="leave-item">
-                    <div class="leave-row">
-                      <div class="leave-left">
-                        <div class="input-box">
-                          <div class="input-block mb-3">
-                            <label class="col-form-label">Days</label>
-                            <input
-                              type="text"
-                              class="form-control"
-                              disabled=""
-                            />
-                          </div>
-                        </div>
-                      </div>
-                      <div class="leave-right">
-                        <button class="leave-edit-btn">Edit</button>
-                      </div>
-                    </div>
-
-                    <div class="leave-row">
-                      <div class="leave-left">
-                        <div class="input-box">
-                          <label class="d-block col-form-label">
-                            Carry forward
-                          </label>
-                          <div class="leave-inline-form">
-                            <div class="form-check form-check-inline">
-                              <input
-                                class="form-check-input"
-                                type="radio"
-                                name="inlineRadioOptions"
-                                id="carry_no"
-                                value="option1"
-                                disabled=""
-                              />
-                              <label class="form-check-label" for="carry_no">
-                                No
-                              </label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                              <input
-                                class="form-check-input"
-                                type="radio"
-                                name="inlineRadioOptions"
-                                id="carry_yes"
-                                value="option2"
-                                disabled=""
-                              />
-                              <label class="form-check-label" for="carry_yes">
-                                Yes
-                              </label>
-                            </div>
-                            <div class="input-group">
-                              <span class="input-group-text">Max</span>
-                              <input
-                                type="text"
-                                class="form-control"
-                                disabled=""
-                              />
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="leave-right">
-                        <button class="leave-edit-btn">Edit</button>
-                      </div>
-                    </div>
-
-                    <div class="leave-row">
-                      <div class="leave-left">
-                        <div class="input-box">
-                          <label class="d-block col-form-label">
-                            Earned leave
-                          </label>
-                          <div class="leave-inline-form">
-                            <div class="form-check form-check-inline">
-                              <input
-                                class="form-check-input"
-                                type="radio"
-                                name="inlineRadioOptions"
-                                id="earned_no"
-                                value="option1"
-                                disabled=""
-                              />
-                              <label class="form-check-label" for="earned_no">
-                                No
-                              </label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                              <input
-                                class="form-check-input"
-                                type="radio"
-                                name="inlineRadioOptions"
-                                id="earned_yes"
-                                value="option2"
-                                disabled=""
-                              />
-                              <label class="form-check-label" for="earned_yes">
-                                Yes
-                              </label>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="leave-right">
-                        <button class="leave-edit-btn">Edit</button>
-                      </div>
-                    </div>
-                  </div>
-
-                 
-                </div>
-              </div>
+              {leaveTypes.map((leaveType, index) => (
+                <LeaveTypeCard key={leaveType.id} leaveType={leaveType} />
+              ))}
             </div>
           </div>
         </div>

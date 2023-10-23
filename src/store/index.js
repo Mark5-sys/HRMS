@@ -21,6 +21,7 @@ import statisticsSlice from "./statistics_store";
 import orientSlice from "./orients_store";
 import companySlice from "./companies_store";
 import rumukoScheduleSlice from "./rumuko_store";
+import leaveSlice from "./leave_store";
 
 const persistConfig = {
   key: "root",
@@ -37,6 +38,7 @@ const rootReducer = combineReducers({
   orientation: orientSlice.reducer,
   company: companySlice.reducer,
   rumuko: rumukoScheduleSlice.reducer,
+  leave: leaveSlice.reducer
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

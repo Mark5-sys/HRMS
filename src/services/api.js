@@ -160,7 +160,6 @@ export const getOrientationMonthlyStats = async () => {
   return responseData;
 };
 
-
 export const getRumukoSchedule = async () => {
   const response = await fetch(`${API}/rumuko/scheduler`, {
     method: "GET",
@@ -173,9 +172,7 @@ export const getRumukoSchedule = async () => {
   return responseData.data;
 };
 
-
-
-export const getAllEmployeRoles = async() => {
+export const getAllEmployeRoles = async () => {
   const response = await fetch(`${API}/role`, {
     method: "GET",
     headers: {
@@ -185,4 +182,16 @@ export const getAllEmployeRoles = async() => {
   });
   const responseData = await response.json();
   return responseData.data;
-}
+};
+
+export const getAllLeaveTypes = async () => {
+  const response = await fetch(`${API}/leave_type`, {
+    method: "GET",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+  });
+  const responseData = await response.json();
+  return responseData.data;
+};
