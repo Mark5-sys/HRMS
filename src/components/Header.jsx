@@ -111,7 +111,7 @@ const Header = ({}) => {
                 <img src="/assets/img/user.jpg" alt="User Image" />
                 <span className="status online"></span>
               </span>
-              <span>{user.username}</span>
+              <span>{user.username} ({user.role})</span>
             </a>
             <div className="dropdown-menu">
               <a className="dropdown-item">My Profile</a>

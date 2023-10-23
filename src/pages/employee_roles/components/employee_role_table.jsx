@@ -19,7 +19,7 @@ const EmployeeRoleTable = () => {
     fetchAllRoles();
   }, []);
 
-  const roles = useSelector((state) => state.employees.employeRoles);
+  const roles = useSelector((state) => state.employees.employeRoles) || [];
 
   return (
     <Fragment>
