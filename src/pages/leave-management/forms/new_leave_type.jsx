@@ -6,6 +6,8 @@ import { API } from "../../../config";
 import { getAllLeaveTypes } from "../../../services/api";
 import { leavesActions } from "../../../store/leave_store";
 import Loading from "../../../components/loader/loading";
+import Swal from "sweetalert2";
+import "sweetalert2/dist/sweetalert2.min.css";
 
 const availableTimes = [
   {
@@ -62,6 +64,14 @@ const NewLeaveTypeForm = () => {
             leaveTypes: leaveTypes,
           })
         );
+
+        Swal.fire({
+          icon: "success",
+          title: "Success",
+          text: "Created a new leave type.",
+          timer: 4000,
+          confirmButtonColor: "#007a41",
+        });
         setLoading(false);
         resetForm();
       }

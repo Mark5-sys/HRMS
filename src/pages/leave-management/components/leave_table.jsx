@@ -1,7 +1,30 @@
 import React, { Fragment, useEffect, useState } from "react";
 import LeaveItem from "./leave_item";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { getAllAppliedLeaves } from "../../../services/api";
+import { leavesActions } from "../../../store/leave_store";
 
 const LeaveTable = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const fetchLeaveData = async () => {
+      const appliedLeaves = await getAllAppliedLeaves();
+
+      dispatch(
+        leavesActions.setAppliedLeaves({
+          appliedLeaves: appliedLeaves,
+        })
+      );
+    };
+
+    fetchLeaveData();
+  }, []);
+
+  const leaves = useSelector((state) => state.leave.appliedLeaves) || [];
+
   return (
     <Fragment>
       <div className="row">
@@ -158,7 +181,9 @@ const LeaveTable = () => {
                       </tr>
                     </thead>
                     <tbody>
-                      <LeaveItem />
+                      {leaves.map((leave, i) => (
+                        <LeaveItem key={leave.id} leave={leave} />
+                      ))}
                     </tbody>
                   </table>
                 </div>
@@ -167,6 +192,7 @@ const LeaveTable = () => {
           </div>
         </div>
       </div>
+
     </Fragment>
   );
 };

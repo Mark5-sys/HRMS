@@ -34,6 +34,7 @@ import SchedulerPage from "./pages/rumuko_management/schedule_page";
 import LeaveType from "./pages/leave-management/leave_type_page";
 import AppliedLeaves from "./pages/leave-management/applied_leaves_page";
 import EmployeeRoles from "./pages/employee_roles/employee_roles_page";
+import ApplyForLeave from "./pages/leave-management/apply_leave";
 
 const App = () => {
   const isAuth = useSelector((state) => state.auth.isAuthenticated);
@@ -81,6 +82,7 @@ const App = () => {
 
           <Route exact path="/leave/settings" element={<LeaveType />} />
           <Route exact path="/leaves" element={<AppliedLeaves />} />
+          <Route exact path="/apply/leave" element={<ApplyForLeave />} />
         </Route>
 
         <Route exact path="/login" element={<LoginPage />} />

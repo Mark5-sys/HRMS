@@ -195,3 +195,15 @@ export const getAllLeaveTypes = async () => {
   const responseData = await response.json();
   return responseData.data;
 };
+
+export const getAllAppliedLeaves = async () => {
+  const response = await fetch(`${API}/leave/application`, {
+    method: "GET",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+  });
+  const responseData = await response.json();
+  return responseData.data;
+};

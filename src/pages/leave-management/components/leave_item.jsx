@@ -1,6 +1,35 @@
 import React, { Fragment, useEffect, useState } from "react";
+import { formatDateShort } from "../../../helpers/helpers";
 
-const LeaveItem = () => {
+const LeaveItem = ({ leave }) => {
+  const leaveStatus = (status) => {
+    if (status === "New") {
+      return (
+        <a className="dropdown-item">
+          <i className="fa-regular fa-circle-dot text-purple"></i> {status}
+        </a>
+      );
+    } else if (status === "Pending") {
+      return (
+        <a className="dropdown-item">
+          <i className="fa-regular fa-circle-dot text-info"></i> {status}
+        </a>
+      );
+    } else if (status === "Approved") {
+      return (
+        <a className="dropdown-item">
+          <i className="fa-regular fa-circle-dot text-success"></i> Approved
+        </a>
+      );
+    } else {
+      return (
+        <a className="dropdown-item">
+          <i className="fa-regular fa-circle-dot text-danger"></i> {status}
+        </a>
+      );
+    }
+  };
+
   return (
     <Fragment>
       <tr className="odd">
@@ -11,46 +40,18 @@ const LeaveItem = () => {
             </a>
             <a>
               {" "}
-              John Doe <span>Web Designer</span>
+              {leave.employee.first_name} {leave.employee.surname} <span></span>
             </a>
           </h2>
         </td>
-        <td>Medical Leave</td>
-        <td>27 Feb 2019</td>
-        <td>27 Feb 2019</td>
-        <td>1 day</td>
-        <td>Going to Hospital</td>
+        <td>{leave.leave_type.name}</td>
+        <td>{formatDateShort(leave.start_date)}</td>
+        <td>{formatDateShort(leave.end_date)}</td>
+        <td>{leave.duration} day (s)</td>
+        <td>{leave.reason}</td>
         <td className="text-center">
-          <div className="dropdown action-label">
-            <a
-              className="btn btn-white btn-sm btn-rounded"
-              href="#"
-              data-bs-toggle="dropdown"
-              aria-expanded="false"
-            >
-              <i className="fa-regular fa-circle-dot text-success"></i> Approved
-            </a>
-            <div className="dropdown-menu dropdown-menu-right">
-              <a className="dropdown-item" href="#">
-                <i className="fa-regular fa-circle-dot text-purple"></i> New
-              </a>
-              <a className="dropdown-item" href="#">
-                <i className="fa-regular fa-circle-dot text-info"></i> Pending
-              </a>
-              <a
-                className="dropdown-item"
-                href="#"
-                data-bs-toggle="modal"
-                data-bs-target="#approve_leave"
-              >
-                <i className="fa-regular fa-circle-dot text-success"></i>{" "}
-                Approved
-              </a>
-              <a className="dropdown-item" href="#">
-                <i className="fa-regular fa-circle-dot text-danger"></i>{" "}
-                Declined
-              </a>
-            </div>
+          <div className="dropdown action-label btn btn-white btn-sm btn-rounded">
+            {leaveStatus(leave.status)}
           </div>
         </td>
         <td className="text-end">
