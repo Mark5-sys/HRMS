@@ -48,7 +48,7 @@ const NewLeaveTypeForm = () => {
 
     setLoading(true);
     try {
-      const response = await fetch(`${API}/leave_type`, {
+      const response = await fetch(`${API}/leave/type`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
