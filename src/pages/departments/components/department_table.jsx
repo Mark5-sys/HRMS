@@ -1,7 +1,6 @@
-import React, { Fragment, useEffect, useState } from "react";
+import { Fragment } from "react";
 import PropTypes from 'prop-types'
 import DepartmentItem from "./department_item";
-import { useSelector } from "react-redux";
 import { useGetDepartmentsQuery } from "../../../store/api/apiSlice";
 import Loading from "../../../components/loader/loading";
 
@@ -26,7 +25,7 @@ let DepartmentExcerpt = ({ departments }) => {
   )
 }
 
-const DepartmentTable = ({}) => {
+const DepartmentTable = () => {
   const {
     data: dpts,
     isLoading,
