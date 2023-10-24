@@ -2,10 +2,12 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 
 export const apiSlice = createApi({
     reducerPath: 'api',
-    baseQuery: fetchBaseQuery({ baseUrl: '' }),
+    baseQuery: fetchBaseQuery({ baseUrl: 'https://seal-app-sq4gf.ondigitalocean.app/api' }),
     endpoints: builder => ({
         getDepartments: builder.query({
             query: () => '/department'
         })
     })
 })
+
+export const { useGetDepartmentsQuery } = apiSlice

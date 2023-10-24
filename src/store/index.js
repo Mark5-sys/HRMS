@@ -22,6 +22,7 @@ import orientSlice from "./orients_store";
 import companySlice from "./companies_store";
 import rumukoScheduleSlice from "./rumuko_store";
 import leaveSlice from "./leave_store";
+import { apiSlice } from "./api/apiSlice";
 
 const persistConfig = {
   key: "root",
@@ -38,7 +39,8 @@ const rootReducer = combineReducers({
   orientation: orientSlice.reducer,
   company: companySlice.reducer,
   rumuko: rumukoScheduleSlice.reducer,
-  leave: leaveSlice.reducer
+  leave: leaveSlice.reducer,
+  [apiSlice.reducerPath]: apiSlice.reducer
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
@@ -49,7 +51,7 @@ const store = configureStore({
       serializableCheck: {
         ignoreActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
       },
-    }),
+    }).concat(apiSlice.middleware),
 });
 
 export default store;
