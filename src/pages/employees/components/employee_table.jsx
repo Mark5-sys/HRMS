@@ -3,8 +3,18 @@ import EmployeeItem from "./employee_item";
 import { useDispatch, useSelector } from "react-redux";
 import { employeesActions } from "../../../store/employee_store";
 import { getAllEmployees } from "../../../services/api";
+import { useGetEmployeesQuery } from "../../../store/api/employeeSlice";
+import Loading from "../../../components/loader/loading";
 
 const EmployeeTable = () => {
+  const {
+    data: emps,
+    isLoading,
+    isSuccess,
+    isError,
+    error
+  } = useGetEmployeesQuery()
+
   const dispatch = useDispatch();
   const employees =
     useSelector((state) => state.employees.activeEmployees) || [];
@@ -64,6 +74,18 @@ const EmployeeTable = () => {
     }
   }, [employeeCode, employeeName]);
 
+  let content
+
+  if (isLoading) {
+    content = <Loading />
+  } else if (isSuccess) {
+    content = emps.data.map((employee) => (
+      <EmployeeItem key={employee.id} employee={employee} />
+    ))
+  } else if (isError) {
+    content = <div>{error.toString()}</div>
+  }
+
   return (
     <Fragment>
       <div className="row filter-row">
@@ -117,12 +139,10 @@ const EmployeeTable = () => {
               </thead>
               <tbody>
                 {filteredEmployees.length > 0
-                  ? filteredEmployees.map((employee, index) => (
+                  ? filteredEmployees.map((employee) => (
                       <EmployeeItem key={employee.id} employee={employee} />
                     ))
-                  : employees.map((employee, index) => (
-                      <EmployeeItem key={employee.id} employee={employee} />
-                    ))}
+                  : content }
               </tbody>
             </table>
           </div>
