@@ -1,28 +1,28 @@
-import React, { Fragment, useEffect, useState } from "react";
+import { Fragment, useState } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import { API } from "../../../config";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import Loading from "../../../components/loader/loading";
 import { employeesCount } from "../../../services/api";
 import { statisticsActions } from "../../../store/statistics_store";
-import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Swal from "sweetalert2";
 import "sweetalert2/dist/sweetalert2.min.css";
+import { useAddNewEmployeeMutation } from "../../../store/api/employeeSlice";
 
 const maritalStatuses = ["Married", "Single", "Divorced"];
 const gender = ["Male", "Female", "Other"];
 const empStatus = ["Pending", "Orientation", "Active"];
 
-const AddEmployeeForm = ({}) => {
+const AddEmployeeForm = () => {
   const dispatch = useDispatch();
-  const [isLoading, setIsLoading] = useState(false);
   const positions = useSelector((state) => state.position.positions);
   const departments = useSelector((state) => state.department.departments);
 
   const [selectedOption, setSelectedOption] = useState("continueAdding");
+
+  const [addNewEmployee, { isLoading }] = useAddNewEmployeeMutation();
 
   const handleOptionChange = (event) => {
     setSelectedOption(event.target.value);
@@ -83,41 +83,28 @@ const AddEmployeeForm = ({}) => {
       console.log(postData);
 
       try {
-        setIsLoading(true);
-        const response = await fetch(`${API}/employee`, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(postData),
+        await addNewEmployee(postData).unwrap();
+
+        const databaseStats = await employeesCount();
+        dispatch(
+          statisticsActions.setEmployeesCount({
+            employeesCount: databaseStats,
+          })
+        );
+
+        Swal.fire({
+          icon: "success",
+          title: "Success",
+          text: "Employee has been successfully added",
+          timer: 4000,
+          confirmButtonColor: "#007a41",
         });
-        const data = await response.json();
-        if (response.ok) {
-          setIsLoading(false);
-          const databaseStats = await employeesCount();
-          dispatch(
-            statisticsActions.setEmployeesCount({
-              employeesCount: databaseStats,
-            })
-          );
 
-          Swal.fire({
-            icon: "success",
-            title: "Success",
-            text: "Employee has been successfully added",
-            timer: 4000,
-            confirmButtonColor: "#007a41",
-          });
-
-          if (selectedOption === "redirectToEmployees") {
-            navigate("/employees");
-          }
+        if (selectedOption === "redirectToEmployees") {
+          navigate("/employees");
         }
-        console.log("data", data);
       } catch (error) {
         console.error("Error Messsage", error);
-      } finally {
-        setIsLoading(false);
       }
     },
   });
