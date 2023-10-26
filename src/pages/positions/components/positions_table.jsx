@@ -1,9 +1,29 @@
-import React, { Fragment, useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { Fragment } from "react";
 import PositionsItem from "./position_item";
+import { useGetPositionsQuery } from "../../../store/api/apiSlice";
+import Loading from "../../../components/loader/loading";
 
-const PositionsTable = ({}) => {
-  const positions = useSelector((state) => state.position.positions);
+const PositionsTable = () => {
+  const {
+    data: pos,
+    isLoading,
+    isSuccess,
+    isError,
+    error
+  } = useGetPositionsQuery()
+
+  let content
+
+  if (isLoading) {
+    content = <Loading />
+  } else if (isSuccess) {
+    content = pos.data.map((position) => (
+      <PositionsItem key={position.id} position={position} />
+    ))
+  } else if (isError) {
+    content = <div>{error.toString()}</div>
+  }
+
   return (
     <Fragment>
       <div>
@@ -16,9 +36,7 @@ const PositionsTable = ({}) => {
             </tr>
           </thead>
           <tbody>
-            {positions.map((position, index) => (
-              <PositionsItem key={position.id} position={position} />
-            ))}
+            {content}
           </tbody>
         </table>
       </div>

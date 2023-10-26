@@ -7,8 +7,11 @@ export const apiSlice = createApi({
     endpoints: builder => ({
         getDepartments: builder.query({
             query: () => '/department'
+        }),
+        getPositions: builder.query({
+            query: () => '/position'
         })
     })
 })
 
-export const { useGetDepartmentsQuery } = apiSlice
+export const { useGetDepartmentsQuery, useGetPositionsQuery } = apiSlice
