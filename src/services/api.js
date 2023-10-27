@@ -185,7 +185,7 @@ export const getAllEmployeRoles = async () => {
 };
 
 export const getAllLeaveTypes = async () => {
-  const response = await fetch(`${API}/leave_type`, {
+  const response = await fetch(`${API}/leave/type`, {
     method: "GET",
     headers: {
       Accept: "application/json",
