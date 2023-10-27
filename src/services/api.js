@@ -193,6 +193,7 @@ export const getAllLeaveTypes = async () => {
     },
   });
   const responseData = await response.json();
+  console.log("All Leave Types", responseData.data)
   return responseData.data;
 };
 

@@ -4,17 +4,25 @@ const LeaveSettingsItem = ({ employee }) => {
   return (
     <Fragment>
       <tr>
-        <td>{ employee.value }</td>
+        <td>{employee.value}</td>
         <td>
           <a class="avatar">
             <img src="assets/img/user.jpg" alt="User Image" />
           </a>
-          <a>{ employee.label }</a>
+          <a>{employee.label}</a>
         </td>
-        <td>{ employee.employeeCode} </td>
-        <td>{ employee.department}</td>
-        <td>{ employee.leaveBalance.opening_bal.toFixed(2)}</td>
-        <td>{ employee.leaveBalance.closing_bal.toFixed(2)}</td>
+        <td>{employee.employeeCode} </td>
+        <td>{employee.department}</td>
+        <td>
+          {employee.leaveBalance
+            ? employee.leaveBalance.opening_bal.toFixed(2)
+            : null}
+        </td>
+        <td>
+          {employee.leaveBalance
+            ? employee.leaveBalance.closing_bal.toFixed(2)
+            : null}
+        </td>
 
         <td class="text-end">
           <div class="dropdown dropdown-action">
