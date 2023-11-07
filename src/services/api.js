@@ -208,3 +208,17 @@ export const getAllAppliedLeaves = async () => {
   const responseData = await response.json();
   return responseData.data;
 };
+
+
+
+export const birthDays = async () => {
+  const response = await fetch(`${API}/birthdays`, {
+    method: "GET",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+  });
+  const responseData = await response.json();
+  return responseData;
+}
