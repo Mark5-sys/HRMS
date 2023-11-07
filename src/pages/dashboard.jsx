@@ -28,10 +28,18 @@ import BirthdayCard from "../components/birthday_card";
 const Dashboard = ({}) => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.auth.user);
-
   const [greeting, setGreeting] = useState();
-
   const [birthdays, setBirthdays] = useState([]);
+
+  const [hovered, setHovered] = useState(false);
+
+  const handleHover = () => {
+    setHovered(true);
+  };
+
+  const handleHoverLeave = () => {
+    setHovered(false);
+  };
 
   const getGreeting = () => {
     const date = new Date();
@@ -154,7 +162,12 @@ const Dashboard = ({}) => {
           <div className="page-header">
             <div className="row">
               <div className="col-sm-12">
-                <h3 className="page-title">
+                <h3
+                  className="page-title"
+                  style={{
+                    fontFamily: "'Cooper Black'",
+                  }}
+                >
                   {greeting} {user.username}!
                 </h3>
                 <ul className="breadcrumb">
@@ -169,25 +182,26 @@ const Dashboard = ({}) => {
               {dbstats.map((stat, index) => (
                 <StatsCard key={index} stat={stat} />
               ))}
-            </div>
-          )}
 
-          <div className="row">
-            <div className="col-md-6"></div>
-            <div className="col-md-6">
-              <div className="card">
-                <div className="card-body">
-                  <h4>Upcoming Birthdays</h4>
+              <div
+                className={`col-md-6 ${hovered ? "hovered" : ""}`}
+                onMouseEnter={handleHover}
+                onMouseLeave={handleHoverLeave}
+              >
+                <div className="card">
+                  <div className="card-body">
+                    <h4>Upcoming Birthdays</h4>
 
-                  <div style={{ maxHeight: "100px", overflowY: "auto" }}>
-                    {birthdays.map((birthday, i) => (
-                      <BirthdayCard key={i} employee={birthday} />
-                    ))}
+                    <div className={`birthday-list ${hovered ? 'enlarged' : ''}`}>
+                      {birthdays.map((birthday, i) => (
+                        <BirthdayCard key={i} employee={birthday} />
+                      ))}
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
+          )}
 
           <div className="col-md-12">
             <div className="card">
