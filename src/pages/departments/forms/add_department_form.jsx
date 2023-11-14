@@ -1,17 +1,11 @@
-import React, { Fragment, useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { Fragment } from "react";
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as yup from "yup";
-import { API } from "../../../config";
 import Loading from "../../../components/loader/loading";
-import { getAllDepartments } from "../../../services/api";
-import { departmentsActions } from "../../../store/department_store";
+import { useAddNewDepartmentMutation } from "../../../store/api/apiSlice";
 
-const AddDepartmentForm = ({}) => {
-  const [loading, setLoading] = useState(false);
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
+const AddDepartmentForm = () => {
+  const [addNewDepartment, { isLoading }] = useAddNewDepartmentMutation()
 
   const initialValues = {
     name: "",
@@ -21,67 +15,46 @@ const AddDepartmentForm = ({}) => {
     name: yup.string().required("Please Enter Department Name"),
   });
 
-  const onSubmit = async (formData, { setSubmitting, resetForm }) => {
+  const onSubmit = async (formData, { resetForm }) => {
     const apiData = {
       name: formData.name.toUpperCase(),
     }
-    setLoading(true);
     try {
-      const response = await fetch(`${API}/department`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(apiData),
-      });
-      const responseData = await response.json();
-      console.log(responseData.data);
-      if (response.ok) {
-        const departments = await getAllDepartments();
-        dispatch(
-          departmentsActions.setDepartments({
-            departments: departments,
-          })
-        );
+      await addNewDepartment(apiData).unwrap()
         // navigate("/departments");
-        setLoading(false)
         resetForm();
-      }
     } catch (error) {
       console.log(error);
-    } finally {
-      setLoading(false);
-      setSubmitting(false);
     }
   };
 
   return (
     <Fragment>
-      <div id="add_department" class="modal custom-modal fade" role="dialog">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title">Add Department</h5>
+      <div id="add_department" className="modal custom-modal fade" role="dialog">
+        <div className="modal-dialog modal-dialog-centered" role="document">
+          <div className="modal-content">
+            <div className="modal-header">
+              <h5 className="modal-title">Add Department</h5>
               <button
                 type="button"
-                class="btn-close"
+                className="btn-close"
                 data-bs-dismiss="modal"
                 aria-label="Close"
               >
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
-            <div class="modal-body">
+            <div className="modal-body">
               <Formik
                 initialValues={initialValues}
                 onSubmit={onSubmit}
                 validationSchema={validationSchema}
               >
-                {({ values, isSubmitting, handleSubmit, touched, errors }) => (
+                {({ isSubmitting, handleSubmit }) => (
                   <Form>
-                    <div class="input-block mb-3">
-                      <label class="col-form-label">
-                        Department Name <span class="text-danger">*</span>
+                    <div className="input-block mb-3">
+                      <label className="col-form-label">
+                        Department Name <span className="text-danger">*</span>
                       </label>
                       <Field
                         type="text"
@@ -95,12 +68,12 @@ const AddDepartmentForm = ({}) => {
                         className="text-danger"
                       />
                     </div>
-                    <div class="submit-section">
-                      {loading ? (
+                    <div className="submit-section">
+                      {isLoading ? (
                         <Loading />
                       ) : (
                         <button
-                          class="btn btn-primary submit-btn"
+                          className="btn btn-primary submit-btn"
                           type="submit"
                           disabled={isSubmitting}
                           onClick={handleSubmit}

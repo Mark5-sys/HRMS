@@ -3,18 +3,21 @@ import { useDispatch, useSelector } from "react-redux";
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as yup from "yup";
 import { getAllPositions } from "../../../services/api";
-import { positionsActions } from "../../../store/position_store";
+import { positionsActions } from "../../../store/position_store/positionSlice";
 import Loading from "../../../components/loader/loading";
 import { API } from "../../../config";
+import { useEditPositionMutation } from "../../../store/api/apiSlice";
 
 const EditPositionForm = () => {
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
 
-  const positionEdit = useSelector((state) => state.position.positionEdit);
+  const [editPost, { isLoading }] = useEditPositionMutation()
+
+  const position = useSelector((state) => state.position.position);
 
   const initialValues = {
-    name: positionEdit.name || "",
+    name: position.name || "",
   };
 
   const validationSchema = yup.object().shape({
@@ -43,36 +46,40 @@ const EditPositionForm = () => {
     console.log("onSubmitPatch", apiValues);
 
     try {
-      const response = await fetch(`${API}/position/${positionEdit.id}`, {
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(apiValues),
-      });
-      const responseData = await response.json();
-      console.log(responseData.data);
-      if (response.ok) {
-        const positions = await getAllPositions();
-        dispatch(
-          positionsActions.setPositions({
-            positions: positions,
-          })
-        );
-        setLoading(false);
+      // const response = await fetch(`${API}/position/${position.id}`, {
+      //   method: "PATCH",
+      //   headers: {
+      //     "Content-Type": "application/json",
+      //   },
+      //   body: JSON.stringify(apiValues),
+      // });
+      // const responseData = await response.json();
+      // console.log(responseData.data);
+      await editPost({id: position.id, name: apiValues.name})
+      // if (response.ok) {
+      //   const positions = await getAllPositions();
+      //   dispatch(
+      //     positionsActions.setPositions({
+      //       positions: positions,
+      //     })
+      //   );
+        // setLoading(false);
+        console.log(position);
+       if (!isLoading) {
         resetForm();
-      }
+       }
+      // }
     } catch (error) {
       console.log(error);
     } finally {
-      setLoading(false);
+      // setLoading(false);
       setSubmitting(false);
     }
   };
 
   return (
     <Fragment>
-      {positionEdit && (
+      {position && (
         <div
           id="edit_position"
           className="modal custom-modal fade"
@@ -123,7 +130,7 @@ const EditPositionForm = () => {
                         />
                       </div>
                       <div className="submit-section">
-                        {loading ? (
+                        {isLoading ? (
                           <Loading />
                         ) : (
                           <button

@@ -1,14 +1,15 @@
-import React, { Fragment, useEffect, useState } from "react";
+/* eslint-disable react/prop-types */
+import { Fragment } from "react";
 import { useDispatch } from "react-redux";
-import { positionsActions } from "../../../store/position_store";
+import { editPosition } from "../../../store/position_store/positionSlice";
 
 const PositionsItem = ({ position }) => {
   const dispatch = useDispatch();
 
   const selectEditPosition = (position) => {
     dispatch(
-      positionsActions.setPositionEdit({
-        positionEdit: position,
+      editPosition({
+        position: position,
       })
     );
   };

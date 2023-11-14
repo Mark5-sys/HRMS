@@ -12,7 +12,7 @@ import {
 } from "../services/api";
 import { useDispatch, useSelector } from "react-redux";
 import { departmentsActions } from "../store/department_store";
-import { positionsActions } from "../store/position_store";
+import { positionsActions } from "../store/position_store/positionSlice";
 import { employeesActions } from "../store/employee_store";
 import StatsCard from "../components/stats_card";
 import AgeStats from "./dashboard/components/age_overview_stat";
@@ -50,7 +50,7 @@ const Dashboard = ({}) => {
         })
       );
     };
-    console.log('Running....')
+    console.log("Running....");
     reloadEmployees();
   }, []);
 
@@ -121,7 +121,7 @@ const Dashboard = ({}) => {
       }
     };
 
-    console.log("Running 2............")
+    console.log("Running 2............");
 
     fetchData();
   }, []);

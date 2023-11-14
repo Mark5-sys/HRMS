@@ -6,7 +6,7 @@ import * as yup from "yup";
 import { API } from "../../../config";
 import { getAllPositions } from "../../../services/api";
 import Loading from "../../../components/loader/loading";
-import { positionsActions } from "../../../store/position_store";
+import { positionsActions } from "../../../store/position_store/positionSlice";
 
 const AddPositionForm = ({}) => {
   const [loading, setLoading] = useState(false);
@@ -37,8 +37,8 @@ const AddPositionForm = ({}) => {
     setLoading(true);
 
     const apiData = {
-      name:  pascalCase(formData.name),
-    }
+      name: pascalCase(formData.name),
+    };
 
     try {
       const response = await fetch(`${API}/position`, {
@@ -119,7 +119,7 @@ const AddPositionForm = ({}) => {
                           disabled={isSubmitting}
                           onClick={handleSubmit}
                           style={{
-                            borderRadius: "10px"
+                            borderRadius: "10px",
                           }}
                         >
                           Save Designation
