@@ -1,6 +1,7 @@
 import React, { Fragment, useEffect, useState } from "react";
 import {
   ageStatistics,
+  birthDays,
   employeeByDepartment,
   employeesCount,
   genderStatistics,
@@ -22,12 +23,23 @@ import DepartmentStatistics from "./dashboard/components/departments_stats";
 import { statisticsActions } from "../store/statistics_store";
 import AgeDistributionChart from "./dashboard/components/age_distribution_chart";
 import MonthlyOrientationStats from "./dashboard/orientation/monthly_orientation_stats";
+import BirthdayCard from "../components/birthday_card";
 
 const Dashboard = ({}) => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.auth.user);
-
   const [greeting, setGreeting] = useState();
+  const [birthdays, setBirthdays] = useState([]);
+
+  const [hovered, setHovered] = useState(false);
+
+  const handleHover = () => {
+    setHovered(true);
+  };
+
+  const handleHoverLeave = () => {
+    setHovered(false);
+  };
 
   const getGreeting = () => {
     const date = new Date();
@@ -93,6 +105,9 @@ const Dashboard = ({}) => {
           })
         );
 
+        const birthdays = await birthDays();
+        setBirthdays(birthdays);
+
         const dptStats = await employeeByDepartment();
 
         dispatch(
@@ -147,7 +162,12 @@ const Dashboard = ({}) => {
           <div className="page-header">
             <div className="row">
               <div className="col-sm-12">
-                <h3 className="page-title">
+                <h3
+                  className="page-title"
+                  style={{
+                    fontFamily: "'Cooper Black'",
+                  }}
+                >
                   {greeting} {user.username}!
                 </h3>
                 <ul className="breadcrumb">
@@ -162,26 +182,44 @@ const Dashboard = ({}) => {
               {dbstats.map((stat, index) => (
                 <StatsCard key={index} stat={stat} />
               ))}
+
+              <div
+                className={`col-md-6 ${hovered ? "hovered" : ""}`}
+                onMouseEnter={handleHover}
+                onMouseLeave={handleHoverLeave}
+              >
+                <div className="card">
+                  <div className="card-body">
+                    <h4>Upcoming Birthdays</h4>
+
+                    <div className={`birthday-list ${hovered ? 'enlarged' : ''}`}>
+                      {birthdays.map((birthday, i) => (
+                        <BirthdayCard key={i} employee={birthday} />
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           )}
 
-          <div class="col-md-12">
-            <div class="card">
-              <div class="card-body">
-                {/* <h4 class="card-title">Top line justified</h4> */}
-                <ul class="nav nav-tabs nav-tabs-top nav-justified">
-                  <li class="nav-item">
+          <div className="col-md-12">
+            <div className="card">
+              <div className="card-body">
+                {/* <h4 className="card-title">Top line justified</h4> */}
+                <ul className="nav nav-tabs nav-tabs-top nav-justified">
+                  <li className="nav-item">
                     <a
-                      class="nav-link active"
+                      className="nav-link active"
                       href="#top-justified-tab1"
                       data-bs-toggle="tab"
                     >
                       Providence Human Capital Statistical Analysis
                     </a>
                   </li>
-                  <li class="nav-item">
+                  <li className="nav-item">
                     <a
-                      class="nav-link"
+                      className="nav-link"
                       href="#top-justified-tab2"
                       data-bs-toggle="tab"
                     >
@@ -189,8 +227,8 @@ const Dashboard = ({}) => {
                     </a>
                   </li>
                 </ul>
-                <div class="tab-content">
-                  <div class="tab-pane show active" id="top-justified-tab1">
+                <div className="tab-content">
+                  <div className="tab-pane show active" id="top-justified-tab1">
                     <div className="row">
                       <div className="col-md-12">
                         <div className="row">
@@ -207,7 +245,7 @@ const Dashboard = ({}) => {
                       </div>
                     </div>
                   </div>
-                  <div class="tab-pane" id="top-justified-tab2">
+                  <div className="tab-pane" id="top-justified-tab2">
                     <div className="row">
                       <div className="col-md-12">
                         <div className="row">

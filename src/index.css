@@ -92,3 +92,34 @@
   background-color: #f5f5f5;
 }
 
+.age-circle {
+  margin: 5px ;
+  display: inline-block;
+  width: 30px; /* Set the width and height for the circle */
+  height: 30px;
+  border-radius: 50%; /* Make it a circle */
+  background-color: green; /* Color the circle green */
+  color: white; /* Set the text color to white */
+  text-align: center;
+  line-height: 30px; /* Center the text vertically */
+}
+
+
+
+.col-md-6 {
+  transition: transform 0.3s ease;
+}
+
+.col-md-6.hovered {
+  transform: scale(1.1);
+}
+
+.birthday-list {
+  max-height: 100px;
+  overflow-y: auto;
+  transition: max-height 0.4s ease;
+}
+
+.birthday-list.enlarged {
+  max-height: 100%; /* Change to whatever height you need when enlarged */
+}
