@@ -15,7 +15,7 @@ import storage from "redux-persist/lib/storage";
 import { PersistGate } from "redux-persist/integration/react";
 import employeeSlice from "./employee_store";
 import departmentSlice from "./department_store";
-import positionSlice from "./position_store";
+import positionReducer from "./position_store/positionSlice";
 import authSlice from "./auth_store";
 import statisticsSlice from "./statistics_store";
 import orientSlice from "./orients_store";
@@ -32,15 +32,15 @@ const persistConfig = {
 
 const rootReducer = combineReducers({
   employees: employeeSlice.reducer,
-  department: departmentSlice.reducer,
-  position: positionSlice.reducer,
+  // department: departmentSlice.reducer,
+  position: positionReducer,
   auth: authSlice.reducer,
   statistics: statisticsSlice.reducer,
   orientation: orientSlice.reducer,
   company: companySlice.reducer,
   rumuko: rumukoScheduleSlice.reducer,
   leave: leaveSlice.reducer,
-  [apiSlice.reducerPath]: apiSlice.reducer
+  [apiSlice.reducerPath]: apiSlice.reducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

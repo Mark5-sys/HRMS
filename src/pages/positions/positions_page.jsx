@@ -5,8 +5,8 @@ import AddPositionForm from "./forms/add_position_form";
 import EditPositionForm from "./forms/edit_position_form";
 import { useSelector } from "react-redux";
 
-const PositionsPage = ({}) => {
-  const positionEdit = useSelector((state) => state.position.positionEdit);
+const PositionsPage = () => {
+  const position = useSelector((state) => state.position.position);
   return (
     <Fragment>
       <div className="page-wrapper">
@@ -23,7 +23,7 @@ const PositionsPage = ({}) => {
           </div>
 
           <AddPositionForm />
-          {positionEdit && <EditPositionForm />}
+          {position && <EditPositionForm />}
         </div>
       </div>
     </Fragment>

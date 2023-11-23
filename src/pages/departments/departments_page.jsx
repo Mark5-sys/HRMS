@@ -1,14 +1,9 @@
-import React, { Fragment, useEffect, useState } from "react";
+import { Fragment } from "react";
 import PageHeader from "../../components/page_header";
 import AddDepartmentForm from "./forms/add_department_form";
 import DepartmentTable from "./components/department_table";
-import EditDepartmentForm from "./forms/edit_department_form";
-import { useSelector } from "react-redux";
 
-const DepartmentsPage = ({}) => {
-  const departmentEdit = useSelector(
-    (state) => state.department.departmentEdit
-  );
+const DepartmentsPage = () => {
 
   return (
     <Fragment>
@@ -26,7 +21,6 @@ const DepartmentsPage = ({}) => {
           </div>
 
           <AddDepartmentForm />
-          {departmentEdit && <EditDepartmentForm />}
         </div>
       </div>
     </Fragment>

@@ -32,8 +32,8 @@ const DepartmentTable = () => {
     isLoading,
     isSuccess,
     isError,
-    error,
-  } = useGetDepartmentsQuery();
+    error
+  } = useGetDepartmentsQuery()
 
   let content;
 
