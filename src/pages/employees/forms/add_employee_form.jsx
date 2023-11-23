@@ -64,7 +64,7 @@ const AddEmployeeForm = () => {
         "Please Select Employee Status, either Active/Orientation"
       ),
     }),
-    onSubmit: async (values) => {
+    onSubmit: async (values, { resetForm }) => {
       const postData = {
         code: values.employeeCode.toUpperCase(),
         position_id: parseInt(values.position),
@@ -99,6 +99,8 @@ const AddEmployeeForm = () => {
           timer: 4000,
           confirmButtonColor: "#007a41",
         });
+
+        resetForm();
 
         if (selectedOption === "redirectToEmployees") {
           navigate("/employees");

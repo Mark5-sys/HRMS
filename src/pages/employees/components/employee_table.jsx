@@ -12,13 +12,14 @@ const EmployeeTable = () => {
     isLoading,
     isSuccess,
     isError,
-    error
-  } = useGetEmployeesQuery()
+    error,
+  } = useGetEmployeesQuery();
 
   const dispatch = useDispatch();
   const employees =
     useSelector((state) => state.employees.activeEmployees) || [];
   const positions = useSelector((state) => state.position.positions);
+
   const [employeeName, setEmployeeName] = useState("");
   const [employeeCode, setEmployeeCode] = useState("");
   const [filteredEmployees, setFilteredEmployees] = useState([]);
@@ -67,6 +68,8 @@ const EmployeeTable = () => {
   };
 
   useEffect(() => {
+    console.log("emps", emps);
+
     if (employeeCode === "" && employeeName === "") {
       setFilteredEmployees([]);
     } else {
@@ -74,16 +77,16 @@ const EmployeeTable = () => {
     }
   }, [employeeCode, employeeName]);
 
-  let content
+  let content;
 
   if (isLoading) {
-    content = <Loading />
+    content = <Loading />;
   } else if (isSuccess) {
-    content = emps.data.map((employee) => (
-      <EmployeeItem key={employee.id} employee={employee} />
-    ))
+    content = emps.ids.map((id) => (
+      <EmployeeItem key={id} employee={emps.entities[id]} />
+    ));
   } else if (isError) {
-    content = <div>{error.toString()}</div>
+    content = <div>{error.toString()}</div>;
   }
 
   return (
@@ -142,7 +145,7 @@ const EmployeeTable = () => {
                   ? filteredEmployees.map((employee) => (
                       <EmployeeItem key={employee.id} employee={employee} />
                     ))
-                  : content }
+                  : content}
               </tbody>
             </table>
           </div>

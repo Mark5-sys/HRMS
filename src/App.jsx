@@ -35,9 +35,17 @@ import LeaveType from "./pages/leave-management/leave_type_page";
 import AppliedLeaves from "./pages/leave-management/applied_leaves_page";
 import EmployeeRoles from "./pages/employee_roles/employee_roles_page";
 import ApplyForLeave from "./pages/leave-management/apply_leave";
+import DepartmentDetail from "./pages/departments/department_detail";
+import CompanyDetailedPage from "./pages/companies/company_detailed_page";
+import EmployeeLogin from "./pages/auth/employee_login";
 
 const App = () => {
   const isAuth = useSelector((state) => state.auth.isAuthenticated);
+
+  useEffect(() => {
+    document.body.style.zoom = "0.80";
+  }, []);
+
   return (
     <HashRouter>
       <ToastContainer />
@@ -76,7 +84,18 @@ const App = () => {
 
           <Route exact path="/companies" element={<CompaniesPage />} />
 
+          <Route
+            exact
+            path="/company/:companyId"
+            element={<CompanyDetailedPage />}
+          />
+
           <Route exact path="/departments" element={<DepartmentsPage />} />
+          <Route
+            exact
+            path="/department/:departmentId"
+            element={<DepartmentDetail />}
+          />
           <Route exact path="/positions" element={<PositionsPage />} />
           <Route exact path="/schedule" element={<SchedulerPage />} />
 
@@ -86,6 +105,7 @@ const App = () => {
         </Route>
 
         <Route exact path="/login" element={<LoginPage />} />
+        <Route exact path="/employee/login" element={<EmployeeLogin />} />
 
         <Route exact path="/job/application" element={<JobApplicationPage />} />
       </Routes>

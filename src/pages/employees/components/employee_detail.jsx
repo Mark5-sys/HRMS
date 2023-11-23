@@ -12,10 +12,20 @@ import PatientSkeleton from "../../../components/skeletons/patient_skeleton";
 import { useGetEmployeeQuery } from "../../../store/api/employeeSlice";
 
 const EmployeeDetail = () => {
+
+  
   const { employeeId } = useParams();
-
+  const dispatch = useDispatch();
   const { data: emps, isFetching, isSuccess } = useGetEmployeeQuery(employeeId);
-
+  useEffect(() => {
+    if (emps) {
+      dispatch(
+        employeesActions.setSingleEmployee({
+          singleEmployee: emps.data,
+        })
+      );
+    }
+  }, [emps, dispatch]);
   const employee = useSelector((state) => state.employees.singleEmployee);
 
   let content;
@@ -81,5 +91,3 @@ const EmployeeDetail = () => {
 };
 
 export default EmployeeDetail;
-
-

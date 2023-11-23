@@ -6,8 +6,15 @@ import * as yup from "yup";
 import { API } from "../../../config";
 import { employeesActions } from "../../../store/employee_store";
 import Loading from "../../../components/loader/loading";
-
 import { getSingleEmployee } from "../../../services/api";
+import {
+  useGetEmployeeQuery,
+  useUpdateEmployeeMutation,
+} from "../../../store/api/employeeSlice";
+import {
+  useGetDepartmentsQuery,
+  useGetPositionsQuery,
+} from "../../../store/api/apiSlice";
 
 const maritalStatuses = ["Married", "Single", "Divorced"];
 const gender = ["Male", "Female", "Other"];
@@ -21,8 +28,12 @@ const EditEmployeeFormModal = ({}) => {
 
   const positions = useSelector((state) => state.position.positions);
   const departments = useSelector((state) => state.department.departments);
-
+  const [updateEmployee, { isLoading }] = useUpdateEmployeeMutation();
+  const { data: singleEmployee } = useGetEmployeeQuery(employeeId);
   const employee = useSelector((state) => state.employees.singleEmployee);
+
+  const { data: dpts } = useGetDepartmentsQuery();
+  const { data: posns } = useGetPositionsQuery();
 
   const initialValues = {
     employeeCode: employee.code,
@@ -49,7 +60,7 @@ const EditEmployeeFormModal = ({}) => {
   const onSubmit = async (values, { setSubmitting, resetForm }) => {
     setLoading(true);
 
-    const apiData = {
+    const updatedEmployee = {
       code: values.employeeCode,
       position_id: parseInt(values.position),
       first_name: values.firstName,
@@ -68,26 +79,33 @@ const EditEmployeeFormModal = ({}) => {
 
     // console.log("Vaues", apiData)
     try {
-      const response = await fetch(`${API}/employee/${employee.id}`, {
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(apiData),
-      });
-      const responseData = await response.json();
-      console.log(responseData);
-      if (response.ok) {
-        setLoading(false);
-        resetForm();
+      console.log("Updating");
+      // const response = await fetch(`${API}/employee/${employee.id}`, {
+      //   method: "PATCH",
+      //   headers: {
+      //     "Content-Type": "application/json",
+      //   },
+      //   body: JSON.stringify(apiData),
+      // });
+      // const responseData = await response.json();
+      // console.log(responseData);
+      const result = await updateEmployee({
+        employeeId,
+        updatedEmployee,
+      }).unwrap();
+      // console.log(result.data.data);
 
-        const employee = await getSingleEmployee(employeeId);
-        dispatch(
-          employeesActions.setSingleEmployee({
-            singleEmployee: employee,
-          })
-        );
-      }
+      // if (response.ok) {
+      //   setLoading(false);
+      //   resetForm();
+
+      //   const employee = await getSingleEmployee(employeeId);
+      //   dispatch(
+      //     employeesActions.setSingleEmployee({
+      //       singleEmployee: employee,
+      //     })
+      //   );
+      // }
     } catch (error) {
       console.log(error);
       setLoading(false);
@@ -129,6 +147,7 @@ const EditEmployeeFormModal = ({}) => {
               <Form>
                 <div className="row">
                   <div className="col-md-12">
+                    {/* <p>{JSON.stringify(employee)}</p> */}
                     <div className="profile-img-wrap edit-img">
                       <img
                         className="inline-block"
@@ -330,7 +349,7 @@ const EditEmployeeFormModal = ({}) => {
                         {employee.department ? (
                           <option value="">{employee.department.name}</option>
                         ) : null}
-                        {departments.map((department) => (
+                        {dpts.data.map((department) => (
                           <option key={department.id} value={department.id}>
                             {department.name}
                           </option>
@@ -356,9 +375,11 @@ const EditEmployeeFormModal = ({}) => {
                         id="position"
                         name="position"
                       >
-                        { employee.position ? (<option value="">{employee.position.name}</option>) : null}
-                        
-                        {positions.map((position) => (
+                        {employee.position ? (
+                          <option value="">{employee.position.name}</option>
+                        ) : null}
+
+                        {posns.data.map((position) => (
                           <option key={position.id} value={position.id}>
                             {position.name}
                           </option>

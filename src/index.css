@@ -93,7 +93,7 @@
 }
 
 .age-circle {
-  margin: 5px ;
+  margin: 5px;
   display: inline-block;
   width: 30px; /* Set the width and height for the circle */
   height: 30px;
@@ -103,8 +103,6 @@
   text-align: center;
   line-height: 30px; /* Center the text vertically */
 }
-
-
 
 .col-md-6 {
   transition: transform 0.3s ease;
@@ -122,4 +120,9 @@
 
 .birthday-list.enlarged {
   max-height: 100%; /* Change to whatever height you need when enlarged */
+}
+
+.modal-backdrop.show {
+  height: 100% !important;
+  width: 100% !important;
 }

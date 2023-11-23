@@ -74,6 +74,7 @@ const LoginPage = ({}) => {
             <Link to={"/job/application"} className="btn btn-primary apply-btn">
               Apply Job
             </Link>
+            
             <div className="container">
               <div className="account-logo">
                 <a href="admin-dashboard.html">
@@ -174,6 +175,7 @@ const LoginPage = ({}) => {
                 </div>
               </div>
             </div>
+
           </div>
         </div>
       </div>

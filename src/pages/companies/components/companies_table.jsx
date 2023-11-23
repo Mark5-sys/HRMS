@@ -30,7 +30,13 @@ const CompaniesTable = () => {
           {companies.map((company) => (
             <tr>
               <td>{company.id}</td>
-              <td>{company.name}</td>
+              <td
+                style={{
+                  cursor: "pointer",
+                }}
+              >
+                <Link to={`/company/${company.id}`}>{company.name}</Link>
+              </td>
               <td class="text-end">
                 <div class="dropdown dropdown-action">
                   <a

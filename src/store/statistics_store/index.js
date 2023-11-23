@@ -7,6 +7,7 @@ const initialState = {
   employeeByDepartmentStatistics: [],
   ageStatistics: [],
   orientationMonthlyStatistics: {},
+  birthdays: [],
 };
 
 const statisticsSlice = createSlice({
@@ -37,6 +38,11 @@ const statisticsSlice = createSlice({
     setOrientationMonthlyStatistics: (state, action) => {
       state.orientationMonthlyStatistics = action.payload.orientationMonth;
     },
+
+    setBirthdays: (state, action) => {
+      state.birthdays = action.payload.birthdays;
+    },
+    
   },
 });
 

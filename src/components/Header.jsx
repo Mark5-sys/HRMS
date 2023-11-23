@@ -11,8 +11,6 @@ const Header = ({}) => {
   const user = useSelector((state) => state.auth.user);
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
 
-  
-
   const signOut = () => {
     dispatch(authActions.setLogout());
     dispatch(employeesActions.clearState());
@@ -59,29 +57,6 @@ const Header = ({}) => {
         </a>
 
         <ul className="nav user-menu">
-          <li class="btn-group nav-item d-lg-inline-flex d-none">
-            <a
-              data-provide="fullscreen"
-              class="waves-effect waves-light nav-link full-screen btn-warning-light"
-              title="Full Screen"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                class="feather feather-maximize"
-              >
-                <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"></path>
-              </svg>
-            </a>
-          </li>
-          
           <li className="nav-item">
             <div className="top-nav-search">
               <a className="responsive-search">
@@ -111,7 +86,9 @@ const Header = ({}) => {
                 <img src="/assets/img/user.jpg" alt="User Image" />
                 <span className="status online"></span>
               </span>
-              <span>{user.username} ({user.role})</span>
+              <span>
+                {user.username} ({user.role})
+              </span>
             </a>
             <div className="dropdown-menu">
               <a className="dropdown-item">My Profile</a>

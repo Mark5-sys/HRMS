@@ -26,7 +26,7 @@ const SideBar = ({}) => {
               </li>
               <li>
                 <Link to={"/orients"}>
-                  <i className="la la-users"></i> <span>Orients (SS)</span>
+                  <i className="la la-users"></i> <span>Trainees (SS)</span>
                 </Link>
               </li>
 

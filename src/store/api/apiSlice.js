@@ -1,9 +1,11 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
+import { API } from '../../config'
 
 export const apiSlice = createApi({
     reducerPath: 'api',
-    baseQuery: fetchBaseQuery({ baseUrl: 'https://seal-app-sq4gf.ondigitalocean.app/api' }),
-    tagTypes: ['Employee'],
+    baseQuery: fetchBaseQuery({ baseUrl: API }),
+    tagTypes: ['Employee', 'Department', 'Position'],
+    // endpoints: builder => ({})
     endpoints: builder => ({
         getDepartments: builder.query({
             query: () => '/department'
@@ -11,6 +13,7 @@ export const apiSlice = createApi({
         getPositions: builder.query({
             query: () => '/position'
         })
+        
     })
 })
 

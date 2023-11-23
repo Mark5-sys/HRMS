@@ -42,7 +42,7 @@ const BirthdayCard = ({ employee }) => {
         }'s birthday is on ${dob.toLocaleDateString("en-US", {
           month: "long",
           day: "numeric",
-        })}, ${currentYear}. They will be turning ${age} years old on their birthday this year. The day of the week will be: ${dayOfWeek}`
+        })}, ${currentYear}. They will be turning ${age + 1} years old on their birthday this year. The day of the week will be: ${dayOfWeek}`
       );
     };
 
@@ -54,12 +54,15 @@ const BirthdayCard = ({ employee }) => {
       <div className="dash-section">
         <div className="dash-sec-content">
           <div className="dash-info-list">
-            <a href="#" className="dash-card text-danger">
+            <a className="dash-card text-danger">
               <div className="dash-card-container">
                 <div className="dash-card-icon">
-                  <i class="fa-solid fa-cake-candles" style={{
-                    color: "green"
-                  }}></i>
+                  <i
+                    class="fa-solid fa-cake-candles"
+                    style={{
+                      color: "green",
+                    }}
+                  ></i>
                 </div>
                 <div className="dash-card-content">
                   <p
@@ -77,7 +80,7 @@ const BirthdayCard = ({ employee }) => {
                       {employee.first_name} {employee.surname}
                     </span>{" "}
                     {"will be turning"}{" "}
-                    <span className="age-circle">{turningAge}</span> on{" "}
+                    <span className="age-circle">{turningAge + 1}</span> on{" "}
                     <span
                       style={{
                         fontFamily: "'Cooper Black'",

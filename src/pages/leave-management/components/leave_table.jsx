@@ -77,8 +77,8 @@ const LeaveTable = () => {
                           className="sorting_asc"
                           tabindex="0"
                           aria-controls="DataTables_Table_0"
-                          rowspan="1"
-                          colspan="1"
+                          rowSpan="1"
+                          colSpan="1"
                           aria-sort="ascending"
                           aria-label="Employee: activate to sort column descending"
                           style={{
@@ -91,8 +91,8 @@ const LeaveTable = () => {
                           className="sorting"
                           tabindex="0"
                           aria-controls="DataTables_Table_0"
-                          rowspan="1"
-                          colspan="1"
+                          rowSpan="1"
+                          colSpan="1"
                           aria-label="Leave Type: activate to sort column ascending"
                           style={{
                             width: "153.438px",
@@ -104,8 +104,8 @@ const LeaveTable = () => {
                           className="sorting"
                           tabindex="0"
                           aria-controls="DataTables_Table_0"
-                          rowspan="1"
-                          colspan="1"
+                          rowSpan="1"
+                          colSpan="1"
                           aria-label="From: activate to sort column ascending"
                           style={{
                             width: "115.234px",
@@ -117,8 +117,8 @@ const LeaveTable = () => {
                           className="sorting"
                           tabindex="0"
                           aria-controls="DataTables_Table_0"
-                          rowspan="1"
-                          colspan="1"
+                          rowSpan="1"
+                          colSpan="1"
                           aria-label="To: activate to sort column ascending"
                           style={{
                             width: "114.094px",
@@ -130,8 +130,8 @@ const LeaveTable = () => {
                           className="sorting"
                           tabindex="0"
                           aria-controls="DataTables_Table_0"
-                          rowspan="1"
-                          colspan="1"
+                          rowSpan="1"
+                          colSpan="1"
                           aria-label="No of Days: activate to sort column ascending"
                           style={{
                             width: "112.688px",
@@ -143,8 +143,8 @@ const LeaveTable = () => {
                           className="sorting"
                           tabindex="0"
                           aria-controls="DataTables_Table_0"
-                          rowspan="1"
-                          colspan="1"
+                          rowSpan="1"
+                          colSpan="1"
                           aria-label="Reason: activate to sort column ascending"
                           style={{
                             width: "164.891px",
@@ -156,8 +156,8 @@ const LeaveTable = () => {
                           className="text-center sorting"
                           tabindex="0"
                           aria-controls="DataTables_Table_0"
-                          rowspan="1"
-                          colspan="1"
+                          rowSpan="1"
+                          colSpan="1"
                           aria-label="Status: activate to sort column ascending"
                           style={{
                             width: "156.281px",
@@ -169,8 +169,8 @@ const LeaveTable = () => {
                           className="text-end sorting"
                           tabindex="0"
                           aria-controls="DataTables_Table_0"
-                          rowspan="1"
-                          colspan="1"
+                          rowSpan="1"
+                          colSpan="1"
                           aria-label="Actions: activate to sort column ascending"
                           style={{
                             width: "83.6094px",

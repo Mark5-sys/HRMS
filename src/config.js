@@ -7,3 +7,5 @@ export const IMAGE_URL = "https://seal-app-sq4gf.ondigitalocean.app/images"
 
 
 // export const API = "http://localhost:8000/api"
+
+// export const IMAGE_URL = "http://127.0.0.1:8000/images"

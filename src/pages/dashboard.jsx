@@ -28,6 +28,7 @@ import BirthdayCard from "../components/birthday_card";
 const Dashboard = ({}) => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.auth.user);
+  const bds = useSelector((state) => state.statistics.birthdays) || [];
   const [greeting, setGreeting] = useState();
   const [birthdays, setBirthdays] = useState([]);
 
@@ -106,7 +107,12 @@ const Dashboard = ({}) => {
         );
 
         const birthdays = await birthDays();
-        setBirthdays(birthdays);
+        // setBirthdays(birthdays);
+        dispatch(
+          statisticsActions.setBirthdays({
+            birthdays: birthdays
+          })
+        )
 
         const dptStats = await employeeByDepartment();
 
@@ -136,7 +142,6 @@ const Dashboard = ({}) => {
       }
     };
 
-    console.log("Running 2............");
 
     fetchData();
   }, []);
@@ -192,8 +197,10 @@ const Dashboard = ({}) => {
                   <div className="card-body">
                     <h4>Upcoming Birthdays</h4>
 
-                    <div className={`birthday-list ${hovered ? 'enlarged' : ''}`}>
-                      {birthdays.map((birthday, i) => (
+                    <div
+                      className={`birthday-list ${hovered ? "enlarged" : ""}`}
+                    >
+                      {bds.map((birthday, i) => (
                         <BirthdayCard key={i} employee={birthday} />
                       ))}
                     </div>

@@ -7,11 +7,15 @@ import Loading from "../../../components/loader/loading";
 import { API } from "../../../config";
 import { getSingleEmployee } from "../../../services/api";
 import { employeesActions } from "../../../store/employee_store";
+import { useGetEmployeesQuery } from "../../../store/api/employeeSlice";
 
 const PersonalInfoFormModal = ({ employeeId }) => {
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
+
   const navigate = useNavigate();
+
+
 
   const initialValues = {
     passport_number: "",
@@ -54,7 +58,7 @@ const PersonalInfoFormModal = ({ employeeId }) => {
       });
 
       const responseData = await response.json();
-      if(response.ok){
+      if (response.ok) {
         setLoading(false);
         resetForm();
         const employee = await getSingleEmployee(employeeId);
@@ -141,7 +145,9 @@ const PersonalInfoFormModal = ({ employeeId }) => {
                   </div>
                   <div className="col-md-3">
                     <div className="input-block mb-3">
-                      <label className="col-form-label">Number of Children</label>
+                      <label className="col-form-label">
+                        Number of Children
+                      </label>
                       <Field
                         type="number"
                         className="form-control"
@@ -180,7 +186,10 @@ const PersonalInfoFormModal = ({ employeeId }) => {
                   {loading ? (
                     <Loading />
                   ) : (
-                    <button className="btn btn-primary submit-btn" type="submit">
+                    <button
+                      className="btn btn-primary submit-btn"
+                      type="submit"
+                    >
                       Submit
                     </button>
                   )}

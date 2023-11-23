@@ -41,10 +41,10 @@ const ProfileCard = ({ employee }) => {
                             Employee ID : {employee.code}{" "}
                           </div>
                           <div className="small doj text-muted">
-                            Date of Join : 1st Jan 2013
+                            {/* Date of Join : 1st Jan 2013 */}
                           </div>
                           <div className="staff-msg">
-                            <a className="btn btn-custom">Send Message</a>
+                            <a className="btn btn-custom">Send Email</a>
                           </div>
                         </div>
                       </div>
@@ -53,7 +53,7 @@ const ProfileCard = ({ employee }) => {
                           <li>
                             <div className="title">Phone:</div>
                             <div className="text">
-                              <a>+{employee.phone_number_1}</a>
+                              <a>{employee.phone_number_1}</a>
                             </div>
                           </li>
                           <li>
