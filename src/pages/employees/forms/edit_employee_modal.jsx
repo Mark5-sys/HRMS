@@ -27,13 +27,18 @@ const EditEmployeeFormModal = ({}) => {
   const navigate = useNavigate();
 
   const positions = useSelector((state) => state.position.positions);
-  const departments = useSelector((state) => state.department.departments);
+  // const departments = useSelector((state) => state.department.departments);
   const [updateEmployee, { isLoading }] = useUpdateEmployeeMutation();
   const { data: singleEmployee } = useGetEmployeeQuery(employeeId);
   const employee = useSelector((state) => state.employees.singleEmployee);
 
   const { data: dpts } = useGetDepartmentsQuery();
   const { data: posns } = useGetPositionsQuery();
+
+  useEffect(() => {
+    console.log("departments", dpts);
+    console.log("positions", posns);
+  }, []);
 
   const initialValues = {
     employeeCode: employee.code,
@@ -349,11 +354,11 @@ const EditEmployeeFormModal = ({}) => {
                         {employee.department ? (
                           <option value="">{employee.department.name}</option>
                         ) : null}
-                        {dpts.data.map((department) => (
+                        {/* {dpts.data.map((department) => (
                           <option key={department.id} value={department.id}>
                             {department.name}
                           </option>
-                        ))}
+                        ))} */}
                       </Field>
                       <ErrorMessage
                         name="department"
@@ -379,11 +384,11 @@ const EditEmployeeFormModal = ({}) => {
                           <option value="">{employee.position.name}</option>
                         ) : null}
 
-                        {posns.data.map((position) => (
+                        {/* {posns.data.map((position) => (
                           <option key={position.id} value={position.id}>
                             {position.name}
                           </option>
-                        ))}
+                        ))} */}
                       </Field>
                       <ErrorMessage
                         name="position"

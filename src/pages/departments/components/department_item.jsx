@@ -1,7 +1,10 @@
 import React, { Fragment, useEffect, useState } from "react";
-import EditDepartmentForm from "../forms/edit_department_form";
+// import EditDepartmentForm from "../forms/edit_department_form";
 import { useDispatch } from "react-redux";
 import { departmentsActions } from "../../../store/department_store";
+import Loading from "../../../components/loader/loading";
+import { useDeleteDepartmentMutation, useUpdateDepartmentMutation } from "../../../store/api/apiSlice";
+import Swal from "sweetalert2";
 
 const DepartmentItem = ({ department }) => {
   const [updateDepartment, { isLoading }] = useUpdateDepartmentMutation()
@@ -51,7 +54,7 @@ const DepartmentItem = ({ department }) => {
             <div className="dropdown-menu dropdown-menu-right">
               <a
                 class="dropdown-item"
-                onClick={() => setEditDepartment(department)}
+                onClick={() => editDepartment()}
                 data-bs-toggle="modal"
                 data-bs-target="#edit_department"
               >
