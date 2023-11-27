@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import * as XLSX from "xlsx";
 import Loading from "../../../components/loader/loading";
 import { API } from "../../../config";
+import { toast } from "react-toastify";
 
 const AddOrientsThroughExcel = ({}) => {
   const [excelData, setExcelData] = useState(null);
@@ -88,6 +89,7 @@ const AddOrientsThroughExcel = ({}) => {
         if (response.ok) {
           // If the request was successful, increment the success counter
           setSuccessCounter((prevCounter) => prevCounter + 1);
+          toast.success(`Orient Added Successfully`);
         }
       } catch (error) {
         console.log("Upload error:", error);
