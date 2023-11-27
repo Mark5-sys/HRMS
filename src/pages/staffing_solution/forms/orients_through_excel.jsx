@@ -96,7 +96,8 @@ const AddOrientsThroughExcel = ({}) => {
     }
   };
 
-  const handleUploadDataToBackend = () => {
+  const handleUploadDataToBackend = (e) => {
+    e.preventDefault();
     if (excelData) {
       setLoading(true);
       uploadDataToBackend(excelData);
