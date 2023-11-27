@@ -1,7 +1,7 @@
-
 import { createEntityAdapter, createSelector } from "@reduxjs/toolkit";
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { id } from "date-fns/locale";
+import { API } from "../../config";
 
 // const departmentsAdapter = createEntityAdapter()
 
@@ -10,15 +10,15 @@ import { id } from "date-fns/locale";
 export const apiSlice = createApi({
   reducerPath: "api",
   baseQuery: fetchBaseQuery({
-    baseUrl: "https://seal-app-sq4gf.ondigitalocean.app/api",
+    baseUrl: API,
   }),
-  tagTypes: ["Employee", "Position", "Department"],
+  tagTypes: ["Employee", "Position", "Department", "Trainee", "Role"],
   endpoints: (builder) => ({
     getDepartments: builder.query({
       query: () => "/department",
       providesTags: (result, error, arg) => [
-        'Department',
-        ...result.data.map(({ id }) => ({ type: 'Department', id }))
+        "Department",
+        ...result.data.map(({ id }) => ({ type: "Department", id })),
       ],
     }),
     getDepartmentById: builder.query({
@@ -34,7 +34,7 @@ export const apiSlice = createApi({
         method: "POST",
         body: initialDepartment,
       }),
-      invalidatesTags: ['Department'],
+      invalidatesTags: ["Department"],
     }),
     updateDepartment: builder.mutation({
       query: (initialDepartment) => ({
@@ -73,20 +73,6 @@ export const apiSlice = createApi({
     }),
   }),
 });
-
-
-// export const selectDepartmentsResult = apiSlice.endpoints.getDepartments.select()
-
-// const selectDepartmentsData = createSelector(
-//     selectDepartmentsResult,
-//     departmentsResult => departmentsResult.data
-// )
-
-// export const {
-//     selectAll: selectAllDepartments,
-//     selectById: selectDepartmentById,
-//     selectIds: selectDepartmentIds
-// } = departmentsAdapter.getSelectors(state => selectDepartmentsData(state) ?? initialState)
 
 export const {
   useGetDepartmentsQuery,

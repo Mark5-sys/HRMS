@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useState } from "react";
+import React, { Fragment, useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { Formik, Field, Form, ErrorMessage } from "formik";
@@ -7,14 +7,19 @@ import Loading from "../../../components/loader/loading";
 import { API } from "../../../config";
 import { getSingleEmployee } from "../../../services/api";
 import { employeesActions } from "../../../store/employee_store";
-import { useGetEmployeesQuery } from "../../../store/api/employeeSlice";
+import {
+  useGetEmployeesQuery,
+  useUpdatePersonalInfoMutation,
+} from "../../../store/api/employeeSlice";
 
-const PersonalInfoFormModal = ({ employeeId }) => {
+const PersonalInfoFormModal = ({ employeeId, showModal, handleClose }) => {
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
 
   const navigate = useNavigate();
+  const [updatePersonalInfo, { isLoading }] = useUpdatePersonalInfoMutation();
 
+ 
 
 
   const initialValues = {
@@ -36,7 +41,7 @@ const PersonalInfoFormModal = ({ employeeId }) => {
   const onSubmit = async (values, { setSubmitting, resetForm }) => {
     setLoading(true);
 
-    const infoData = {
+    const initialInfo = {
       passport_number: values.passport_number,
       nationality: values.nationality,
       religion: values.religion,
@@ -44,30 +49,16 @@ const PersonalInfoFormModal = ({ employeeId }) => {
       no_children: values.no_children,
     };
 
-    infoData.employee_id = employeeId;
-
-    console.log("Submitted", infoData);
-    // personal/info
     try {
-      const response = await fetch(`${API}/personal/info`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(infoData),
-      });
+      const result = await updatePersonalInfo({
+        initialInfo,
+        employeeId,
+      }).unwrap();
 
-      const responseData = await response.json();
-      if (response.ok) {
-        setLoading(false);
-        resetForm();
-        const employee = await getSingleEmployee(employeeId);
-        dispatch(
-          employeesActions.setSingleEmployee({
-            singleEmployee: employee,
-          })
-        );
-      }
+    
+      resetForm();
+
+     
     } catch (error) {
       console.log(error);
     } finally {

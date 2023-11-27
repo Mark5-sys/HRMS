@@ -27,7 +27,6 @@ const EditEmployeeFormModal = ({}) => {
   const navigate = useNavigate();
 
   const positions = useSelector((state) => state.position.positions);
-  // const departments = useSelector((state) => state.department.departments);
   const [updateEmployee, { isLoading }] = useUpdateEmployeeMutation();
   const { data: singleEmployee } = useGetEmployeeQuery(employeeId);
   const employee = useSelector((state) => state.employees.singleEmployee);
@@ -82,35 +81,12 @@ const EditEmployeeFormModal = ({}) => {
       email: values.email,
     };
 
-    // console.log("Vaues", apiData)
     try {
-      console.log("Updating");
-      // const response = await fetch(`${API}/employee/${employee.id}`, {
-      //   method: "PATCH",
-      //   headers: {
-      //     "Content-Type": "application/json",
-      //   },
-      //   body: JSON.stringify(apiData),
-      // });
-      // const responseData = await response.json();
-      // console.log(responseData);
       const result = await updateEmployee({
         employeeId,
         updatedEmployee,
       }).unwrap();
-      // console.log(result.data.data);
-
-      // if (response.ok) {
-      //   setLoading(false);
-      //   resetForm();
-
-      //   const employee = await getSingleEmployee(employeeId);
-      //   dispatch(
-      //     employeesActions.setSingleEmployee({
-      //       singleEmployee: employee,
-      //     })
-      //   );
-      // }
+      console.log("This is the result", result);
     } catch (error) {
       console.log(error);
       setLoading(false);
@@ -354,11 +330,11 @@ const EditEmployeeFormModal = ({}) => {
                         {employee.department ? (
                           <option value="">{employee.department.name}</option>
                         ) : null}
-                        {/* {dpts.data.map((department) => (
+                        {dpts?.data.map((department) => (
                           <option key={department.id} value={department.id}>
                             {department.name}
                           </option>
-                        ))} */}
+                        ))}
                       </Field>
                       <ErrorMessage
                         name="department"
@@ -384,11 +360,12 @@ const EditEmployeeFormModal = ({}) => {
                           <option value="">{employee.position.name}</option>
                         ) : null}
 
-                        {/* {posns.data.map((position) => (
-                          <option key={position.id} value={position.id}>
-                            {position.name}
-                          </option>
-                        ))} */}
+                        {posns &&
+                          posns?.data.map((position) => (
+                            <option key={position.id} value={position.id}>
+                              {position.name}
+                            </option>
+                          ))}
                       </Field>
                       <ErrorMessage
                         name="position"
@@ -461,7 +438,7 @@ const EditEmployeeFormModal = ({}) => {
                   </div>
                 </div>
 
-                {loading ? (
+                {isLoading ? (
                   <Loading />
                 ) : (
                   <div className="submit-section">

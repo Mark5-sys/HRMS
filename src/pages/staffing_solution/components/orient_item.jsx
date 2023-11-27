@@ -30,6 +30,14 @@ const OrientItem = ({ orientee }) => {
           </Link>
         </td>
         <td>{orientee.gender}</td>
+        <td>
+          <span className="badge bg-inverse-success">
+            {orientee.national_id}
+          </span>
+        </td>
+        <td>
+          {orientee.marital_status}
+        </td>
         <td>{orientee.qualifications}</td>
         <td>{orientee.phone_1}</td>
         <td>

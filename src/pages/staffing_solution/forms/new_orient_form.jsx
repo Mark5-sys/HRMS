@@ -100,7 +100,7 @@ const NewOrientForm = () => {
             orients: orientsAll,
           })
         );
-
+        setLoading(false);
         const databaseStats = await employeesCount();
         dispatch(
           statisticsActions.setEmployeesCount({

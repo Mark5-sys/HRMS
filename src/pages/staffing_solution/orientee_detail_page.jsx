@@ -1,29 +1,26 @@
-import React, { Fragment, useEffect, useState } from "react";
+import React, { Fragment, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { orientActions } from "../../store/orients_store";
 import OrienteeProfileCard from "./components/OrienteeProfileCard";
+import { useGetTraineesQuery } from "../../store/api/traineeSlice";
 
 const OrienteeDetail = () => {
   const { orienteeId } = useParams();
   const dispatch = useDispatch();
 
-  const orients = useSelector((state) => state.orientation.orients) || [];
+  const {
+    data: trainees,
+    isLoading,
+    isSuccess,
+    isError,
+    error,
+  } = useGetTraineesQuery();
 
   const findOrienteeById = (id) => {
-    return orients.find((orientee) => orientee.id === id);
+    return trainees.entities[id];
   };
-
-  useEffect(() => {
-    const singleOrientee = findOrienteeById(parseInt(orienteeId));
-    dispatch(
-      orientActions.setSingleSingleOrient({
-        singleOrient: singleOrientee,
-      })
-    );
-  }, [orients, orienteeId]);
-
-  const orientee = useSelector((state) => state.orientation.singleOrient) || {};
+  const singleOrientee = findOrienteeById(parseInt(orienteeId));
 
   return (
     <Fragment>
@@ -49,7 +46,9 @@ const OrienteeDetail = () => {
               marginBottom: "40px",
             }}
           >
-            {orientee && <OrienteeProfileCard orientee={orientee} />}
+            {singleOrientee && (
+              <OrienteeProfileCard orientee={singleOrientee} />
+            )}
           </div>
         </div>
       </div>

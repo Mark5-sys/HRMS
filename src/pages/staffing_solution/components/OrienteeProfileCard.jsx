@@ -1,5 +1,6 @@
 import React, { Fragment, useEffect, useState } from "react";
 import { convertToDateWord } from "../../../helpers/helpers";
+import UserInitials from "../../../components/user_initials";
 
 const OrienteeProfileCard = ({ orientee }) => {
   return (
@@ -11,9 +12,10 @@ const OrienteeProfileCard = ({ orientee }) => {
               <div className="profile-view">
                 <div className="profile-img-wrap">
                   <div className="profile-img">
-                    <a>
-                      <img src="/assets/img/user.jpg" alt="User Image" />
-                    </a>
+                    <UserInitials
+                      firstName={orientee.first_name}
+                      lastName={orientee.last_name}
+                    />
                   </div>
                 </div>
                 {orientee && (
@@ -43,10 +45,14 @@ const OrienteeProfileCard = ({ orientee }) => {
                                 padding: "8px 11px",
                                 borderRadius: "20px",
                               }}
-                            > { orientee.deployement_status }</span>
+                            >
+                              {" "}
+                              {orientee.deployement_status}
+                            </span>
                           </div>
                         </div>
                       </div>
+
                       <div className="col-md-7">
                         <ul className="personal-info">
                           <li>
@@ -82,6 +88,13 @@ const OrienteeProfileCard = ({ orientee }) => {
                           <li>
                             <div className="title">Gender:</div>
                             <div className="text">{orientee.gender}</div>
+                          </li>
+                          <li>
+                            <div className="title">Qualifications:</div>
+                            <div className="text ">
+                              
+                                {orientee.qualifications}
+                            </div>
                           </li>
                         </ul>
                       </div>

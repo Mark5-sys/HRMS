@@ -6,16 +6,23 @@ import Loading from "../../components/loader/loading";
 import { API } from "../../config";
 import { getRumukoSchedule } from "../../services/api";
 import { rumukoScheduleActions } from "../../store/rumuko_store";
+import { useGetDepartmentsQuery } from "../../store/api/apiSlice";
 
 const AssignRumuko = () => {
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
   const employees =
     useSelector((state) => state.employees.activeEmployees) || [];
-  const departments =
-    useSelector((state) => state.department.departments) || [];
 
   const user = useSelector((state) => state.auth.user);
+
+  const {
+    data: dpts,
+    isLoading,
+    isSuccess,
+    isError,
+    error,
+  } = useGetDepartmentsQuery();
 
   const initialValues = {
     department: null,
@@ -70,7 +77,9 @@ const AssignRumuko = () => {
       setSubmitting(false);
     }
   };
-  useEffect(() => {}, []);
+  useEffect(() => {
+    console.log("Departments", dpts?.data);
+  }, []);
   return (
     <>
       <div id="add_schedule" className="modal custom-modal fade" role="dialog">
@@ -115,7 +124,7 @@ const AssignRumuko = () => {
                             name="department"
                           >
                             <option value></option>
-                            {departments.map((department) => (
+                            {dpts?.data.map((department) => (
                               <option key={department.id} value={department.id}>
                                 {department.name}
                               </option>

@@ -5,6 +5,7 @@ import { employeesActions } from "../../../store/employee_store";
 import { getAllEmployees } from "../../../services/api";
 import { useGetEmployeesQuery } from "../../../store/api/employeeSlice";
 import Loading from "../../../components/loader/loading";
+import { useGetDepartmentsQuery } from "../../../store/api/apiSlice";
 
 const EmployeeTable = () => {
   const {
@@ -14,6 +15,8 @@ const EmployeeTable = () => {
     isError,
     error,
   } = useGetEmployeesQuery();
+
+  const { data: dpts } = useGetDepartmentsQuery();
 
   const dispatch = useDispatch();
   const employees =

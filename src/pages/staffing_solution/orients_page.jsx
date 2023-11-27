@@ -45,8 +45,22 @@ const OrientsPage = () => {
                 </ul>
               </div>
               <div className="col-auto float-end ms-auto">
-                <Link to={"/add/orient"} href="#" className="btn add-btn">
+                <Link
+                  to={"/add/orient"}
+                  href="#"
+                  className="btn add-btn"
+                  style={{
+                    marginLeft: "10px",
+                  }}
+                >
                   <i className="fa-solid fa-plus"></i> Add New Orient
+                </Link>
+                <Link
+                  to={"/add/orients/excel"}
+                  href="#"
+                  className="btn add-btn"
+                >
+                  <i className="fas fa-file-excel"></i> Upload Excel
                 </Link>
                 <div className="view-icons"></div>
               </div>

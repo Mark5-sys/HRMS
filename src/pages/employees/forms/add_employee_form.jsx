@@ -1,4 +1,4 @@
-import { Fragment, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useDispatch, useSelector } from "react-redux";
@@ -10,6 +10,10 @@ import "react-toastify/dist/ReactToastify.css";
 import Swal from "sweetalert2";
 import "sweetalert2/dist/sweetalert2.min.css";
 import { useAddNewEmployeeMutation } from "../../../store/api/employeeSlice";
+import {
+  useGetDepartmentsQuery,
+  useGetPositionsQuery,
+} from "../../../store/api/apiSlice";
 
 const maritalStatuses = ["Married", "Single", "Divorced"];
 const gender = ["Male", "Female", "Other"];
@@ -18,11 +22,13 @@ const empStatus = ["Pending", "Orientation", "Active"];
 const AddEmployeeForm = () => {
   const dispatch = useDispatch();
   const positions = useSelector((state) => state.position.positions);
-  const departments = useSelector((state) => state.department.departments);
+  // const departments = useSelector((state) => state.department.departments);
 
   const [selectedOption, setSelectedOption] = useState("continueAdding");
 
   const [addNewEmployee, { isLoading }] = useAddNewEmployeeMutation();
+  const { data: dpts } = useGetDepartmentsQuery();
+  const { data: posns } = useGetPositionsQuery();
 
   const handleOptionChange = (event) => {
     setSelectedOption(event.target.value);
@@ -111,6 +117,11 @@ const AddEmployeeForm = () => {
     },
   });
 
+  useEffect(() => {
+    console.log("departments", dpts )
+    console.log("positions", posns )
+  }, []);
+
   return (
     <Fragment>
       <div
@@ -198,7 +209,7 @@ const AddEmployeeForm = () => {
                       }}
                     >
                       <option value="">Select Department</option>
-                      {departments.map((department) => (
+                      {dpts.data.map((department) => (
                         <option key={department.id} value={department.id}>
                           {department.name}
                         </option>

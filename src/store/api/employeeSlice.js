@@ -23,7 +23,12 @@ export const employeeSlice = apiSlice.injectEndpoints({
 
     getEmployee: builder.query({
       query: (employeeId) => `/employee/detail/${employeeId}`,
-      invalidatesTags: ["Employee"],
+      providesTags: (result, error, employeeId) => [
+        {
+          type: "Employee",
+          id: employeeId,
+        },
+      ],
     }),
 
     addNewEmployee: builder.mutation({
@@ -45,6 +50,17 @@ export const employeeSlice = apiSlice.injectEndpoints({
         { type: "Employee", id: arg.employeeId },
       ],
     }),
+
+    updatePersonalInfo: builder.mutation({
+      query: ({ initialInfo, employeeId }) => ({
+        url: `/personal/info/${employeeId}`,
+        method: "POST",
+        body: initialInfo,
+      }),
+      invalidatesTags: (result, error, arg) => [
+        { type: "Employee", id: arg.employeeId },
+      ],
+    }),
   }),
 });
 
@@ -53,47 +69,5 @@ export const {
   useGetEmployeeQuery,
   useAddNewEmployeeMutation,
   useUpdateEmployeeMutation,
+  useUpdatePersonalInfoMutation,
 } = employeeSlice;
-
-// export const employeeSlice = apiSlice.injectEndpoints({
-//   endpoints: (builder) => ({
-
-// getEmployees: builder.query({
-//   query: () => "/employee",
-//   providesTags: ['Employee']
-// }),
-
-// getEmployee: builder.query({
-//   query: (employeeId) => `/employee/detail/${employeeId}`,
-//   invalidatesTags: (result, error, arg) => [
-//     { type: "Employee", id: arg.employeeId },
-//   ],
-// }),
-// addNewEmployee: builder.mutation({
-//   query: (initialEmployee) => ({
-//     url: "/employee",
-//     method: "POST",
-//     body: initialEmployee,
-//   }),
-//   invalidatesTags: ["Employee"],
-// }),
-
-// updateEmployee: builder.mutation({
-//   query: ({ employeeId, updatedEmployee }) => ({
-//     url: `/employee/${employeeId}`,
-//     method: "PATCH",
-//     body: updatedEmployee,
-//   }),
-//   invalidatesTags: (result, error, arg) => [
-//     { type: "Employee", id: arg.employeeId },
-//   ],
-// }),
-//   }),
-// });
-
-// export const {
-//   useGetEmployeesQuery,
-//   useGetEmployeeQuery,
-// useAddNewEmployeeMutation,
-// useUpdateEmployeeMutation,
-// } = employeeSlice;

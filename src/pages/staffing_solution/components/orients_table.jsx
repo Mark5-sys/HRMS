@@ -1,26 +1,60 @@
-import React, { Fragment, useEffect, useState } from "react";
+import React, { Fragment, useEffect, useRef, useState } from "react";
 import OrientItem from "./orient_item";
 import { useSelector } from "react-redux";
 import DeployOrienteeModal from "./deploy_orientee_modal";
+import { useGetTraineesQuery } from "../../../store/api/traineeSlice";
+import Loading from "../../../components/loader/loading";
+import { downloadExcel } from "react-export-table-to-excel";
 
 const OrinetsTable = () => {
-  const allOrients = useSelector((state) => state.orientation.orients);
+  const header = [
+    "First Name",
+    "Last Name",
+    "Gender",
+    "National ID",
+    "Marital Status",
+  ];
+
+  const {
+    data: trainees,
+    isLoading,
+    isSuccess,
+    isError,
+    error,
+  } = useGetTraineesQuery();
 
   const [orientName, setOrientName] = useState("");
   const [filteredOrients, setFilteredOrients] = useState([]);
 
   const handleSearch = () => {
-    const filteredOrients = allOrients.filter((orient) => {
+    const filteredOrients = trainees.ids.filter((id) => {
+      const trainee = trainees.entities[id];
       const nameMatch =
         orientName !== "" &&
-        (orient.first_name.toLowerCase().includes(orientName.toLowerCase()) ||
-          orient.last_name.toLowerCase().includes(orientName.toLowerCase()));
+        (trainee.first_name.toLowerCase().includes(orientName.toLowerCase()) ||
+          trainee.last_name.toLowerCase().includes(orientName.toLowerCase()));
 
-      return nameMatch;
+      const nationalIdMatch =
+        orientName !== "" &&
+        trainee.national_id.toLowerCase().includes(orientName.toLowerCase());
+
+      return nameMatch || nationalIdMatch;
     });
 
     setFilteredOrients(filteredOrients);
-    console.log(filteredOrients);
+  };
+
+  const handleDownloadExcel = () => {
+    const traineesArray = Object.values(trainees.entities);
+
+    downloadExcel({
+      fileName: "allOrients",
+      sheet: "Orientation",
+      tablePayload: {
+        header,
+        body: traineesArray,
+      },
+    });
   };
 
   const handleInputChange = (e) => {
@@ -31,12 +65,25 @@ const OrinetsTable = () => {
   };
 
   useEffect(() => {
+    console.log("orients", trainees);
     if (orientName === "") {
       setFilteredOrients([]);
     } else {
       handleSearch();
     }
   }, [orientName]);
+
+  let content;
+
+  if (isLoading) {
+    content = <Loading />;
+  } else if (isSuccess) {
+    content = trainees.ids.map((id) => (
+      <OrientItem key={id} orientee={trainees.entities[id]} />
+    ));
+  } else if (isError) {
+    content = <div>{error.toString()}</div>;
+  }
 
   return (
     <Fragment>
@@ -59,6 +106,8 @@ const OrinetsTable = () => {
             <a className="btn btn-success"> Search </a>
           </div>
         </div>
+
+        {/* <button onClick={handleDownloadExcel}> Export excel </button> */}
         <div className="row">
           <div className="col-md-12">
             <div className="table-responsive">
@@ -69,8 +118,10 @@ const OrinetsTable = () => {
                     <th>Date of Orientation</th>
                     <th>Name</th>
                     <th>Gender</th>
+                    <th>National ID</th>
+                    <th>Marital Status</th>
                     <th>Qualification</th>
-                    <th>Phone Number</th>
+                    <th>Phone Number(s)</th>
                     <th>Deployment Status</th>
                     <th className="text-end no-sort">Action</th>
                   </tr>
@@ -78,11 +129,12 @@ const OrinetsTable = () => {
                 <tbody>
                   {filteredOrients.length > 0
                     ? filteredOrients.map((orientee, index) => (
-                        <OrientItem key={orientee.id} orientee={orientee} />
+                        <OrientItem
+                          key={orientee}
+                          orientee={trainees.entities[orientee]}
+                        />
                       ))
-                    : allOrients.map((orientee, index) => (
-                        <OrientItem key={orientee.id} orientee={orientee} />
-                      ))}
+                    : content}
                 </tbody>
               </table>
             </div>

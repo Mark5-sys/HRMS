@@ -38,6 +38,7 @@ import ApplyForLeave from "./pages/leave-management/apply_leave";
 import DepartmentDetail from "./pages/departments/department_detail";
 import CompanyDetailedPage from "./pages/companies/company_detailed_page";
 import EmployeeLogin from "./pages/auth/employee_login";
+import AddOrientsThroughExcel from "./pages/staffing_solution/forms/orients_through_excel";
 
 const App = () => {
   const isAuth = useSelector((state) => state.auth.isAuthenticated);
@@ -80,6 +81,11 @@ const App = () => {
             exact
             path="/orientee/:orienteeId"
             element={<OrienteeDetail />}
+          />
+          <Route
+            exact
+            path="/add/orients/excel"
+            element={<AddOrientsThroughExcel />}
           />
 
           <Route exact path="/companies" element={<CompaniesPage />} />

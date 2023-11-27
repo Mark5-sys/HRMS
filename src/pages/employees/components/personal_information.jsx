@@ -2,6 +2,12 @@ import React, { Fragment, useEffect, useState } from "react";
 import PersonalInfoFormModal from "../forms/personal_info_form";
 
 const PersonalInfomation = ({ employeeId, personalInfo }) => {
+  const [showModal, setShowModal] = useState(false);
+
+  const handleOpenModal = () => setShowModal(true);
+  const handleCloseModal = () => setShowModal(false);
+
+  
   return (
     <Fragment>
       <div className="card profile-box flex-fill">
