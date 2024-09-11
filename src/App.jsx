@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import axios from 'axios';
 import {
   BrowserRouter,
   Route,
@@ -39,6 +40,15 @@ import DepartmentDetail from "./pages/departments/department_detail";
 import CompanyDetailedPage from "./pages/companies/company_detailed_page";
 import EmployeeLogin from "./pages/auth/employee_login";
 import AddOrientsThroughExcel from "./pages/staffing_solution/forms/orients_through_excel";
+import Clients from "./pages/Clients/Clients";
+// import Leads_page from "./pages/Leads/Leads_page";
+import Tickets_pages from "./pages/Tickets/Tickets_pages";
+// import TimeEntry from "./components/TimeEntry";
+import TimeEntryPage from "./pages/time_entry/TimeEntryPage";
+import AttendanceListPage from "./pages/AttendanceList/AttendanceListPage";
+import ReportGenerator from "./components/ReportGenerator";
+import BarChart from "./components/BarChart";
+
 
 const App = () => {
   const isAuth = useSelector((state) => state.auth.isAuthenticated);
@@ -46,6 +56,25 @@ const App = () => {
   useEffect(() => {
     document.body.style.zoom = "0.80";
   }, []);
+
+  const [entries, setEntries] = useState([]);
+
+  useEffect(() => {
+    const fetchEntries = async () => {
+      try {
+        const response = await axios.get('http://127.0.0.1:8000/api/entries');
+        setEntries(response.data);
+      } catch (error) {
+        console.error('Error fetching entries:', error);
+      }
+    };
+    fetchEntries();
+  }, []);
+
+  const handleAddEntry = (newEntry) => {
+    setEntries([...entries, newEntry]);
+  };
+
 
   return (
     <HashRouter>
@@ -63,6 +92,11 @@ const App = () => {
           <Route exact path="/employees" element={<EmployeeList />} />
           <Route exact path="/roles" element={<EmployeeRoles />} />
           <Route exact path="/add/employee" element={<AddEmployee />} />
+          <Route exact path="/clients" element={<Clients />} />
+      
+          <Route exact path="/tickets" element={<Tickets_pages />} />
+          <Route exact path="/time" element={<TimeEntryPage />} />
+          <Route exact path="/attendance/list" element={<AttendanceListPage />} />
 
           <Route
             exact
