@@ -54,6 +54,39 @@ const Dashboard = ({}) => {
     }
   };
 
+  const [currentTime, setCurrentTime] = useState(new Date());
+
+  useEffect(() => {
+    // Function to update the greeting based on the current hour
+    const updateGreeting = () => {
+      const currentHour = new Date().getHours();
+
+      if (currentHour < 12) {
+        setGreeting("Good Morning");
+      } else if (currentHour < 18) {
+        setGreeting("Good Afternoon");
+      } else {
+        setGreeting("Good Evening");
+      }
+    };
+
+    // Function to update the current time every second
+    const updateTime = () => {
+      setCurrentTime(new Date());
+    };
+
+    // Call the updateGreeting function initially
+    updateGreeting();
+
+    // Set interval to update the time every second
+    const timeInterval = setInterval(() => {
+      updateTime();
+    }, 1000);
+
+    // Cleanup the interval on component unmount
+    return () => clearInterval(timeInterval);
+  }, []);
+
   useEffect(() => {
     const reloadEmployees = async () => {
       const employees = await getAllEmployees();
@@ -110,9 +143,9 @@ const Dashboard = ({}) => {
         // setBirthdays(birthdays);
         dispatch(
           statisticsActions.setBirthdays({
-            birthdays: birthdays
+            birthdays: birthdays,
           })
-        )
+        );
 
         const dptStats = await employeeByDepartment();
 
@@ -142,7 +175,6 @@ const Dashboard = ({}) => {
       }
     };
 
-
     fetchData();
   }, []);
 
@@ -167,14 +199,49 @@ const Dashboard = ({}) => {
           <div className="page-header">
             <div className="row">
               <div className="col-sm-12">
-                <h3
+                {/* <h3
                   className="page-title"
                   style={{
                     fontFamily: "'Cooper Black'",
                   }}
                 >
                   {greeting} {user.username}!
-                </h3>
+                </h3> */}
+
+                <div className="greeting-card">
+                  <h1
+                    style={{
+                      background: "linear-gradient(to right, blue, green)",
+                      WebkitBackgroundClip: "text",
+                      WebkitTextFillColor: "transparent",
+                    }}
+                  >
+                    
+                    <span
+                      style={{
+                        textTransform: "capitalize",
+                      }}
+                    >
+                      {" "}
+                      {greeting} {user.username}!
+                    </span>
+                  </h1>
+                  <p>Welcome to your dashboard!</p>
+                  <div className="current-time">
+                    <h2
+                      style={{
+                        background: "linear-gradient(to right, blue, green)",
+                        WebkitBackgroundClip: "text",
+                        WebkitTextFillColor: "transparent",
+                      }}
+                    >
+                      {currentTime.toLocaleTimeString([], {
+                        hour: "2-digit",
+                        minute: "2-digit",
+                      })}
+                    </h2>
+                  </div>
+                </div>
                 <ul className="breadcrumb">
                   <li className="breadcrumb-item active">Dashboard</li>
                 </ul>
@@ -239,15 +306,16 @@ const Dashboard = ({}) => {
                     <div className="row">
                       <div className="col-md-12">
                         <div className="row">
-                          <GenderStat data={genderData} />
-                          <DepartmentStatistics data={bydpt} />
+                          {/* <GenderStat data={genderData} /> */}
+                          {JSON.stringify()}
+                          {/* <DepartmentStatistics data={bydpt} /> */}
                         </div>
 
                         <div className="row">
-                          <AgeStats data={data} />
+                          {/* <AgeStats data={data} /> */}
                         </div>
                         <div className="row">
-                          <MaritalStatus data={maritalStatus} />
+                          {/* <MaritalStatus data={maritalStatus} /> */}
                         </div>
                       </div>
                     </div>

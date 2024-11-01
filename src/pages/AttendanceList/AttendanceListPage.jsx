@@ -2,8 +2,10 @@ import React, { useEffect, useState } from "react";
 import AttendanceList from "../../components/AttendanceList";
 import PageHeader from "../../components/page_header";
 import axios from "axios";
-import BarChart from "../../components/BarChart";
+// import BarChart from "../../components/BarChart";
 import ReportGenerator from "../../components/ReportGenerator";
+import ShiftSchedules from "../../components/ShiftSchedules";
+import AbsenteeismTardiness from "../../components/AbsenteeismTardiness";
 
 const AttendanceListPage = () => {
   const [dataEntries, setDataEntries] = useState([]);
@@ -36,6 +38,8 @@ const AttendanceListPage = () => {
        
         <AttendanceList entries={dataEntries} />
         <ReportGenerator />
+        <ShiftSchedules />
+        <AbsenteeismTardiness />
       </div>
     </div>
   );

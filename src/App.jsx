@@ -46,8 +46,10 @@ import Tickets_pages from "./pages/Tickets/Tickets_pages";
 // import TimeEntry from "./components/TimeEntry";
 import TimeEntryPage from "./pages/time_entry/TimeEntryPage";
 import AttendanceListPage from "./pages/AttendanceList/AttendanceListPage";
-import ReportGenerator from "./components/ReportGenerator";
-import BarChart from "./components/BarChart";
+// import ReportGenerator from "./components/ReportGenerator";
+// import BarChart from "./components/BarChart";
+import ShiftSchedules from "./components/ShiftSchedules";
+import AbsenteeismTardiness from "./components/AbsenteeismTardiness";
 
 
 const App = () => {
@@ -97,6 +99,8 @@ const App = () => {
           <Route exact path="/tickets" element={<Tickets_pages />} />
           <Route exact path="/time" element={<TimeEntryPage />} />
           <Route exact path="/attendance/list" element={<AttendanceListPage />} />
+          <Route exact path="/shift" element={<ShiftSchedules />} />
+          <Route exact path="/absent" element={<AbsenteeismTardiness />} />
 
           <Route
             exact
