@@ -99,8 +99,9 @@ const App = () => {
           <Route exact path="/tickets" element={<Tickets_pages />} />
           <Route exact path="/time" element={<TimeEntryPage />} />
           <Route exact path="/attendance/list" element={<AttendanceListPage />} />
-          <Route exact path="/shift" element={<ShiftSchedules />} />
+          <Route exact path="/absence" element={<AbsenteeismTardiness />} />
           <Route exact path="/absent" element={<AbsenteeismTardiness />} />
+          <Route exact path="/shift" element={<ShiftSchedules />} />
 
           <Route
             exact

@@ -66,7 +66,7 @@ const SchedulerPage = () => {
           <div className="page-header">
             <div className="row align-items-center">
               <div className="col">
-                <h3 className="page-title">Rumuko</h3>
+                <h3 className="page-title">Shift Schedule</h3>
                 <ul className="breadcrumb">
                   <li className="breadcrumb-item">
                     <Link to={"/"}>Dashboard</Link>
@@ -80,7 +80,7 @@ const SchedulerPage = () => {
                   data-bs-toggle="modal"
                   data-bs-target="#add_schedule"
                 >
-                  <i className="fa-solid fa-plus"></i> Rumuko Scheduling
+                  <i className="fa-solid fa-plus"></i> Scheduling
                 </a>
                 <div className="view-icons"></div>
               </div>

@@ -49,6 +49,16 @@ const SideBar = ({}) => {
                   <i class="la la-users"></i> <span>AttendanceList</span>
                 </Link>
               </li>
+              <li>
+                <Link to={"/Schedule"}>
+                  <i class="la la-calendar-o"></i> <span>Schedule</span>
+                </Link>
+              </li>
+              <li>
+                <Link to={"/absence"}>
+                  <i class="la la-calendar-o"></i> <span>Absence</span>
+                </Link>
+              </li>
               <li className="menu-title">
                 <span>HR</span>
               </li>
@@ -71,22 +81,22 @@ const SideBar = ({}) => {
                 </Link>
               </li>
               {/* <li className="menu-title"> */}
-              <span>IT ASSET MANAGEMENT</span>
-              {/* </li> */}
+              {/* <span>IT ASSET MANAGEMENT</span>
+              </li> */}
               {/* <li> */}
               {/* <Link to={"/schedule"}> */}
-              <i className="la la-server"></i> <span>Asset Register</span>
+              {/* <i className="la la-server"></i> <span>Asset Register</span> */}
               {/* </Link> */}
               {/* </li> */}
               <li className="menu-title">
                 <span>MEETINGS & EVENTS</span>
               </li>
-              <li>
+              {/* <li>
                 <Link to={"/schedule"}>
                   <i className="la la-edit"></i>{" "}
                   <span>General Meeting Scheduler</span>
                 </Link>
-              </li>
+              </li> */} 
               <li>
                 <Link to={"/schedule"}>
                   <i className="la la-ticket"></i> <span>Meeting Posts</span>

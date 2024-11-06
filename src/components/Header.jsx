@@ -49,7 +49,7 @@ const Header = ({}) => {
         </a>
 
         <div className="page-title-box">
-          <h3>HR Management</h3>
+          <h3>HR Time and Attendance Management System</h3>
         </div>
 
         <a id="mobile_btn" className="mobile_btn" href="#sidebar">

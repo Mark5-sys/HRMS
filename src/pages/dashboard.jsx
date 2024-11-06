@@ -306,16 +306,16 @@ const Dashboard = ({}) => {
                     <div className="row">
                       <div className="col-md-12">
                         <div className="row">
-                          {/* <GenderStat data={genderData} /> */}
+                          <GenderStat data={genderData} />
                           {JSON.stringify()}
-                          {/* <DepartmentStatistics data={bydpt} /> */}
+                          <DepartmentStatistics data={bydpt} />
                         </div>
 
                         <div className="row">
-                          {/* <AgeStats data={data} /> */}
+                          <AgeStats data={data} />
                         </div>
                         <div className="row">
-                          {/* <MaritalStatus data={maritalStatus} /> */}
+                          <MaritalStatus data={maritalStatus} />
                         </div>
                       </div>
                     </div>

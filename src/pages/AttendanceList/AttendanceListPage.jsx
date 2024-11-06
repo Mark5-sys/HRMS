@@ -38,8 +38,8 @@ const AttendanceListPage = () => {
        
         <AttendanceList entries={dataEntries} />
         <ReportGenerator />
-        <ShiftSchedules />
-        <AbsenteeismTardiness />
+        {/* <ShiftSchedules /> */}
+        {/* <AbsenteeismTardiness /> */}
       </div>
     </div>
   );
