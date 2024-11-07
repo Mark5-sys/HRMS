@@ -1,10 +1,26 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { saveAs } from 'file-saver';
 import jsPDF from "jspdf";
 import "jspdf-autotable";
 
-const ReportGenerator = ({ entries = [] }) => {
+const ReportGenerator = () => {
+  const [entries, setEntries] = useState([]);
   const [filter, setFilter] = useState('daily');
+
+  // Fetch data from the time_entry table
+  useEffect(() => {
+    const fetchTimeEntries = async () => {
+      try {
+        const response = await fetch('http://127.0.0.1:8000/api/time_entry');
+        const data = await response.json();
+        setEntries(data);
+      } catch (error) {
+        console.error('Error fetching time entries:', error);
+      }
+    };
+
+    fetchTimeEntries();
+  }, []);
 
   // Get filtered data based on the selected filter
   const getFilteredData = () => {
