@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import moment from 'moment'; // Moment.js for time calculations
 
 const AttendanceList = ({ entries }) => {
-  
+  const [searchQuery, setSearchQuery] = useState('');
+
   // Function to calculate total hours worked
   const calculateWorkingHours = (time_in, time_out) => {
     const start = moment(time_in, 'HH:mm');
@@ -10,6 +11,13 @@ const AttendanceList = ({ entries }) => {
     const duration = moment.duration(end.diff(start));
     return duration.asHours();
   };
+
+  // Filter entries based on search query
+  const filteredEntries = entries.filter((entry) => {
+    const hoursWorked = calculateWorkingHours(entry.time_in, entry.time_out).toFixed(2);
+    const searchString = `${entry.name} ${entry.date} ${hoursWorked}`.toLowerCase();
+    return searchString.includes(searchQuery.toLowerCase());
+  });
 
   // Total Employees
   const totalEmployees = entries.length;
@@ -21,6 +29,11 @@ const AttendanceList = ({ entries }) => {
 
   // Average Working Hours
   const averageWorkingHours = totalEmployees ? (totalWorkingHours / totalEmployees).toFixed(2) : 0;
+
+  // Print Function
+  const handlePrint = () => {
+    window.print();
+  };
 
   return (
     <div className="container mt-4">
@@ -52,6 +65,19 @@ const AttendanceList = ({ entries }) => {
         </div>
       </div>
 
+      <h3>Search Attendance</h3>
+      <input
+        type="text"
+        className="form-control mb-3"
+        placeholder="Search by name, date, or hours worked"
+        value={searchQuery}
+        onChange={(e) => setSearchQuery(e.target.value)}
+      />
+
+      <button className="btn btn-secondary mb-3" onClick={handlePrint}>
+        Print
+      </button>
+
       <h3>Attendance List</h3>
       <table className="table table-striped table-bordered">
         <thead>
@@ -64,8 +90,8 @@ const AttendanceList = ({ entries }) => {
           </tr>
         </thead>
         <tbody>
-          {entries.length > 0 ? (
-            entries.map((entry, index) => {
+          {filteredEntries.length > 0 ? (
+            filteredEntries.map((entry, index) => {
               const hoursWorked = calculateWorkingHours(entry.time_in, entry.time_out).toFixed(2);
               return (
                 <tr key={index}>
@@ -79,7 +105,7 @@ const AttendanceList = ({ entries }) => {
             })
           ) : (
             <tr>
-              <td colSpan="5" className="text-center">No attendance records available</td>
+              <td colSpan="5" className="text-center">No matching records found</td>
             </tr>
           )}
         </tbody>

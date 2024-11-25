@@ -7,11 +7,11 @@ const ReportGenerator = () => {
   const [entries, setEntries] = useState([]);
   const [filter, setFilter] = useState('daily');
 
-  // Fetch data from the time_entry table
+  // Fetch data from the timeentry table
   useEffect(() => {
     const fetchTimeEntries = async () => {
       try {
-        const response = await fetch('http://127.0.0.1:8000/api/time_entry');
+        const response = await fetch('http://127.0.0.1:8000/api/timeentry'); // Adjusted endpoint
         const data = await response.json();
         setEntries(data);
       } catch (error) {
@@ -119,7 +119,7 @@ const ReportGenerator = () => {
             onChange={(e) => setFilter(e.target.value)}
           >
             <option value="daily">Daily</option>
-            <option value="weekly">Weekly</option>
+            <option value ="weekly">Weekly</option>
             <option value="monthly">Monthly</option>
             <option value="yearly">Yearly</option>
           </select>

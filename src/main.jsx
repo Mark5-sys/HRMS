@@ -7,12 +7,16 @@ import { persistStore } from "redux-persist";
 import { PersistGate } from "redux-persist/integration/react";
 import store from "./store";
 import { apiSlice } from "./store/api/apiSlice.js";
+import { QueryClient, QueryClientProvider } from "react-query";
 
 // store.dispatch(apiSlice.endpoints.getDepartments.initiate())
+const queryClient = new QueryClient();
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <Provider store={store}>
-    <PersistGate loading={null} persistor={persistStore(store)}></PersistGate>
-    <App />
-  </Provider>
+  <QueryClientProvider client={queryClient}>
+    <Provider store={store}>
+      <PersistGate loading={null} persistor={persistStore(store)}></PersistGate>
+      <App />
+    </Provider>
+  </QueryClientProvider>
 );
