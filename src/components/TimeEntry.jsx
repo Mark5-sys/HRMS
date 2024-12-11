@@ -47,9 +47,61 @@ const TimeEntry = ({ onAddEntry }) => {
     setEntry({ ...entry, [e.target.name]: e.target.value });
   };
 
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+
+  //   // Show SweetAlert loader
+  //   Swal.fire({
+  //     title: 'Submitting Entry',
+  //     text: 'Please wait while we save your data...',
+  //     allowOutsideClick: false,
+  //     didOpen: () => {
+  //       Swal.showLoading();
+  //     },
+  //   });
+
+  //   try {
+  //     await axios.post('http://127.0.0.1:8000/api/entries', entry);
+
+  //     // Clear the form and navigate
+  //     setEntry({ name: '', date: '', time_in: '', time_out: '' });
+
+  //     // Success alert
+  //     Swal.fire({
+  //       icon: 'success',
+  //       title: 'Entry Added',
+  //       text: 'The time entry was successfully added!',
+  //     });
+
+  //     navigate('/attendance/list');
+  //   } catch (error) {
+  //     // Error alert
+  //     Swal.fire({
+  //       icon: 'error',
+  //       title: 'Submission Failed',
+  //       text: 'There was an error saving the entry. Please try again.',
+  //     });
+
+  //     console.error('Error submitting entry:', error);
+  //   }
+  // };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+  
+    const selectedDate = new Date(entry.date);
+    const today = new Date();
+    today.setHours(0, 0, 0, 0); // Reset time for comparison
+  
+    if (selectedDate > today) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Invalid Date',
+        text: 'Date cannot be in the future. Please select a valid date.',
+      });
+      return;
+    }
+  
     // Show SweetAlert loader
     Swal.fire({
       title: 'Submitting Entry',
@@ -59,20 +111,20 @@ const TimeEntry = ({ onAddEntry }) => {
         Swal.showLoading();
       },
     });
-
+  
     try {
       await axios.post('http://127.0.0.1:8000/api/entries', entry);
-
+  
       // Clear the form and navigate
       setEntry({ name: '', date: '', time_in: '', time_out: '' });
-
+  
       // Success alert
       Swal.fire({
         icon: 'success',
         title: 'Entry Added',
         text: 'The time entry was successfully added!',
       });
-
+  
       navigate('/attendance/list');
     } catch (error) {
       // Error alert
@@ -81,11 +133,12 @@ const TimeEntry = ({ onAddEntry }) => {
         title: 'Submission Failed',
         text: 'There was an error saving the entry. Please try again.',
       });
-
+  
       console.error('Error submitting entry:', error);
     }
   };
 
+  
   if (loading) return <div>Loading...</div>;
   if (error) return <div>{error}</div>;
 

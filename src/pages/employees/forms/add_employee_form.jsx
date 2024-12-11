@@ -53,23 +53,65 @@ const AddEmployeeForm = () => {
       employeeStatus: "Active",
     },
 
+    // validationSchema: Yup.object({
+    //   employeeCode: Yup.string().nullable(),
+    //   firstName: Yup.string().required("First Name is required"),
+    //   surname: Yup.string().required("Surname is required"),
+    //   department: Yup.number().required(
+    //     "Person atleast belongs to a department"
+    //   ),
+    //   nationalId: Yup.string().required("Please enter National ID"),
+    //   maritalStatus: Yup.string().required("Select Relationship status"),
+    //   dateOfBirth: Yup.string().nullable(),
+    //   position: Yup.number().required("Selected Person's Position"),
+    //   gender: Yup.string().required("Select Person's Gender"),
+    //   postalCity: Yup.string().nullable(),
+    //   employeeStatus: Yup.string().required(
+    //     "Please Select Employee Status, either Active/Orientation"
+    //   ),
+    // }),
+
     validationSchema: Yup.object({
-      employeeCode: Yup.string().nullable(),
-      firstName: Yup.string().required("First Name is required"),
-      surname: Yup.string().required("Surname is required"),
+      employeeCode: Yup.string()
+        .nullable()
+        .matches(/^[A-Za-z\s]*$/, "Employee Code must contain only letters"),
+      firstName: Yup.string()
+        .required("First Name is required")
+        .matches(/^[A-Za-z\s]*$/, "First Name must contain only letters"),
+      surname: Yup.string()
+        .required("Surname is required")
+        .matches(/^[A-Za-z\s]*$/, "Surname must contain only letters"),
       department: Yup.number().required(
-        "Person atleast belongs to a department"
+        "Person must belong to at least one department"
       ),
-      nationalId: Yup.string().required("Please enter National ID"),
-      maritalStatus: Yup.string().required("Select Relationship status"),
-      dateOfBirth: Yup.string().nullable(),
+      nationalId: Yup.string()
+        .required("Please enter National ID")
+        .matches(/^[A-Za-z0-9]*$/, "National ID must be alphanumeric"),
+      maritalStatus: Yup.string()
+        .required("Select Relationship status")
+        .matches(/^[A-Za-z\s]*$/, "Marital Status must contain only letters"),
+      dateOfBirth: Yup.date()
+        .nullable()
+        .max(new Date(), "Date of Birth cannot be in the future"),
       position: Yup.number().required("Selected Person's Position"),
-      gender: Yup.string().required("Select Person's Gender"),
-      postalCity: Yup.string().nullable(),
-      employeeStatus: Yup.string().required(
-        "Please Select Employee Status, either Active/Orientation"
-      ),
+      gender: Yup.string()
+        .required("Select Person's Gender")
+        .matches(/^[A-Za-z\s]*$/, "Gender must contain only letters"),
+      postalCity: Yup.string()
+        .nullable()
+        .matches(/^[A-Za-z\s]*$/, "Postal City must contain only letters"),
+      employeeStatus: Yup.string()
+        .required("Please Select Employee Status, either Active/Orientation")
+        .matches(/^[A-Za-z\s]*$/, "Employee Status must contain only letters"),
+
+      phoneNumber1: Yup.number()
+        .typeError("Phone Number 1 must be a number")
+        .required("Phone Number 1 is required"),
+      phoneNumber2: Yup.number()
+        .typeError("Phone Number 2 must be a number")
+        .nullable(),
     }),
+
     onSubmit: async (values, { resetForm }) => {
       const postData = {
         code: values.employeeCode.toUpperCase(),
@@ -118,8 +160,8 @@ const AddEmployeeForm = () => {
   });
 
   useEffect(() => {
-    console.log("departments", dpts )
-    console.log("positions", posns )
+    console.log("departments", dpts);
+    console.log("positions", posns);
   }, []);
 
   return (
